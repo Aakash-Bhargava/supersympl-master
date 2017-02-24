@@ -1,0 +1,88 @@
+<!--
+  Generated template for the Profile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ pageTitle }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToSettingsPage()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-grid>
+		<ion-row style="height: 200px; background-color: black;">		
+		</ion-row>
+		<!-- -->
+		<div padding>
+  			<ion-segment [(ngModel)]="settingsMode">
+		    <ion-segment-button value="profile">
+		      Profile
+		    </ion-segment-button>
+		    <ion-segment-button value="groups">
+		      Groups
+		    </ion-segment-button>
+		  </ion-segment>
+		</div>
+
+		<div [ngSwitch]="settingsMode">
+  			<ion-list *ngSwitchCase="'profile'">
+    			<ion-list-header>
+    				Profile
+		  		</ion-list-header>
+		  		<ion-item>Jon Snow</ion-item>
+		  		<ion-item>JonSnow13@msu.edu</ion-item>
+		  		<ion-item>Senior</ion-item>
+		  		<ion-item>Communications</ion-item>
+		  		<ion-item>123-456-7890</ion-item>
+		  		<ion-item>More...</ion-item>
+			</ion-list>
+		    <ion-list *ngSwitchCase="'groups'">
+		    	<ion-list-header>
+    				Groups
+		  		</ion-list-header>
+		  		<ion-item>View Groups</ion-item>
+		  		<ion-item (click)="newGroupPrompt()">Add Group</ion-item>
+		  		<ion-item>Delete Group</ion-item>
+		  		<ion-item>More...</ion-item>
+  			</ion-list>
+		</div>
+	</ion-grid>
+	<ion-list>
+			</ion-list>
+</ion-content>
+
+
+
+<!-- 
+<ion-row style="text-align: center;"> 
+			<ion-col width-50>
+				<button ion-button icon-only block>
+					<ion-icon name="person"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col width-50>
+				<button ion-button icon-only block>
+					<ion-icon name="people"></ion-icon>
+				</button>
+			</ion-col>			
+		</ion-row>
+		<ion-row>
+			<ion-col width-50>
+				<button ion-button outline block round style="height: 50px;">
+					Rating
+				</button>
+			</ion-col>
+			<ion-col width-50>
+				<button ion-button icon-only outline block round style="height: 50px;">
+					Rewards
+				</button>
+			</ion-col>
+		</ion-row>
+
+-->
