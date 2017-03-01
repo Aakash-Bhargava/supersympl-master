@@ -3,7 +3,6 @@ import { NavController, NavParams, ModalController, AlertController} from 'ionic
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Settings } from '../../providers/settings';
 import { SettingsPage } from '../settings/settings';
-import { ModalPage } from './modal-page';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 /*
@@ -113,6 +112,13 @@ export class ProfilePage {
         }
       ],
       buttons: [
+        {
+          text: 'Add',
+          role: 'add',
+          handler: data => {
+            console.log('Add clicked');
+          }
+        },
         {
           text: 'Cancel',
           role: 'cancel',
