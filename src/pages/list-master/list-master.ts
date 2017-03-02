@@ -4,6 +4,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { ItemCreatePage } from '../item-create/item-create';
 
+import { SearchPage } from '../search/search';
 import { Items } from '../../providers/providers';
 import { Item } from '../../models/item';
 
@@ -29,13 +30,7 @@ export class ListMasterPage {
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {
-    let addModal = this.modalCtrl.create(ItemCreatePage);
-    addModal.onDidDismiss(item => {
-      if (item) {
-        this.items.add(item);
-      }
-    })
-    addModal.present();
+  this.navCtrl.push(SearchPage);
   }
 
   /**
