@@ -13,44 +13,37 @@
 		</ion-row>
 		<!-- -->
 		<div padding>
-  			<!-- <ion-segment [(ngModel)]="itemMode"> -->
-        <ion-segment>
-		    <ion-segment-button value="profile">
+  			<ion-segment [(ngModel)]="classInfo">
+		    <ion-segment-button value="professor">
 		      Professor
 		    </ion-segment-button>
-		    <ion-segment-button value="groups">
+		    <ion-segment-button value="classmates">
 		      Classmates
 		    </ion-segment-button>
 		  </ion-segment>
 		</div>
 
-		<!-- <div [ngSwitch]="itemMode"> -->
-      <div>
-    			<!-- <ion-list *ngSwitchCase="'professor'"> -->
-          <ion-list>
-      			<ion-list-header>
-      				Professor
-  		  		</ion-list-header>
-  		  		<ion-item>Professor Name</ion-item>
-  		  		<ion-item>Professor Email</ion-item>
-  		  		<ion-item>Other Communication</ion-item>
-  		  		<ion-item>Office Hours</ion-item>
-  		  		<ion-item>More...</ion-item>
-  			</ion-list>
-  		    <!-- <ion-list *ngSqwitchCase="'classmates'"> -->
-          <ion-list>
-            <ion-list-header>
-      				Classmates
-  		  		</ion-list-header>
-            <!-- <ion-item-sliding *ngFor="let item of currentItems">
-              <button ion-item (click)="openItem(item)">
-                <h2>{{item.name}}</h2>
-                <p>{{item.about}}</p>
-              </button> -->
-          </ion-list>
-  		</div>
-    <!-- </div> -->
+		<div [ngSwitch]="classInfo">
+			<ion-list *ngSwitchCase="'professor'">
+  			<ion-list-header>
+  				Professor
+	  		</ion-list-header>
+	  		<ion-item>Professor Name</ion-item>
+	  		<ion-item>Professor Email</ion-item>
+	  		<ion-item>Other Communication</ion-item>
+	  		<ion-item>Office Hours</ion-item>
+	  		<ion-item>More...</ion-item>
+		</ion-list>
+	    <ion-list *ngSwitchCase="'classmates'">
+        <ion-list-header>
+  				Classmates
+	  		</ion-list-header>
+        <!-- <ion-item-sliding *ngFor="let item of currentItems">
+          <button ion-item (click)="openItem(item)">
+            <h2>{{item.name}}</h2>
+            <p>{{item.about}}</p>
+          </button> -->
+      </ion-list>
+	</div>
 	</ion-grid>
-	<ion-list>
-			</ion-list>
 </ion-content>
