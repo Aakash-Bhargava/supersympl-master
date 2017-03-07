@@ -5,7 +5,7 @@
       <button ion-button icon-only (click)="moreInfo()">
         <ion-icon name="information-circle"></ion-icon>
       </button>
-      
+
     </ion-buttons>
 
     <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
@@ -25,7 +25,10 @@
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-left>
-          <img [src]="item.profilePic" />
+          <i primary class="{{ item.icon }}"aria-hidden="true"></i>
+
+          <!-- <ion-icon name="calculator"></ion-icon> -->
+          <!-- <img [src]="item.profilePic" /> -->
         </ion-avatar>
         <h2>{{item.name}}</h2>
         <p>{{item.about}}</p>

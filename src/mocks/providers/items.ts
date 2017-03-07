@@ -24,7 +24,8 @@ export class Items {
          "about": "Introduction to C++",
          "professor": "William Punch",
          "email": "example@gmail.com",
-         "type": "CSE"
+         "type": "CSE",
+         "icon": "fa fa-laptop"
        },
        {
          "name": "CSE 231",
@@ -32,7 +33,8 @@ export class Items {
          "about": "Introduction to Python",
          "professor": "Richard Enbody",
          "email": "example@gmail.com",
-         "type": "CSE"
+         "type": "CSE",
+         "icon": "fa fa-laptop"
        },
        {
          "name": "ECE 201",
@@ -40,7 +42,8 @@ export class Items {
          "about": "Circuits and Systems 1",
          "professor": "Kalyanmoy Deb",
          "email": "example@gmail.com",
-         "type": "ECE"
+         "type": "ECE",
+         "icon": "fa fa-microchip"
        },
        {
          "name": "ECE 202",
@@ -48,7 +51,8 @@ export class Items {
          "about": "Circuits and Systems 2",
          "Professor": "Kalyanmoy Deb",
          "email": "example@gmail.com",
-         "type": "ECE"
+         "type": "ECE",
+         "icon": "fa fa-microchip"
        },
        {
          "name": "MTH 234",
@@ -56,7 +60,8 @@ export class Items {
          "about": "Calculus 3",
          "professor":"Casim Abbas",
          "email": "example@gmail.com",
-         "type": "MTH"
+         "type": "MTH",
+         "icon": "fa fa-calculator"
        },
        {
          "name": "MTH 235",
@@ -64,7 +69,8 @@ export class Items {
          "about": "Differential Equations",
          "professor":"Gabriel Nagy",
          "email": "example@gmail.com",
-         "type": "MTH"
+         "type": "MTH",
+         "icon": "fa fa-calculator"
        },
        {
          "name": "PHY 183",
@@ -72,7 +78,8 @@ export class Items {
          "about": "Physics for Scientists and Engineers 1",
          "professor":"Hironori Iwasaki",
          "email": "example@gmail.com",
-         "type": "PHY"
+         "type": "PHY",
+         "icon": "fa fa-thermometer-half"
        }
      ];
 
