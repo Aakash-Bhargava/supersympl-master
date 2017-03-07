@@ -1,8 +1,8 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
-$font-path: "../assets/fonts";
+$font-path: '../assets/fonts';
 
-@import "ionic.globals";
+@import 'ionic.globals';
 
 
 // Shared Variables
@@ -60,7 +60,7 @@ $colors: (
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import "ionic.theme.default";
+@import 'ionic.theme.default';
 
 
 // Ionicons
@@ -68,17 +68,17 @@ $colors: (
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionic.ionicons";
+@import 'ionic.ionicons';
 
 
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
-@import "scss/font-awesome"; @font-face { font-family: 'FontAwesome'; src: url('../assets/fonts/fontawesome-webfont.eot?v=#{$fa-version}');
+@import 'roboto';
+@import 'noto-sans';
+@import 'scss/font-awesome'; @font-face { font-family: 'FontAwesome'; src: url('../assets/fonts/fontawesome-webfont.eot?v=#{$fa-version}');
 src: url('../assets/fonts/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
-url('../assets/fonts/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
-url('../assets/fonts/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
-url('../assets/fonts/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
-url('../assets/fonts/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg'); font-weight: normal; font-style: normal; }
+  url('../assets/fonts/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
+  url('../assets/fonts/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
+  url('../assets/fonts/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
+  url('../assets/fonts/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg'); font-weight: normal; font-style: normal; }
