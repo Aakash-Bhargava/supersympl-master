@@ -20,7 +20,7 @@ export class Items {
     let items = [
       {
          "name": "CSE 232",
-         "profilePic": "assets/img/speakers/bear.jpg",
+         "profilePic": "assets/img/CSE_classes.jpg",
          "about": "Introduction to C++",
          "professor": "William Punch",
          "email": "example@gmail.com",
@@ -28,7 +28,7 @@ export class Items {
        },
        {
          "name": "CSE 231",
-         "profilePic": "assets/img/speakers/enbody.jpg",
+         "profilePic": "assets/img/CSE_classes.jpg",
          "about": "Introduction to Python",
          "professor": "Richard Enbody",
          "email": "example@gmail.com",
@@ -36,7 +36,7 @@ export class Items {
        },
        {
          "name": "ECE 201",
-         "profilePic": "assets/img/speakers/duck.jpg",
+         "profilePic": "assets/img/ECE_classes.jpg",
          "about": "Circuits and Systems 1",
          "professor": "Kalyanmoy Deb",
          "email": "example@gmail.com",
@@ -44,7 +44,7 @@ export class Items {
        },
        {
          "name": "ECE 202",
-         "profilePic": "assets/img/speakers/eagle.jpg",
+         "profilePic": "assets/img/ECE_classes.jpg",
          "about": "Circuits and Systems 2",
          "Professor": "Kalyanmoy Deb",
          "email": "example@gmail.com",
@@ -52,7 +52,7 @@ export class Items {
        },
        {
          "name": "MTH 234",
-         "profilePic": "assets/img/speakers/elephant.jpg",
+         "profilePic": "assets/img/MTH_classes.jpg",
          "about": "Calculus 3",
          "professor":"Casim Abbas",
          "email": "example@gmail.com",
@@ -60,7 +60,7 @@ export class Items {
        },
        {
          "name": "MTH 235",
-         "profilePic": "assets/img/speakers/mouse.jpg",
+         "profilePic": "assets/img/MTH_classes.jpg",
          "about": "Differential Equations",
          "professor":"Gabriel Nagy",
          "email": "example@gmail.com",
@@ -68,7 +68,7 @@ export class Items {
        },
        {
          "name": "PHY 183",
-         "profilePic": "assets/img/speakers/puppy.jpg",
+         "profilePic": "assets/img/PHY_classes.png",
          "about": "Physics for Scientists and Engineers 1",
          "professor":"Hironori Iwasaki",
          "email": "example@gmail.com",

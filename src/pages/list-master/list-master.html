@@ -1,6 +1,13 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="moreInfo()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+      
+    </ion-buttons>
+
     <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
 
     <ion-buttons end>

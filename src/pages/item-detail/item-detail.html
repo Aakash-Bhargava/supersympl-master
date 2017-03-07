@@ -17,8 +17,15 @@
       <div *ngIf="item.type == 'ECE'">
         <img src="../assets/img/ECE_classes.jpg">
       </div>
+      <div *ngIf="item.type == 'PHY'">
+        <img src="../assets/img/PHY_classes.png">
+      </div>
+      <div *ngIf="item.type == 'MTH'">
+        <img src="../assets/img/MTH_classes.jpg">
+      </div>
+
     </ion-row>
-		<div padding>
+		<div padding style="background-color: white;">
   			<ion-segment [(ngModel)]="classInfo">
 		    <ion-segment-button value="professor">
 		      Professor

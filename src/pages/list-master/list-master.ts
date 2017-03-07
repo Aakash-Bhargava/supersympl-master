@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
 
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { ItemCreatePage } from '../item-create/item-create';
@@ -15,7 +15,9 @@ import { Item } from '../../models/item';
 export class ListMasterPage {
   currentItems: Item[];
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public items: Items,
+              public modalCtrl: ModalController,
+              public alertCtrl: AlertController ) {
     this.currentItems = this.items.query();
   }
 
@@ -48,4 +50,13 @@ export class ListMasterPage {
       item: item
     });
   }
+moreInfo() {
+  let alert = this.alertCtrl.create({
+    title: 'What is this page?',
+    subTitle: 'This page allows the user to navigate through their classes every semester.',
+    buttons: ['Dismiss']
+  });
+  alert.present()
+}
+
 }
