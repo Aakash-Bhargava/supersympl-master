@@ -16,32 +16,35 @@
 </ion-header>
 <ion-content>
 	<ion-grid>
-		<!-- 
+		<!--
 			<ion-row center style="height: 200px; background-color: white;">
 			<ion-item>
 				<ion-avatar item-left>
 	      			 <img src="../assets/img/marty-avatar.png">
 	    		</ion-avatar>
-    		</ion-item>		
+    		</ion-item>
 		</ion-row>
 		-->
-	 	 <ion-row class="avatarRow">
+	 	 <ion-row class="avatar-row">
     		<div>
     		<ion-col>
 				<ion-avatar>
-  			 		<img class="avatar" src="../assets/img/marty-avatar.png">
+            <div>
+  			 		  <img class="avatar" src="assets/img/marty-avatar.png">
+            </div>
+            <!-- <img class="avatar"> -->
 				</ion-avatar>
-				<div class="profileHeader">
-					Marty McFly 
+				<div class="profile-header">
+					Marty McFly
 				</div>
-				<div class="profileHeader">
+				<div class="profile-header">
 					Communications
 				</div>
    		 	</ion-col>
    		 	</div>
   		</ion-row>
 	</ion-grid>
-		
+
 	<div padding>
 			<ion-segment [(ngModel)]="settingsMode">
 	    <ion-segment-button value="profile">
@@ -55,7 +58,7 @@
 
 	<div [ngSwitch]="settingsMode">
 		<ion-list *ngSwitchCase="'profile'">
-		<ion-row class="profileButtons">
+		<ion-row class="profile-buttons">
 			<ion-col>
 				<button ion-button icon-left full round color="light">
 					<ion-icon name="thumbs-up"></ion-icon>
@@ -85,8 +88,8 @@
 
 
 
-<!-- 
-<ion-row style="text-align: center;"> 
+<!--
+<ion-row style="text-align: center;">
 			<ion-col width-50>
 				<button ion-button icon-only block>
 					<ion-icon name="person"></ion-icon>
@@ -96,7 +99,7 @@
 				<button ion-button icon-only block>
 					<ion-icon name="people"></ion-icon>
 				</button>
-			</ion-col>			
+			</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col width-50>

@@ -1,19 +1,25 @@
 page-profile {
-	.profileHeader{
-		font-weight: bold;
-		text-align: center;
-		color: white;
+  .profile-header {
+    color: white;
+    font-weight: bold;
+    text-align: center;
 	}
-	.avatarRow{
-		align-items: center;
-	  	display: flex;
-	  	justify-content: center;
-	  	background-color: rgba(#cc2121, .93);
+
+  .avatar-row {
+    align-items: center;
+    background-color: rgba(#cc2121, .93);
+    display: flex;
+    justify-content: center;
+
 	}
-	.avatar{
-		height: 150px;
-    	width: 150px;
-    	border-radius: 50%;
+
+  .avatar {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
 	}
-	.profileButtons{}
+
+  .profile-buttons {
+    background: none;
+	}
 }
