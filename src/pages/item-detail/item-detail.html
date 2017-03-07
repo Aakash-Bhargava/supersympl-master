@@ -9,9 +9,15 @@
 
 <ion-content>
 	<ion-grid>
-		<ion-row style="height: 200px; background-color: black;">
-		</ion-row>
-		<!-- -->
+		<ion-row style="height: 200px;" >
+      <!--Different header images for different class types  -->
+      <div *ngIf="item.type == 'CSE'">
+        <img src="../assets/img/CSE_classes.jpg">
+      </div>
+      <div *ngIf="item.type == 'ECE'">
+        <img src="../assets/img/ECE_classes.jpg">
+      </div>
+    </ion-row>
 		<div padding>
   			<ion-segment [(ngModel)]="classInfo">
 		    <ion-segment-button value="professor">
@@ -38,7 +44,10 @@
         <ion-list-header>
   				Classmates
 	  		</ion-list-header>
-        <!-- <ion-item-sliding *ngFor="let item of currentItems">
+        <ion-item>
+          display a list of classmates here
+        </ion-item>
+        <!-- <ion-item *ngFor="let item of currentItems">
           <button ion-item (click)="openItem(item)">
             <h2>{{item.name}}</h2>
             <p>{{item.about}}</p>

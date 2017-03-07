@@ -23,49 +23,56 @@ export class Items {
          "profilePic": "assets/img/speakers/bear.jpg",
          "about": "Introduction to C++",
          "professor": "William Punch",
-         "email": "example@gmail.com"
+         "email": "example@gmail.com",
+         "type": "CSE"
        },
        {
          "name": "CSE 231",
          "profilePic": "assets/img/speakers/enbody.jpg",
          "about": "Introduction to Python",
          "professor": "Richard Enbody",
-         "email": "example@gmail.com"
+         "email": "example@gmail.com",
+         "type": "CSE"
        },
        {
          "name": "ECE 201",
          "profilePic": "assets/img/speakers/duck.jpg",
          "about": "Circuits and Systems 1",
          "professor": "Kalyanmoy Deb",
-         "email": "example@gmail.com"
+         "email": "example@gmail.com",
+         "type": "ECE"
        },
        {
          "name": "ECE 202",
          "profilePic": "assets/img/speakers/eagle.jpg",
          "about": "Circuits and Systems 2",
          "Professor": "Kalyanmoy Deb",
-         "email": "example@gmail.com"
+         "email": "example@gmail.com",
+         "type": "ECE"
        },
        {
          "name": "MTH 234",
          "profilePic": "assets/img/speakers/elephant.jpg",
          "about": "Calculus 3",
          "professor":"Casim Abbas",
-         "email": "example@gmail.com"
+         "email": "example@gmail.com",
+         "type": "MTH"
        },
        {
          "name": "MTH 235",
          "profilePic": "assets/img/speakers/mouse.jpg",
          "about": "Differential Equations",
          "professor":"Gabriel Nagy",
-         "email": "example@gmail.com"
+         "email": "example@gmail.com",
+         "type": "MTH"
        },
        {
          "name": "PHY 183",
          "profilePic": "assets/img/speakers/puppy.jpg",
          "about": "Physics for Scientists and Engineers 1",
          "professor":"Hironori Iwasaki",
-         "email": "example@gmail.com"
+         "email": "example@gmail.com",
+         "type": "PHY"
        }
      ];
 
