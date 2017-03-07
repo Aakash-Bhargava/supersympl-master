@@ -16,45 +16,71 @@
 </ion-header>
 <ion-content>
 	<ion-grid>
-		<ion-row style="height: 200px; background-color: black;">		
+		<!-- 
+			<ion-row center style="height: 200px; background-color: white;">
+			<ion-item>
+				<ion-avatar item-left>
+	      			 <img src="../assets/img/marty-avatar.png">
+	    		</ion-avatar>
+    		</ion-item>		
 		</ion-row>
-		<!-- -->
-		<div padding>
-  			<ion-segment [(ngModel)]="settingsMode">
-		    <ion-segment-button value="profile">
-		      Profile
-		    </ion-segment-button>
-		    <ion-segment-button value="groups">
-		      Groups
-		    </ion-segment-button>
-		  </ion-segment>
-		</div>
-
-		<div [ngSwitch]="settingsMode">
-  			<ion-list *ngSwitchCase="'profile'">
-    			<ion-list-header>
-    				Profile
-		  		</ion-list-header>
-		  		<ion-item>Jon Snow</ion-item>
-		  		<ion-item>JonSnow13@msu.edu</ion-item>
-		  		<ion-item>Senior</ion-item>
-		  		<ion-item>Communications</ion-item>
-		  		<ion-item>123-456-7890</ion-item>
-		  		<ion-item>More...</ion-item>
-			</ion-list>
-		    <ion-list *ngSwitchCase="'groups'">
-		    	<ion-list-header>
-    				Groups
-		  		</ion-list-header>
-		  		<ion-item>View Groups</ion-item>
-		  		<ion-item (click)="newGroupPrompt()">Add Group</ion-item>
-		  		<ion-item>Delete Group</ion-item>
-		  		<ion-item>More...</ion-item>
-  			</ion-list>
-		</div>
+		-->
+	 	 <ion-row class="avatarRow">
+    		<div>
+    		<ion-col>
+				<ion-avatar>
+  			 		<img class="avatar" src="../assets/img/marty-avatar.png">
+				</ion-avatar>
+				<div class="profileHeader">
+					Marty McFly 
+				</div>
+				<div class="profileHeader">
+					Communications
+				</div>
+   		 	</ion-col>
+   		 	</div>
+  		</ion-row>
 	</ion-grid>
-	<ion-list>
-			</ion-list>
+		
+	<div padding>
+			<ion-segment [(ngModel)]="settingsMode">
+	    <ion-segment-button value="profile">
+	      Profile
+	    </ion-segment-button>
+	    <ion-segment-button value="groups">
+	      Groups
+	    </ion-segment-button>
+	  </ion-segment>
+	</div>
+
+	<div [ngSwitch]="settingsMode">
+		<ion-list *ngSwitchCase="'profile'">
+		<ion-row class="profileButtons">
+			<ion-col>
+				<button ion-button icon-left full round color="light">
+					<ion-icon name="thumbs-up"></ion-icon>
+					Ratings
+				</button>
+			</ion-col>
+			<ion-col>
+				<button ion-button icon-left full round color="light">
+					<ion-icon name="star"></ion-icon>
+					Rewards
+				</button>
+			</ion-col>
+		</ion-row>
+  		<ion-item>Senior</ion-item>
+  		<ion-item>MartyFly13@msu.edu</ion-item>
+  		<ion-item>123-456-7890</ion-item>
+  		<ion-item>More...</ion-item>
+	</ion-list>
+    <ion-list *ngSwitchCase="'groups'">
+  		<ion-item>View Groups</ion-item>
+  		<ion-item (click)="newGroupPrompt()">Add Group</ion-item>
+  		<ion-item>Delete Group</ion-item>
+  		<ion-item>More...</ion-item>
+		</ion-list>
+	</div>
 </ion-content>
 
 
