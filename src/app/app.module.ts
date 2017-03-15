@@ -28,6 +28,7 @@ import { Items } from '../mocks/providers/items';
 import { MessagePage } from '../pages/message/message';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
+import { provideClient } from './client';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
