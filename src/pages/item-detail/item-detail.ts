@@ -12,7 +12,6 @@ const allSections = gql`
     User{
       id
     }
-
   }
 `;
 

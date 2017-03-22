@@ -29,14 +29,6 @@ export class LoginPage {
     password: 'test'
   };
 
-  //Create a new user
-  createUserMutation = gql`
-     mutation createUser($email: String!, $password: String!) {
-       createUser(authProvider: { email: {email: $email, password: $password}}) {
-         id
-       }
-     }
-   `;
 
   // Our translated text strings
   private loginErrorString: string;

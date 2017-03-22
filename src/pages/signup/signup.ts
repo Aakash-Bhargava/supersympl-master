@@ -6,6 +6,13 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import { MainPage } from '../../pages/pages';
 import { User } from '../../providers/user';
 
+import { Angular2Apollo } from 'angular2-apollo';
+import { Subscription } from 'rxjs/Subscription'
+
+import gql from 'graphql-tag';
+
+import 'rxjs/add/operator/toPromise';
+
 /*
   Generated class for the Signup page.
 
@@ -25,6 +32,17 @@ export class SignupPage {
     email: 'MartyFly@msu.edu',
     password: 'test'
   };
+
+
+  //Create a new user
+  createUserMutation = gql`
+     mutation createUser($email: String!, $password: String!) {
+       createUser(authProvider: { email: {email: $email, password: $password}}) {
+         id
+       }
+     }
+   `;
+
 
   // Our translated text strings
   private signupErrorString: string;
