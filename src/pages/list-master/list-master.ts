@@ -8,6 +8,8 @@ import { SearchPage } from '../search/search';
 import { Items } from '../../providers/providers';
 import { Item } from '../../models/item';
 
+import { Angular2Apollo } from 'angular2-apollo';
+
 @Component({
   selector: 'page-list-master',
   templateUrl: 'list-master.html'
@@ -17,7 +19,8 @@ export class ListMasterPage {
 
   constructor(public navCtrl: NavController, public items: Items,
               public modalCtrl: ModalController,
-              public alertCtrl: AlertController ) {
+              public alertCtrl: AlertController,
+              private apollo: Angular2Apollo ) {
     this.currentItems = this.items.query();
   }
 
