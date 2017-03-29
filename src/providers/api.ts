@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  url: string = 'https://api.graph.cool/simple/v1/ciz9zl8wq16pw0169bqgvgp9j';
 
   constructor(public http: Http) {
   }

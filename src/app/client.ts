@@ -12,12 +12,7 @@ networkInterface.use([{
       // Create the header object if needed.
       req.options.headers = {};
     }
-    req.options.headers = {};
-
-    if (localStorage.getItem('graphcoolToken')){
-        req.options.headers['Authorization'] = `Bearer ${localStorage.getItem('graphcoolToken')}`
-    }
-    // req.options.headers['authorization'] = localStorage.getItem('token') || null;
+    req.options.headers['x-graphcool-source'] = 'example:angular-apollo-instagram';
     next();
   },
 }]);

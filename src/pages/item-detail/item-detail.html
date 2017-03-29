@@ -1,14 +1,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ item.name }}</ion-title>
+    <ion-title>{{ name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-	<ion-grid>
+  <ion-grid>
 		<ion-row style="height: 200px;" >
       <!--Different header images for different class types  -->
       <div *ngIf="item.type == 'CSE'">

@@ -7,7 +7,14 @@ import { MainPage } from '../../pages/pages';
 import { User } from '../../providers/user';
 
 import { Angular2Apollo } from 'angular2-apollo';
+
+import { Subscription } from 'rxjs/Subscription'
+
 import gql from 'graphql-tag';
+
+import 'rxjs/add/operator/toPromise';
+
+import { ListMasterPage } from '../list-master/list-master';
 
 @Component({
   selector: 'page-login',
@@ -22,6 +29,7 @@ export class LoginPage {
     password: ""
   };
 
+
   // Our translated text strings
   private loginErrorString: string;
 
@@ -29,56 +37,84 @@ export class LoginPage {
               public user: User,
               public toastCtrl: ToastController,
               public translateService: TranslateService,
-              private apollo: Angular2Apollo) {
+              public apollo : Angular2Apollo) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
   }
 
-
   loginUserMutation = gql`
-      mutation signinUser($email: String!, $password: String!) {
-        signinUser( email: {email: $email, password: $password }) {
-          token
+        mutation signinUser($email: String!, $password: String!) {
+          signinUser( email: {email: $email, password: $password }) {
+            token
+          }
+        }
+    `;
+    CurrentUserForProfile = gql`
+      query {
+        user {
+          id
         }
       }
-  `;
-  CurrentUserForProfile = gql`
-    query {
-      user {
-        id
-      }
+    `;
+
+    doLogin(event) {
+      let userInfo = <any>{};
+      this.signIn().then(({data}) =>{
+        if (data) {
+          userInfo.data = data
+          console.log(userInfo.data.signinUser.token);
+          window.localStorage.setItem('graphcoolToken', userInfo.data.signinUser.token);
+        }
+        // this.apollo.watchQuery({
+        // query: this.CurrentUserForProfile
+        // }).subscribe(({data}) => {
+        //     console.log(data);
+        // });
+
+      }).then(() => {
+        this.navCtrl.push(ListMasterPage)
+      }) ;
+
+        // console.log(data.token);
+        // console.log(data.signinUser);
+        // window.localStorage.setItem('graphcoolToken', data.signinUser.token);
+      // })
+
     }
-  `;
 
-  signInEvent(event) {
-    let userInfo = <any>{};
-    this.signIn().then(({data}) =>{
-      if (data) {
-        userInfo.data = data
-        window.localStorage.setItem('graphcoolToken', userInfo.data.signinUser.token);
-      }
-
-    }).then(() => {
-      this.navCtrl.push(MainPage)
-    }) ;
-  }
-
-  signIn(){
-    return this.apollo.mutate({
-      mutation: gql`
-      mutation signinUser($email: String!,
-                          $password: String!){
-        signinUser(email: {email: $email, password: $password}){
-          token
+    signIn(){
+      return this.apollo.mutate({
+        mutation: gql`
+        mutation signinUser($email: String!,
+                            $password: String!){
+          signinUser(email: {email: $email, password: $password}){
+            token
+          }
         }
-      }
-      `,
-      variables: {
-        email: this.account.email,
-        password: this.account.password
-      }
-    }).toPromise();
-  }
+        `,
+        variables: {
+          email: this.account.email,
+          password: this.account.password
+        }
+      }).toPromise();
+    }
+
+
+  // // Attempt to login in through our User service
+  // doLogin() {
+  //   this.user.login(this.account).subscribe((resp) => {
+  //     this.navCtrl.push(MainPage);
+  //   }, (err) => {
+  //     this.navCtrl.push(MainPage);
+  //     // Unable to log in
+  //     let toast = this.toastCtrl.create({
+  //       message: this.loginErrorString,
+  //       duration: 3000,
+  //       position: 'top'
+  //     });
+  //     toast.present();
+  //   });
+  // }
 }

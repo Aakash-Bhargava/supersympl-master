@@ -30,6 +30,8 @@ import { MessagePage } from '../pages/message/message';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { provideClient } from './client';
 import { ApolloModule } from 'angular2-apollo';
+
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: Http) {
