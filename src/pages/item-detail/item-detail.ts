@@ -7,13 +7,16 @@ import { Subscription } from 'rxjs/Subscription';
 import gql from 'graphql-tag';
 
 
-const allSections = gql`
-  query{
-    User{
-      id
-    }
-  }
-`;
+// const allUsers = gql`
+//   query{
+//     allUsers{
+//       id
+//       firstName
+//       lastName
+//       phone
+//     }
+//   }
+// `;
 
 
 @Component({
@@ -24,27 +27,29 @@ const allSections = gql`
 
 
 
-export class ItemDetailPage implements OnInit {
-  // item: any;
+export class ItemDetailPage {//implements OnInit {
+  item: any;
   classInfo: string = "professor";
 
-  name: string;
-  // email: string;
+  //name: string;
+  //email: string;
 
   constructor(public navCtrl: NavController,
                      navParams: NavParams,
                      items:   Items,
                      private apollo: Angular2Apollo) {
 
-    // this.item = navParams.get('item') || items.defaultItem;
+    this.item = navParams.get('item') || items.defaultItem;
   }
 
-  ngOnInit() {
-    this.apollo.watchQuery({
-      query: allSections
-    }).subscribe(({data}) => {
-      this.name = name;
-      // this.email = data.email;
-    });
-  }
+  // ngOnInit() {
+  //   console.log("I get here");
+  // //
+  // //   this.apollo.watchQuery({
+  // //     query: allSections
+  // //   }).subscribe(({data}) => {
+  // //     this.name = name;
+  // //     // this.email = data.email;
+  // //   });
+  // }
 }
