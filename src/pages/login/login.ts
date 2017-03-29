@@ -6,6 +6,9 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import { MainPage } from '../../pages/pages';
 import { User } from '../../providers/user';
 
+import { Angular2Apollo } from 'angular2-apollo';
+import gql from 'graphql-tag';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -15,8 +18,8 @@ export class LoginPage {
   // If you're using the username field with or without email, make
   // sure to add it to the type
   account: {email: string, password: string} = {
-    email: 'MartyFly@msu.edu',
-    password: 'test'
+    email: "",
+    password: ""
   };
 
   // Our translated text strings
@@ -25,26 +28,57 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
               public user: User,
               public toastCtrl: ToastController,
-              public translateService: TranslateService) {
+              public translateService: TranslateService,
+              private apollo: Angular2Apollo) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
   }
 
-  // Attempt to login in through our User service
-  doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    });
+
+  loginUserMutation = gql`
+      mutation signinUser($email: String!, $password: String!) {
+        signinUser( email: {email: $email, password: $password }) {
+          token
+        }
+      }
+  `;
+  CurrentUserForProfile = gql`
+    query {
+      user {
+        id
+      }
+    }
+  `;
+
+  signInEvent(event) {
+    let userInfo = <any>{};
+    this.signIn().then(({data}) =>{
+      if (data) {
+        userInfo.data = data
+        window.localStorage.setItem('graphcoolToken', userInfo.data.signinUser.token);
+      }
+
+    }).then(() => {
+      this.navCtrl.push(MainPage)
+    }) ;
+  }
+
+  signIn(){
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation signinUser($email: String!,
+                          $password: String!){
+        signinUser(email: {email: $email, password: $password}){
+          token
+        }
+      }
+      `,
+      variables: {
+        email: this.account.email,
+        password: this.account.password
+      }
+    }).toPromise();
   }
 }

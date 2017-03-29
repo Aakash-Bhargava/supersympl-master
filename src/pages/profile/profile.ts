@@ -4,7 +4,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Settings } from '../../providers/settings';
 import { SettingsPage } from '../settings/settings';
 import { TranslateService } from 'ng2-translate/ng2-translate';
+import { Angular2Apollo } from 'angular2-apollo';
+import { Subscription } from 'rxjs/Subscription'
 
+import gql from 'graphql-tag';
+
+import 'rxjs/add/operator/toPromise';
 /*
   Generated class for the Profile page.
 
@@ -16,6 +21,16 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
+
+    userInfo = <any>{};
+    user = <any>{};
+    email = "";
+    password = "";
+    firstName = "";
+    lastName = "";
+    major = "";
+    phone = "";
+    year = "";
 
    settingsMode: string = "profile";
 
@@ -42,40 +57,17 @@ export class ProfilePage {
               public formBuilder: FormBuilder,
               public navParams: NavParams,
               public translate: TranslateService,
-              private alertCtrl: AlertController) {}
+              private alertCtrl: AlertController,
+              private apollo: Angular2Apollo) {}
 
-  _buildForm() {
-    let group: any = {
-      option1: [this.options.option1],
-      option2: [this.options.option2],
-      option3: [this.options.option3]
-    };
-
-    switch(this.page) {
-      case 'main':
-        break;
-      case 'profile':
-        group = {
-          option4: [this.options.option4]
-        };
-        break;
-    }
-    this.form = this.formBuilder.group(group);
-
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.settings.merge(this.form.value);
-    });
-  }
 
   ionViewDidLoad() {
     // Build an empty form for the template to render
-    this.form = this.formBuilder.group({});
+    this.setUser();
   }
 
   ionViewWillEnter() {
     // Build an empty form for the template to render
-    this.form = this.formBuilder.group({});
 
     this.page = this.navParams.get('page') || this.page;
     this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
@@ -87,14 +79,9 @@ export class ProfilePage {
     this.settings.load().then(() => {
       this.settingsReady = true;
       this.options = this.settings.allSettings;
-
-      this._buildForm();
     });
   }
 
-  ngOnChanges() {
-    console.log('Ng All Changes');
-  }
   //goToSettingsPage
   goToSettingsPage() {
     //push another page onto the history stack
@@ -130,4 +117,41 @@ export class ProfilePage {
       });
       alert.present();
   }
+
+  setUser(){
+   this.checkUserInfo().then(({data}) => {
+     if (data){
+       this.userInfo = data;
+       this.user = this.userInfo.user;
+       this.email = this.user.email;
+       this.firstName = this.user.firstName;
+       this.lastName = this.user.lastName;
+       this.major = this.user.major;
+       this.phone = this.user.phone;
+       this.year = this.user.year;
+     }
+   })
+ }
+
+ //returns a promise containing the user's info
+ checkUserInfo(){
+   return this.apollo.query({
+     query: gql`
+       query{
+         user{
+           id
+           email
+           firstName
+           lastName
+           phone
+           email
+           major
+           year
+          }
+         }
+     `
+   }).toPromise();
+ }
+
+
 }

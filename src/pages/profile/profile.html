@@ -35,17 +35,17 @@
             <!-- <img class="avatar"> -->
 				</ion-avatar>
 				<div class="profile-header">
-					Marty McFly
+					{{firstName}} {{lastName}}
 				</div>
 				<div class="profile-header">
-					Communications
+					{{major}}
 				</div>
    		 	</ion-col>
    		 	</div>
   		</ion-row>
 	</ion-grid>
 
-	<div padding>
+	<!--<div padding>
 			<ion-segment [(ngModel)]="settingsMode">
 	    <ion-segment-button value="profile">
 	      Profile
@@ -54,10 +54,10 @@
 	      Groups
 	    </ion-segment-button>
 	  </ion-segment>
-	</div>
+	</div>-->
 
-	<div [ngSwitch]="settingsMode">
-		<ion-list *ngSwitchCase="'profile'">
+	<div >
+		<ion-list >
 		<ion-row class="profile-buttons">
 			<ion-col>
 				<button ion-button icon-left full round color="light">
@@ -72,17 +72,20 @@
 				</button>
 			</ion-col>
 		</ion-row>
-  		<ion-item>Senior</ion-item>
-  		<ion-item>MartyFly13@msu.edu</ion-item>
-  		<ion-item>123-456-7890</ion-item>
+  		<ion-item>
+        <ion-label color="primary" stacked>Year</ion-label>
+        <ion-input value="{{year}}"></ion-input>
+      </ion-item>
+  		<ion-item>
+        <ion-label color="primary" stacked>E-mail</ion-label>
+        <ion-input value="{{email}}"></ion-input>
+      </ion-item>
+  		<ion-item>
+        <ion-label color="primary" stacked>Phone</ion-label>
+        <ion-input value="{{phone}}"></ion-input>
+      </ion-item>
   		<ion-item>More...</ion-item>
 	</ion-list>
-    <ion-list *ngSwitchCase="'groups'">
-  		<ion-item>View Groups</ion-item>
-  		<ion-item (click)="newGroupPrompt()">Add Group</ion-item>
-  		<ion-item>Delete Group</ion-item>
-  		<ion-item>More...</ion-item>
-		</ion-list>
 	</div>
 </ion-content>
 

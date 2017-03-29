@@ -8,35 +8,54 @@
 
 
 <ion-content>
-  <form (submit)="doSignup()">
+  <form (submit)="doSignup()" [formGroup]="signup">
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+        <ion-label floating>First Name</ion-label>
+        <ion-input type="text"  [(ngModel)]="account.firstName" formControlName="firstName"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input type="text" [(ngModel)]="account.lastName" formControlName="lastName"></ion-input>
       </ion-item>
-
-      <!--
-      Want to add a Username? Here you go:
 
       <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
+        <ion-label floating>E-mail</ion-label>
+        <ion-input type="email" [(ngModel)]="account.email" formControlName="email"></ion-input>
       </ion-item>
-      -->
 
       <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="account.password" formControlName="password"></ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-label floating>Phone</ion-label>
+        <ion-input type="text" [(ngModel)]="account.phone" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Major</ion-label>
+        <ion-input type="text" [(ngModel)]="account.major" formControlName="major"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Year</ion-label>
+        <ion-select [(ngModel)]="account.year" formControlName="year">
+          <ion-option value="Freshman">Freshman</ion-option>
+          <ion-option value="Sophomore">Sophomore</ion-option>
+          <ion-option value="Junior">Junior</ion-option>
+          <ion-option value="Senior">Senior</ion-option>
+          <ion-option value="Graduate">Graduate</ion-option>
+        </ion-select>
+      </ion-item>
+
+
 
       <div padding>
-        <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+        <button ion-button color="primary" block [disabled]="!signup.valid">{{ 'SIGNUP_BUTTON' | translate }}</button>
       </div>
 
     </ion-list>
