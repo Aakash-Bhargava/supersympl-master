@@ -74,7 +74,7 @@ export class LoginPage {
         // });
 
       }).then(() => {
-        this.navCtrl.push(ListMasterPage)
+        this.navCtrl.push(MainPage);
       }) ;
 
         // console.log(data.token);

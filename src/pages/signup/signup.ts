@@ -10,10 +10,10 @@ import gql from 'graphql-tag';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
-import { Angular2Apollo } from 'angular2-apollo';
+// import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription'
 
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -42,15 +42,15 @@ export class SignupPage {
     year: ""
   };
 
-
-  //Create a new user
-  createUserMutation = gql`
-     mutation createUser($email: String!, $password: String!) {
-       createUser(authProvider: { email: {email: $email, password: $password}}) {
-         id
-       }
-     }
-   `;
+  //
+  // //Create a new user
+  // createUserMutation = gql`
+  //    mutation createUser($email: String!, $password: String!) {
+  //      createUser(authProvider: { email: {email: $email, password: $password}}) {
+  //        id
+  //      }
+  //    }
+  //  `;
 
 
   // Our translated text strings
