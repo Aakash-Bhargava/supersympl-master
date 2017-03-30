@@ -1,10 +1,9 @@
 import { TabsPage } from './tabs/tabs';
 import { TutorialPage } from './tutorial/tutorial';
 import { ListMasterPage } from './list-master/list-master';
-import { MessagePage } from './message/message';
 import { ProfilePage } from './profile/profile';
 import { SchedulePage } from '../pages/schedule/schedule';
-
+import { MapPage } from '../pages/map/map';
 // The page the user lands on after opening the app and without a session
 export const FirstRunPage = TutorialPage;
 
@@ -14,6 +13,6 @@ export const MainPage = TabsPage;
 
 // The initial root pages for our tabs (remove if not using tabs)
 export const Tab1Root = ListMasterPage;
-export const Tab2Root = MessagePage;
+export const Tab2Root = MapPage;
 export const Tab3Root = ProfilePage;
 export const Tab4Root = SchedulePage;
