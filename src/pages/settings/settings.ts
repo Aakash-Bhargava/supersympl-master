@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
@@ -32,12 +32,14 @@ export class SettingsPage {
 
   subSettings: any = SettingsPage;
 
+  loading: any;
   constructor(public navCtrl: NavController,
               public settings: Settings,
               public formBuilder: FormBuilder,
               public navParams: NavParams,
               public translate: TranslateService,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              public loadingCtrl: LoadingController) {
   }
 
   _buildForm() {
@@ -121,7 +123,7 @@ export class SettingsPage {
   });
   alert.present();
 }
-  
+
   newPasswordPrompt() {
       let alert = this.alertCtrl.create({
       title: 'New Passwrod',
@@ -176,5 +178,15 @@ export class SettingsPage {
       alert.present();
   }
 
+  logoutUser() {
+      window.localStorage.removeItem('graphcoolToken');
+      this.loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+        content: 'Logging Out...'
+      });
+      this.loading.present();
+      location.reload();
+      // this.app.getRootNav().setRoot(WelcomePage);
+    }
 
 }
