@@ -5,28 +5,58 @@ import { ItemDetailPage } from '../item-detail/item-detail';
 import { ItemCreatePage } from '../item-create/item-create';
 
 import { SearchPage } from '../search/search';
-import { Items } from '../../providers/providers';
-import { Item } from '../../models/item';
+// import { Items } from '../../providers/providers';
+// import { Item } from '../../models/item';
 
 import { Angular2Apollo } from 'angular2-apollo';
+import gql from 'graphql-tag';
 
 @Component({
   selector: 'page-list-master',
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
-  currentItems: Item[];
-
-  constructor(public navCtrl: NavController, public items: Items,
+  currentUser = <any>{};
+  courses = <any>[];
+  course: any;
+  constructor(public navCtrl: NavController, //public items: Items,
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               private apollo: Angular2Apollo ) {
-    this.currentItems = this.items.query();
   }
 
-  /**
-   * The view loaded, let's query our items for the list
-   */
+  //
+  ngOnInit() {
+    this.currentUserInfo().then(({data}) => {
+      this.currentUser = data;
+      this.currentUser = this.currentUser.user;
+      this.courses = this.currentUser.courses
+      this.course = this.courses.course
+      console.log(this.currentUser.courses);
+    });
+  }
+
+  //Gets user info using graphcool token for authentication
+  currentUserInfo(){
+      return this.apollo.query({
+        query: gql`
+          query{
+            user{
+              id
+              firstName
+              lastName
+              courses{
+                id
+                name
+                icon
+                type
+              }
+            }
+          }
+        `
+      }).toPromise();
+    }
+
   ionViewDidLoad() {
   }
 
@@ -41,16 +71,16 @@ export class ListMasterPage {
   /**
    * Delete an item from the list of items.
    */
-  deleteItem(item) {
-    this.items.delete(item);
-  }
+  // deleteItem(item) {
+  //   this.items.delete(item);
+  // }
 
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(item: Item) {
+  openItem(course) {
     this.navCtrl.push(ItemDetailPage, {
-      item: item
+      course: course
     });
   }
 moreInfo() {

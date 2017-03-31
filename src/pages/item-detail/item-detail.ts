@@ -28,9 +28,8 @@ import gql from 'graphql-tag';
 
 
 export class ItemDetailPage {//implements OnInit {
-  item: any;
   classInfo: string = "professor";
-
+  course: any;
   //name: string;
   //email: string;
 
@@ -39,7 +38,7 @@ export class ItemDetailPage {//implements OnInit {
                      items:   Items,
                      private apollo: Angular2Apollo) {
 
-    this.item = navParams.get('item') || items.defaultItem;
+    this.course = navParams.get('course') || items.defaultItem; 
   }
 
   // ngOnInit() {
