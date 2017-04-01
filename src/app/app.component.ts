@@ -20,6 +20,7 @@ import { SearchPage } from '../pages/search/search';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { ProfilePage } from '../pages/profile/profile';
 import { TranslateService } from 'ng2-translate/ng2-translate';
+import { PasswordPage } from '../pages/password/password';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -60,6 +61,7 @@ export class MyApp {
     { title: 'Search', component: SearchPage },
     { title: 'Schedule', component: SchedulePage },
     { title: 'Profile', component: ProfilePage},
+    { title: 'Password', component: PasswordPage}
   ]
 
   constructor(translate: TranslateService, platform: Platform, settings: Settings, config: Config) {

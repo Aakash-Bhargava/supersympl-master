@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
 import { TranslateService } from 'ng2-translate/ng2-translate';
+import { PasswordPage } from '../password/password';
 
 import { Angular2Apollo } from 'angular2-apollo';
 import gql from 'graphql-tag';
@@ -61,37 +62,10 @@ export class SettingsPage {
   saveChages() {
 
   }
-
-  changePassword() {
-      let alert = this.alertCtrl.create({
-      inputs: [
-        {
-          name: 'currentPassword',
-          placeholder: 'Current Password',
-          type: 'password'
-        },
-        {
-          name: 'newPassword',
-          placeholder: 'New Password',
-          type: 'password'
-        },
-        {
-          name: 'newPassword',
-          placeholder: 'Confirm Password',
-          type: 'password'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Confirm',
-          handler: data => {
-            console.log('Confirm clicked');
-          }
-        }
-      ]
-      });
-      alert.present();
+  changePassword(){
+    this.navCtrl.push(PasswordPage);
   }
+
   logoutUser() {
       window.localStorage.removeItem('graphcoolToken');
       this.loading = this.loadingCtrl.create({
