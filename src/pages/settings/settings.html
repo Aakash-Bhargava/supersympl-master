@@ -48,16 +48,11 @@
         Profile
       </ion-list-header>
       <ion-item>
-         <ion-label fixed>Username</ion-label>
-         <ion-input type="text" value="Fultz" text-right></ion-input>
-      </ion-item>
-      <ion-item>
          <ion-label fixed>Email</ion-label>
-         <ion-input type="text" value="gugafflu@gmail.com" text-right></ion-input>
+         <ion-input type="text" value={{currentUser.email}} text-right></ion-input>
       </ion-item>
-      <ion-item>
-         <ion-label fixed>Password</ion-label>
-         <ion-input type="text" value="Fultz" text-right></ion-input>
+      <ion-item (click)="changePassword()">
+         <ion-label>Change Password</ion-label>
       </ion-item>
     </ion-list>
 
@@ -97,9 +92,9 @@
       </ion-item>
     </ion-list>
 
-</ion-content>  
-
-  <!--<form [formGroup]="form" *ngIf="settingsReady">
+</ion-content>
+<!-- <ion-content>
+  <form [formGroup]="form" *ngIf="settingsReady">
       <ion-list *ngIf="page == 'main'">
 
 
@@ -118,4 +113,5 @@
         </ion-item>
       </ion-list>
     </form>
-    -->
+
+</ion-content> -->
