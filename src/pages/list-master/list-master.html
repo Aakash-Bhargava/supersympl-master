@@ -21,18 +21,16 @@
 
 <ion-content>
 
-  <ion-list>
-    <ion-item *ngFor="let course of courses">
+  <ion-list *ngFor="let course of courses">
+    <ion-item class="list">
       <button ion-item (click)="openItem(course)">
         <ion-avatar item-left>
           <i primary class="{{ course.name }}"aria-hidden="true"></i>
-
           <span class={{course.icon}}></span>
         </ion-avatar>
         <h2>{{course.name}}</h2>
         <p>{{course.about}}</p>
       </button>
-
       <ion-item-options>
         <button ion-button color="danger">
           {{ 'DELETE_BUTTON' | translate }}
