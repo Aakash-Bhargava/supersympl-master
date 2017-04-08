@@ -31,7 +31,7 @@ export class ListMasterPage {
       this.currentUser = data;
       this.currentUser = this.currentUser.user;
       this.courses = this.currentUser.courses
-      this.course = this.courses.course
+      this.course = this.courses.Course
       console.log(this.currentUser.courses);
     });
   }
@@ -50,6 +50,7 @@ export class ListMasterPage {
                 name
                 icon
                 type
+                professor
               }
             }
           }

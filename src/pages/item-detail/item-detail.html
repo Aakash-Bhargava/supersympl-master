@@ -23,7 +23,6 @@
       <div *ngIf="course.type == 'MTH'">
         <img src="assets/img/MTH_classes.jpg">
       </div>
-
     </ion-row>
 		<div padding style="background-color: white;">
   			<ion-segment [(ngModel)]="classInfo">
@@ -37,11 +36,11 @@
 		</div>
 
 		<div [ngSwitch]="classInfo">
-			<ion-list *ngSwitchCase="'professor'">
+			<ion-list *ngSwitchCase="'professor'" style="background: white;">
   			<ion-list-header>
   				Professor
 	  		</ion-list-header>
-	  		<ion-item>Professor Name</ion-item>
+	  		<ion-item>{{course.professor}}</ion-item>
 	  		<ion-item>Professor Email</ion-item>
 	  		<ion-item>Other Communication</ion-item>
 	  		<ion-item>Office Hours</ion-item>
