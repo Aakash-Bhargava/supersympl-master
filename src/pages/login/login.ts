@@ -68,7 +68,12 @@ export class LoginPage {
 
       }).then(() => {
         this.navCtrl.push(MainPage);
-      }) ;
+      }).catch(() => {
+      console.log('view was not dismissed');
+      this.showToast();
+    });
+
+
 
         // console.log(data.token);
         // console.log(data.signinUser);
@@ -76,6 +81,16 @@ export class LoginPage {
       // })
 
     }
+
+    showToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Login failed, Please try again.',
+      duration: 2500,
+      position: 'bottom'
+    });
+
+    toast.present(toast);
+  }
 
     signIn(){
       return this.apollo.mutate({
