@@ -21,15 +21,15 @@
 
 <ion-content>
 
-  <ion-list *ngFor="let course of courses">
+  <ion-list *ngFor="let section of sections">
     <ion-item class="list">
-      <button ion-item (click)="openItem(course)">
+      <button ion-item (click)="openItem(section)">
         <ion-avatar item-left>
-          <i primary class="{{ course.name }}"aria-hidden="true"></i>
-          <span class={{course.icon}}></span>
+          <i primary class="{{section.icon}} fa-2x"aria-hidden="true"></i>
+          <!-- <span class={{section.icon}}></span> -->
         </ion-avatar>
-        <h2>{{course.name}}</h2>
-        <p>{{course.about}}</p>
+        <h2>{{section.courseName}}</h2>
+        <!-- <p>{{course.about}}</p> -->
       </button>
       <ion-item-options>
         <button ion-button color="danger">

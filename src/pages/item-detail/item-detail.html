@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ course.name }}</ion-title>
+    <ion-title>{{ section.name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,16 +11,16 @@
   <ion-grid>
 		<ion-row style="height: 200px;" >
       <!--Different header images for different class types  -->
-      <div *ngIf="course.type == 'CSE'">
+      <div *ngIf="section.type == 'CSE'">
         <img src="assets/img/CSE_classes.jpg">
       </div>
-      <div *ngIf="course.type == 'ECE'">
+      <div *ngIf="section.type == 'ECE'">
         <img src="assets/img/ECE_classes.jpg">
       </div>
-      <div *ngIf="course.type == 'PHY'">
+      <div *ngIf="section.type == 'PHY'">
         <img src="assets/img/PHY_classes.png">
       </div>
-      <div *ngIf="course.type == 'MTH'">
+      <div *ngIf="section.type == 'MTH'">
         <img src="assets/img/MTH_classes.jpg">
       </div>
     </ion-row>
@@ -40,7 +40,7 @@
   			<ion-list-header>
   				Professor
 	  		</ion-list-header>
-	  		<ion-item>{{course.professor}}</ion-item>
+	  		<ion-item>{{section.professor.name}}</ion-item>
 	  		<ion-item>Professor Email</ion-item>
 	  		<ion-item>Other Communication</ion-item>
 	  		<ion-item>Office Hours</ion-item>

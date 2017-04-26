@@ -42,7 +42,7 @@ import { PasswordPage } from '../pages/password/password';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = WelcomePage;
+  rootPage: any;
 
   @ViewChild(Nav) nav: Nav;
 
@@ -79,6 +79,11 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+    if (window.localStorage.getItem('graphcoolToken') != null) {
+     this.rootPage = TabsPage;
+   } else {
+     this.rootPage = LoginPage;
+   }
   }
 
   openPage(page) {

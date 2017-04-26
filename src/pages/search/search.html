@@ -9,14 +9,17 @@
 
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
-  <ion-list>
-    <button ion-item (click)="openItem(course)" *ngFor="let course of queryList">
-      <!-- <ion-avatar item-left>
-        <img [src]="item.profilePic" />
-      </ion-avatar> -->
-      <h2>{{course.name}}</h2>
-      <!-- <p>{{item.about}}</p> -->
-      <!-- <ion-note item-right *ngIf="item.note">{{item.note}}</ion-note> -->
-    </button>
+  <ion-list *ngFor="let course of queryList">
+
+    <!-- <h2>{{course.name}}</h2> -->
+    <ion-item (click)=listSections(course)>
+      <ion-label>{{course.name}}</ion-label>
+        <ion-select (ionChange) = "addSection(section)" *ngFor="let section of sectionList">
+
+          <ion-option [value]="section.sectionNumber">{{section.sectionNumber}}</ion-option>
+
+        </ion-select>
+      </ion-item>
+
   </ion-list>
 </ion-content>

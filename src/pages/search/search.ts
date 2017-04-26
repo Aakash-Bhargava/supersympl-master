@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { ItemDetailPage } from '../item-detail/item-detail';
 // import { Items } from '../../providers/providers';
@@ -17,9 +17,13 @@ export class SearchPage {
   allCourses = <any>[];
   queryList = <any>[];
   // course: any;
+   sectionList=<any>[];
+   userId: any;
+  // section: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               // public items: Items
+              public alertCtrl: AlertController,
               private apollo: Angular2Apollo) {}
 
 
@@ -27,8 +31,7 @@ export class SearchPage {
     this.currentUserInfo().then(({data}) => {
       this.allCourseData = data;
       this.allCourses = this.allCourseData.allCourses;
-      // this.allCourses = this.allCourses.allCourses;
-      // this.course = this.allCourses.course;
+      this.userId = this.allCourseData.user.id;
       console.log(this.allCourses);
     });
   }
@@ -37,13 +40,22 @@ export class SearchPage {
   currentUserInfo(){
       return this.apollo.query({
         query: gql`
-          query{
-            allCourses{
-              id
-              name
-              type
+        query{
+          user{
+            id
+          }
+          allCourses{
+            id
+            name
+            type
+          	sections{
+              sectionNumber
+              professor{
+                name
+              }
             }
           }
+        }
         `
       }).toPromise();
     }
@@ -96,9 +108,28 @@ export class SearchPage {
   // /**
   //  * Navigate to the detail page for this item.
   //  */
-  openItem(course) {
-    this.navCtrl.push(ItemDetailPage, {
-      course: course
-    });
+  listSections(course) {
+    this.sectionList = course.sections;
+
+    console.log(course.sections)
+  }
+
+  addSection(section){
+    // return this.apollo.mutate({
+    //
+    //   mutation: gql`
+    //   mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+    //     addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+    //       sectionsSection {
+    //         id
+    //       }
+    //     }
+    //   }
+    //   `,variables:{
+    //     usersUserId: this.userId,
+    //     sectionsSectionId: section.id
+    //   }
+    // }).toPromise();
+    console.log(section);
   }
 }

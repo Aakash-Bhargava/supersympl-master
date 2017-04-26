@@ -17,8 +17,8 @@ import gql from 'graphql-tag';
 })
 export class ListMasterPage {
   currentUser = <any>{};
-  courses = <any>[];
-  course: any;
+  sections = <any>[];
+  section: any;
   constructor(public navCtrl: NavController, //public items: Items,
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
@@ -30,8 +30,8 @@ export class ListMasterPage {
     this.currentUserInfo().then(({data}) => {
       this.currentUser = data;
       this.currentUser = this.currentUser.user;
-      this.courses = this.currentUser.courses
-      this.course = this.courses.Course
+      this.sections = this.currentUser.sections
+      this.section = this.sections.sectionNumber
       console.log(this.currentUser.courses);
     });
   }
@@ -45,12 +45,15 @@ export class ListMasterPage {
               id
               firstName
               lastName
-              courses{
+              sections{
                 id
-                name
-                icon
+                sectionNumber
+                courseName
                 type
-                professor
+                icon
+                professor{
+                  name
+                }
               }
             }
           }
@@ -79,9 +82,9 @@ export class ListMasterPage {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(course) {
+  openItem(section) {
     this.navCtrl.push(ItemDetailPage, {
-      course: course
+      section: section
     });
   }
 moreInfo() {

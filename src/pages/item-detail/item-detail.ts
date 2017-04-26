@@ -16,7 +16,7 @@ import gql from 'graphql-tag';
 
 export class ItemDetailPage {
   classInfo: string = "professor";
-  course: any;
+  section: any;
   //name: string;
   //email: string;
 
@@ -25,7 +25,7 @@ export class ItemDetailPage {
                      items:   Items,
                      private apollo: Angular2Apollo) {
 
-    this.course = navParams.get('course') || items.defaultItem;
+    this.section = navParams.get('section') || items.defaultItem;
   }
 
 
