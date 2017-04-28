@@ -42,7 +42,7 @@ import { PasswordPage } from '../pages/password/password';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage: any;
+  rootPage: any;//  = WelcomePage; for default login
 
   @ViewChild(Nav) nav: Nav;
 

@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, LoadingController } from 'io
 import { Settings } from '../../providers/settings';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { PasswordPage } from '../password/password';
+import { WelcomePage } from '../welcome/welcome';
 
 import { Angular2Apollo } from 'angular2-apollo';
 import gql from 'graphql-tag';
@@ -53,8 +54,6 @@ export class SettingsPage {
       }).toPromise();
     }
 
-
-
   ngOnChanges() {
     console.log('Ng All Changes');
   }
@@ -74,7 +73,8 @@ export class SettingsPage {
       });
       this.loading.present();
       location.reload();
-      // this.app.getRootNav().setRoot(WelcomePage);
+      this.navCtrl.push(WelcomePage);
+      //  this.app.getRootNav().setRoot(WelcomePage);
     }
 
 }
