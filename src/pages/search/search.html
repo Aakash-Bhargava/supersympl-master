@@ -8,15 +8,17 @@
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for classes to add to your schedule! "></ion-searchbar>
   <ion-list *ngFor="let course of queryList">
 
     <!-- <h2>{{course.name}}</h2> -->
-    <ion-item (click)=listSections(course)>
+    <ion-item>
       <ion-label>{{course.name}}</ion-label>
-        <ion-select (ionChange) = "addSection(section)" *ngFor="let section of sectionList">
+        <ion-select (click)=listSections(course) (ionChange)="addToUser()" cancelText="Nah" okText="Add!">
 
-          <ion-option [value]="section.sectionNumber">{{section.sectionNumber}}</ion-option>
+          <!-- <div > -->
+            <ion-option *ngFor="let section of sectionList" [value]="section.sectionNumber" (ionSelect) = "addSection(section)">{{section.sectionNumber}}</ion-option>
+          <!-- </div> -->
 
         </ion-select>
       </ion-item>

@@ -8,11 +8,11 @@
 
     </ion-buttons>
 
-    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
+    <ion-title>Classes</ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="search"></ion-icon>
+        <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -21,21 +21,31 @@
 
 <ion-content>
 
-  <ion-list *ngFor="let section of sections">
-    <ion-item class="list">
-      <button ion-item (click)="openItem(section)">
-        <ion-avatar item-left>
-          <i primary class="{{section.icon}} fa-2x"aria-hidden="true"></i>
-          <!-- <span class={{section.icon}}></span> -->
-        </ion-avatar>
-        <h2>{{section.courseName}}</h2>
-        <!-- <p>{{course.about}}</p> -->
-      </button>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText=""
+      refreshingSpinner="circles"
+      refreshingText=""></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item-sliding  *ngFor="let section of sections">
+      <ion-item (click)="openItem(section)">
+        <!-- <button ion-item > -->
+          <ion-avatar item-left>
+            <i primary class="{{section.icon}} fa-2x"aria-hidden="true"></i>
+            <!-- <span class={{section.icon}}></span> -->
+          </ion-avatar>
+          <h2>{{section.courseName}}</h2>
+          <p>Section: {{section.sectionNumber}}</p>
+          <!-- <p>{{course.about}}</p> -->
+        <!-- </button> -->
+      </ion-item>
       <ion-item-options>
-        <button ion-button color="danger">
+        <button ion-button color="danger" (click)="removeSection(section);">
           {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>
-    </ion-item>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
