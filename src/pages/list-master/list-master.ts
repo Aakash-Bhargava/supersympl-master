@@ -104,23 +104,41 @@ export class ListMasterPage {
    * Delete an item from the list of items.
    */
    removeSection(section) {
-     this.apollo.mutate({
+     let confirm = this.alertCtrl.create({
+        title: 'Are you sure?',
+        message: 'You can always add it again later.',
+        buttons: [
+          {
+            text: 'No',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              this.apollo.mutate({
 
-       mutation: gql`
-       mutation removeFromUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
-         removeFromUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
-           sectionsSection {
-             id
-           }
-         }
-       }
-       `,variables:{
-         usersUserId: this.currentUser.id,
-         sectionsSectionId: section.id
-       }
-     }).toPromise();
+               mutation: gql`
+               mutation removeFromUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+                 removeFromUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+                   sectionsSection {
+                     id
+                   }
+                 }
+               }
+               `,variables:{
+                 usersUserId: this.currentUser.id,
+                 sectionsSectionId: section.id
+               }
+             }).toPromise();
 
-     this.refreshData();
+             this.refreshData();
+            }
+          }
+        ]
+      });
+      confirm.present();
    }
 
   /**
