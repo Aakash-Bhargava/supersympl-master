@@ -1,14 +1,35 @@
 page-map {
+  ion-content {
+    background-color: white;
+  }
+
   [noScroll] {
     overflow: hidden;
   }
 
   #map {
+
     height: 100%;
     width: 100%;
+    position: absolute;
+    bottom: 0;
   }
 
   .buttons {
     text-align: center;
+  }
+
+  .filter {
+    margin: 0;
+    //padding-left: 1.2em;
+    padding: 0;
+    padding-left: 1.3em;
+    font-size: 0.8em;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .select {
+    color: red;
   }
 }

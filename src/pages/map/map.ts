@@ -17,6 +17,7 @@ import * as Leaflet from 'leaflet';
 })
 export class MapPage implements OnInit{
   map: any;
+  filterBy:string = "all";
   //class: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
@@ -97,5 +98,7 @@ export class MapPage implements OnInit{
     this.map.on('locationfound', onLocationFound);
   }
 
+  filter() {
+  }
 
 }
