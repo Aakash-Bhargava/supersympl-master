@@ -28,11 +28,8 @@
     <ion-item-divider color="light">Subject</ion-item-divider>
     <ion-item>
       <ion-label>What Are You Studying?</ion-label>
-      <ion-select [(ngModel)]="classes">
-        <ion-option value="cse231">CSE 231</ion-option>
-        <ion-option value="phy183">PHY 183</ion-option>
-        <ion-option value="chem141">CHEM 141</ion-option>
-        <ion-option value="ece201">ECE 201</ion-option>
+      <ion-select [(ngModel)]="className">
+        <ion-option *ngFor="let class of classes" (ionSelect)="selectClass(class.className)">{{class.courseName}}</ion-option>
       </ion-select>
     </ion-item>
     <!--<ion-list-header>Time</ion-list-header>-->

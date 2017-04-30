@@ -84,8 +84,9 @@ export class MapPage implements OnInit{
         iconSize: [38, 38], // size of the icon
       });
 
-      let desc = '<h5>' + c.toUpperCase() + '</h5>';
+      let desc = '<h5>' + c.name.toUpperCase() + '</h5>';
       desc += '<p><em>(4) People studying:</em></p>';
+      desc += '<p>'+ c.startTime+' - '+c.endTime+'</p>';
       desc += '<p><img src="http://i1246.photobucket.com/albums/gg611/theofficechic/Design/profile-round.png" style="width:20%;height:20%;">\
       <img src="http://ablissfulhaven.com/dev/wp-content/uploads/2015/06/round-chokolatta-profile-pic.png" style="width:20%;height:20%;">\
       <img src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/6083/profile/profile-512_1.jpg" style="width:20%;height:20%;">\
