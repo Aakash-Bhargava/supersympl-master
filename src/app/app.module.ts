@@ -26,6 +26,8 @@ import { Api } from '../providers/api';
 import { Settings } from '../providers/settings';
 import { Items } from '../mocks/providers/items';
 import { PasswordPage } from '../pages/password/password';
+import { SetLocationPage } from '../pages/set-location/set-location';
+
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { provideClient } from './client';
@@ -77,7 +79,8 @@ let pages = [
   SearchPage,
   SchedulePage,
   ProfilePage,
-  PasswordPage
+  PasswordPage,
+  SetLocationPage
 ];
 
 export function declarations() {

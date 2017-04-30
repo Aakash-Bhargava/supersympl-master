@@ -21,6 +21,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { ProfilePage } from '../pages/profile/profile';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { PasswordPage } from '../pages/password/password';
+import { SetLocationPage } from '../pages/set-location/set-location';
 
 @Component({
   template: `<ion-menu [content]="content">
