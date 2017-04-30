@@ -82,7 +82,7 @@ export class MyApp {
     if (window.localStorage.getItem('graphcoolToken') != null) {
      this.rootPage = TabsPage;
    } else {
-     this.rootPage = LoginPage;
+     this.rootPage = WelcomePage;
    }
   }
 

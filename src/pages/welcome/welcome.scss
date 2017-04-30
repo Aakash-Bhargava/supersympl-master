@@ -1,12 +1,12 @@
 page-welcome {
   .splash-bg {
-    animation: animatedBackground 40s linear infinite;
-    background: url('../assets/img/sympl_cover.png') no-repeat transparent;
-    background-repeat: repeat-x;
-    background-size: cover;
-    height: 45%;
+    //animation: animatedBackground 40s linear infinite;
+    background: url('../assets/img/symplLogo.png') no-repeat transparent;
+    //background-repeat: repeat-x;
+    background-size: 100% 50%;
+    height: 50%;
+    margin-top: 75px;
     position: relative;
-    z-index: 1;
   }
 
   @keyframes animatedBackground {
