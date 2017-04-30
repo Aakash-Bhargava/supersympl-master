@@ -23,8 +23,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Subject</ion-list-header>
+  <ion-list no-lines>
+    <!--<ion-list-header>Subject</ion-list-header>-->
+    <ion-item-divider color="light">Subject</ion-item-divider>
     <ion-item>
       <ion-label class="header">What Are You Studying?</ion-label>
       <ion-select [(ngModel)]="classes">
@@ -34,7 +35,8 @@
         <ion-option value="ece201">ECE 201</ion-option>
       </ion-select>
     </ion-item>
-    <ion-list-header>Time</ion-list-header>
+    <!--<ion-list-header>Time</ion-list-header>-->
+    <ion-item-divider color="light">Time</ion-item-divider>
     <ion-item>
       <ion-label class="header">From:</ion-label>
       <ion-datetime displayFormat="h:mm a" [(ngModel)]="startTime"></ion-datetime>
@@ -43,7 +45,8 @@
       <ion-label class="header">To:</ion-label>
       <ion-datetime displayFormat="h:mm a" [(ngModel)]="endTime"></ion-datetime>
     </ion-item>
-    <ion-list-header>Visibility</ion-list-header>
+    <!--<ion-list-header>Visibility</ion-list-header>-->
+    <ion-item-divider color="light">Visibility</ion-item-divider>
     <ion-item>
       <ion-label class="header">Who can see you?</ion-label>
       <ion-select [(ngModel)]="visibility">
