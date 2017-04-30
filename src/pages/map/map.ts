@@ -71,6 +71,7 @@ export class MapPage implements OnInit{
     //web location
     if(c) {
       this.map.locate({ setView: true});
+      this.map.on('locationfound', onLocationFound);
     }
 
 
@@ -95,7 +96,6 @@ export class MapPage implements OnInit{
 
       Leaflet.circle(e.latlng, radius, {color: 'red'}).addTo(that.map);
     }
-    this.map.on('locationfound', onLocationFound);
   }
 
   filter() {
