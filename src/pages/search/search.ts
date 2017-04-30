@@ -17,8 +17,9 @@ export class SearchPage {
   allCourses = <any>[];
   queryList = <any>[];
   // course: any;
-   sectionList=<any>[];
-   userId: any;
+  sectionList=<any>[];
+  section: any;
+  userId: any;
   // section: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -49,6 +50,7 @@ export class SearchPage {
             name
             type
           	sections{
+              id
               sectionNumber
               professor{
                 name
@@ -68,31 +70,30 @@ export class SearchPage {
   /**
    * Perform a service for the proper items.
    */
-   getItems(searchbar) {
-  // Reset items back to all of the items
-  this.initializeItems();
+  getItems(searchbar) {
+    // Reset items back to all of the items
+    this.initializeItems();
 
-  // set q to the value of the searchbar
-  var q = searchbar.srcElement.value;
+    // set q to the value of the searchbar
+    var q = searchbar.srcElement.value;
 
-
-  // if the value is an empty string don't filter the items
-  if (!q) {
-    return;
-  }
-
-  this.queryList = this.queryList.filter((v) => {
-    if(v.name && q) {
-      if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-        return true;
-      }
-      return false;
+    // if the value is an empty string don't filter the items
+    if (!q) {
+      return;
     }
-  });
 
-  console.log(q, this.queryList.length);
+    this.queryList = this.queryList.filter((v) => {
+      if(v.name && q) {
+        if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          this.sectionList = v.sections;
+          return true;
+        }
+        return false;
+      }
+    });
 
-}
+    console.log(q, this.queryList.length);
+  }
   //  getItems(ev) {
   //   this.initializeItems()
   //   let val = ev.target.value;
@@ -111,25 +112,30 @@ export class SearchPage {
   listSections(course) {
     this.sectionList = course.sections;
 
-    console.log(course.sections)
+    console.log(course.sections);
   }
 
   addSection(section){
-    // return this.apollo.mutate({
-    //
-    //   mutation: gql`
-    //   mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
-    //     addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
-    //       sectionsSection {
-    //         id
-    //       }
-    //     }
-    //   }
-    //   `,variables:{
-    //     usersUserId: this.userId,
-    //     sectionsSectionId: section.id
-    //   }
-    // }).toPromise();
-    console.log(section);
+    this.section = section;
+    // console.log(section);
+  }
+  addToUser() {
+    console.log(this.section);
+    return this.apollo.mutate({
+
+      mutation: gql`
+      mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+        addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+          sectionsSection {
+            id
+          }
+        }
+      }
+      `,variables:{
+        usersUserId: this.userId,
+        sectionsSectionId: this.section.id
+      }
+    }).toPromise();
+
   }
 }

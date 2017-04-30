@@ -19,20 +19,70 @@ export class ListMasterPage {
   currentUser = <any>{};
   sections = <any>[];
   section: any;
+  data: any;
   constructor(public navCtrl: NavController, //public items: Items,
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               private apollo: Angular2Apollo ) {
   }
 
-  //
   ngOnInit() {
     this.currentUserInfo().then(({data}) => {
       this.currentUser = data;
       this.currentUser = this.currentUser.user;
-      this.sections = this.currentUser.sections
-      this.section = this.sections.sectionNumber
-      console.log(this.currentUser.courses);
+      this.sections = this.currentUser.sections;
+      this.section = this.sections.sectionNumber;
+      console.log(this.currentUser);
+    });
+  }
+
+  refreshData() {
+    this.data = this.watch();
+    this.data.refetch().then(({data}) => {
+      this.currentUser = data;
+      this.currentUser = this.currentUser.user;
+      this.sections = this.currentUser.sections;
+      this.section = this.sections.sectionNumber;
+      // console.log(this.currentUser.sections);
+    });
+  }
+
+  doRefresh(refresher) {
+    this.data = this.watch();
+    this.data.refetch().then(({data}) => {
+      this.currentUser = data;
+      this.currentUser = this.currentUser.user;
+      this.sections = this.currentUser.sections;
+      this.section = this.sections.sectionNumber;
+      // console.log(this.currentUser.sections);
+    });
+    setTimeout(() => {
+      // console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
+  watch() {
+    return this.apollo.watchQuery({
+      query: gql`
+        query{
+          user{
+            id
+            firstName
+            lastName
+            sections{
+              id
+              sectionNumber
+              courseName
+              type
+              icon
+              professor{
+                name
+              }
+            }
+          }
+        }
+      `
     });
   }
 
@@ -61,23 +111,32 @@ export class ListMasterPage {
       }).toPromise();
     }
 
-  ionViewDidLoad() {
-  }
-
-  /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
-   * modal and then adds the new item to our data source if the user created one.
-   */
   addItem() {
-  this.navCtrl.push(SearchPage);
+    this.navCtrl.push(SearchPage);
   }
 
   /**
    * Delete an item from the list of items.
    */
-  // deleteItem(item) {
-  //   this.items.delete(item);
-  // }
+   removeSection(section) {
+     this.apollo.mutate({
+
+       mutation: gql`
+       mutation removeFromUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+         removeFromUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+           sectionsSection {
+             id
+           }
+         }
+       }
+       `,variables:{
+         usersUserId: this.currentUser.id,
+         sectionsSectionId: section.id
+       }
+     }).toPromise();
+
+     this.refreshData();
+   }
 
   /**
    * Navigate to the detail page for this item.
@@ -87,13 +146,14 @@ export class ListMasterPage {
       section: section
     });
   }
-moreInfo() {
-  let alert = this.alertCtrl.create({
-    title: 'What is this page?',
-    subTitle: 'This page allows the user to navigate through their classes every semester.',
-    buttons: ['Dismiss']
-  });
-  alert.present()
-}
+
+  moreInfo() {
+    let alert = this.alertCtrl.create({
+      title: 'What is this page?',
+      subTitle: 'This page allows the user to navigate through their classes every semester.',
+      buttons: ['Dismiss']
+    });
+    alert.present()
+  }
 
 }
