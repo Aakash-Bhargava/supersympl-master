@@ -25,4 +25,9 @@ export class SetLocationPage {
     //this.navCtrl.push(MapPage, {class: c});
     this.viewCtrl.dismiss(c);
   }
+
+  displayFriends() {
+    //this.navCtrl.push(FriendsListPage, {
+    //});
+  }
 }
