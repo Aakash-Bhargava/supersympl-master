@@ -35,8 +35,24 @@
 </ion-content> -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <ion-title>Settings</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="cancel()">
+        <span color="white" showWhen="ios">
+          Cancel
+        </span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="save()" strong>
+        <span color="white" showWhen="ios">
+          Save
+        </span>
+        <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -47,13 +63,28 @@
       <ion-list-header>
         Profile
       </ion-list-header>
-      <ion-item>
-         <ion-label fixed>Email</ion-label>
-         <ion-input type="text" value={{currentUser.email}} text-right></ion-input>
-      </ion-item>
-      <ion-item (click)="changePassword()">
-         <ion-label>Change Password ></ion-label>
-      </ion-item>
+      <!-- <form> -->
+        <ion-item>
+           <ion-label>Email</ion-label>
+           <ion-note item-right>
+            {{this.currentUser.email}}
+            </ion-note>
+        </ion-item>
+        <ion-item>
+           <ion-label>Major</ion-label>
+           <ion-input type="text" value={{currentUser.major}} [(ngModel)]="major" text-right></ion-input>
+        </ion-item>
+        <ion-item>
+           <ion-label>Year</ion-label>
+           <ion-select [(ngModel)]="year">
+             <ion-option value="Freshman">Freshman</ion-option>
+             <ion-option value="Sophomore">Sophomore</ion-option>
+             <ion-option value="Junior">Junior</ion-option>
+             <ion-option value="Senior">Senior</ion-option>
+             <ion-option value="Graduate">Graduate</ion-option>
+           </ion-select>
+        </ion-item>
+      <!-- </form> -->
     </ion-list>
 
     <ion-list>
@@ -84,6 +115,12 @@
       <button ion-item>
         <ion-label>Terms of Service</ion-label>
       </button>
+    </ion-list>
+
+    <ion-list>
+      <ion-item class="center" (click)="changePassword()" text-center>
+        Change Password
+      </ion-item>
     </ion-list>
 
     <ion-list>
