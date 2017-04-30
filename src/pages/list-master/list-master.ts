@@ -26,14 +26,8 @@ export class ListMasterPage {
               private apollo: Angular2Apollo ) {
   }
 
-  ngOnInit() {
-    this.currentUserInfo().then(({data}) => {
-      this.currentUser = data;
-      this.currentUser = this.currentUser.user;
-      this.sections = this.currentUser.sections;
-      this.section = this.sections.sectionNumber;
-      console.log(this.currentUser);
-    });
+  ionViewDidEnter() {
+    this.refreshData();
   }
 
   refreshData() {
@@ -43,21 +37,12 @@ export class ListMasterPage {
       this.currentUser = this.currentUser.user;
       this.sections = this.currentUser.sections;
       this.section = this.sections.sectionNumber;
-      // console.log(this.currentUser.sections);
     });
   }
 
   doRefresh(refresher) {
-    this.data = this.watch();
-    this.data.refetch().then(({data}) => {
-      this.currentUser = data;
-      this.currentUser = this.currentUser.user;
-      this.sections = this.currentUser.sections;
-      this.section = this.sections.sectionNumber;
-      // console.log(this.currentUser.sections);
-    });
+    this.refreshData();
     setTimeout(() => {
-      // console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
   }

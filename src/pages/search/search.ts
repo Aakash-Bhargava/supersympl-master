@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ViewController, ToastController } from 'ionic-angular';
 
 import { ItemDetailPage } from '../item-detail/item-detail';
 // import { Items } from '../../providers/providers';
@@ -25,7 +25,9 @@ export class SearchPage {
               public navParams: NavParams,
               // public items: Items
               public alertCtrl: AlertController,
-              private apollo: Angular2Apollo) {}
+              private apollo: Angular2Apollo,
+              public viewCtrl: ViewController,
+              public toast: ToastController) {}
 
 
   ngOnInit() {
@@ -120,8 +122,8 @@ export class SearchPage {
     // console.log(section);
   }
   addToUser() {
-    console.log(this.section);
-    return this.apollo.mutate({
+    // console.log(this.section);
+    this.apollo.mutate({
 
       mutation: gql`
       mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
@@ -137,5 +139,13 @@ export class SearchPage {
       }
     }).toPromise();
 
+    let toast = this.toast.create({
+      message: 'Class Added!',
+      position: 'top',
+      duration: 3000
+    });
+    toast.present();
+
+    this.viewCtrl.dismiss();
   }
 }
