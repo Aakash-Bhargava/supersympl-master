@@ -15,7 +15,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-	<ion-grid>
+	<ion-grid no-padding>
 		<!--
 			<ion-row center style="height: 200px; background-color: white;">
 			<ion-item>
@@ -25,7 +25,7 @@
     		</ion-item>
 		</ion-row>
 		-->
-	 	 <ion-row class="avatar-row">
+	 	 <ion-row class="avatar-row" no-padding>
     		<div>
     		<ion-col>
 				<ion-avatar>
@@ -34,10 +34,10 @@
             </div>
             <!-- <img class="avatar"> -->
 				</ion-avatar>
-				<div class="profile-header">
+				<div class="profile-header" text-capitalize>
 					{{firstName}} {{lastName}}
 				</div>
-				<div class="profile-header">
+				<div class="profile-header" text-capitalize>
 					{{major}}
 				</div>
    		 	</ion-col>
@@ -73,18 +73,22 @@
 			</ion-col>
 		</ion-row>
   		<ion-item>
-        <ion-label color="primary" stacked>Year</ion-label>
-        <ion-input value="{{year}}"></ion-input>
+        <h2 color="primary">Email: </h2>
+        <p>{{email}}</p>
       </ion-item>
   		<ion-item>
-        <ion-label color="primary" stacked>E-mail</ion-label>
-        <ion-input value="{{email}}"></ion-input>
+        <h2 color="primary">Phone Number: </h2>
+        <p>{{phone}}</p>
       </ion-item>
-  		<ion-item>
-        <ion-label color="primary" stacked>Phone</ion-label>
-        <ion-input value="{{phone}}"></ion-input>
+      <ion-item>
+        <h2 color="primary">Year: </h2>
+        <p>{{year}}</p>
       </ion-item>
-  		<ion-item>More...</ion-item>
+      <ion-item>
+        <h2 color="primary">Current classes: </h2>
+        <p  *ngFor="let section of sections" style="display: inline"> {{section.courseName}} </p>
+      </ion-item>
+  		<!-- <ion-item>More...</ion-item> -->
 	</ion-list>
 	</div>
 </ion-content>

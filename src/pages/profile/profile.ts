@@ -31,6 +31,7 @@ export class ProfilePage {
     major = "";
     phone = "";
     year = "";
+    sections: any[];
 
    settingsMode: string = "profile";
 
@@ -129,6 +130,8 @@ export class ProfilePage {
        this.major = this.user.major;
        this.phone = this.user.phone;
        this.year = this.user.year;
+       this.sections = this.user.sections;
+       console.log(this.sections);
      }
    })
  }
@@ -147,6 +150,9 @@ export class ProfilePage {
            email
            major
            year
+           sections {
+             courseName
+           }
           }
          }
      `
