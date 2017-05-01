@@ -32,4 +32,10 @@ page-map {
   .select {
     color: red;
   }
+
+  button {
+    position: absolute !important;
+    bottom: 5px !important;
+    z-index: 999 !important;
+  }
 }
