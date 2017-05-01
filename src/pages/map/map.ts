@@ -84,7 +84,7 @@ export class MapPage implements OnInit{
         iconSize: [38, 38], // size of the icon
       });
 
-      let desc = '<h5 style="text-align:center;">' + c.toUpperCase() + '</h5>';
+      let desc = '<h5 style="text-align:center;">' + c.name.toUpperCase() + '</h5>';
       //let desc = '<h5>' + c.name.toUpperCase() + '</h5>';
       desc += '<p><em>(4) People studying:</em></p>';
       desc += '<p>'+ c.startTime+' - '+c.endTime+'</p>';
