@@ -9,10 +9,10 @@
 
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for classes to add to your schedule! "></ion-searchbar>
-  <ion-list *ngFor="let course of queryList">
+  <ion-list>
 
     <!-- <h2>{{course.name}}</h2> -->
-    <ion-item>
+    <ion-item *ngFor="let course of queryList">
       <ion-label>{{course.name}}</ion-label>
         <ion-select (click)=listSections(course) (ionChange)="addToUser()" cancelText="Nah" okText="Add!">
 
