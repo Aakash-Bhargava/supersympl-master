@@ -34,27 +34,67 @@ export class MapPage implements OnInit{
     Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
       //attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18
-    }).addTo(map);
+    }).addTo(this.map);
 
     //web location
-    map.locate({ setView: true});
+    this.map.locate({ setView: true});
+    this.map.on('locationfound', addMockPins);
 
-    //when we have a location draw a marker and accuracy circle
-    /*function onLocationFound(e) {
-      var radius = e.accuracy / 2;
+    function addMockPins(e) {
+      var radius = e.accuracy / 4;
+      var profileIcon = Leaflet.icon({
+        iconUrl: 'https://cdn0.iconfinder.com/data/icons/education-15/500/reader-512.png',
+        iconSize: [38, 38] // size of the icon
+      });
+      let times = [
+        '2pm - 5pm',
+        '10am - 12pm',
+        '8pm - 2am',
+        '5pm - 8pm'
+      ];
+      let classes = [
+        'CHEM 141',
+        'MTH 234',
+        'FI 320',
+        'IAH 201'
+      ];
 
-      Leaflet.marker(e.latlng).addTo(map)
-          .bindPopup("You are within " + radius + " meters from this point").openPopup();
+      let offsets = [
+        [0.0001, 0.0007],
+        [0.0008, 0.0003],
+        [0.0004, -0.0005],
+        [-0.0006, -0.0001]
+      ];
 
-      Leaflet.circle(e.latlng, radius).addTo(map);
+      //let colors = ['blue', 'yellow', 'green', 'orange'];
+      let images = [
+        '<img src="http://i1246.photobucket.com/albums/gg611/theofficechic/Design/profile-round.png" style="width:20%;height:20%;">',
+        '<img src="http://ablissfulhaven.com/dev/wp-content/uploads/2015/06/round-chokolatta-profile-pic.png" style="width:20%;height:20%;">',
+        '<img src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/6083/profile/profile-512_1.jpg" style="width:20%;height:20%;">',
+        '<img src="https://rigorous-digital.co.uk/wp-content/uploads/2014/06/profile-round.png" style="width:20%;height:20%;">'
+      ];
+
+      for(var i=0; i<4; i++) {
+        let num = i +1;
+        let desc = '<h5 style="text-align:center;">' + classes[i] + '</h5>';
+        desc += '<p>' + times[i] + '</p>';
+        desc += '<p><em>(' + num +') People studying:</em></p>';
+        desc += '<p>';
+        for(var j=0; j<=i; j++) {
+          desc += images[j];
+        }
+        desc += '</p>';
+        desc += '<p class="buttons"><button ion-button style="color:white;background-color:red;">Ask to Join</button></p>';
+
+        let new_lat = e.latlng.lat + offsets[i][0];
+        let new_lng = e.latlng.lng + offsets[i][1];
+        let latlng = Leaflet.latLng(new_lat, new_lng);
+
+        Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
+            .bindPopup(desc);//.openPopup();
+        //Leaflet.circle(latlng, radius, {color: colors[i]}).addTo(map);
+      }
     }
-    map.on('locationfound', onLocationFound);
-    //alert on location error
-    function onLocationError(e) {
-      alert(e.message);
-    }
-
-    map.on('locationerror', onLocationError);*/
   }
 
   setLocation() {
@@ -86,8 +126,8 @@ export class MapPage implements OnInit{
 
       let desc = '<h5 style="text-align:center;">' + c.name.toUpperCase() + '</h5>';
       //let desc = '<h5>' + c.name.toUpperCase() + '</h5>';
-      desc += '<p><em>(4) People studying:</em></p>';
       desc += '<p>'+ c.startTime+' - '+c.endTime+'</p>';
+      desc += '<p><em>(4) People studying:</em></p>';
       desc += '<p><img src="http://i1246.photobucket.com/albums/gg611/theofficechic/Design/profile-round.png" style="width:20%;height:20%;">\
       <img src="http://ablissfulhaven.com/dev/wp-content/uploads/2015/06/round-chokolatta-profile-pic.png" style="width:20%;height:20%;">\
       <img src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/6083/profile/profile-512_1.jpg" style="width:20%;height:20%;">\
@@ -97,6 +137,8 @@ export class MapPage implements OnInit{
           .bindPopup(desc);//.openPopup();
 
       Leaflet.circle(e.latlng, radius, {color: 'red'}).addTo(that.map);
+
+
     }
   }
 
