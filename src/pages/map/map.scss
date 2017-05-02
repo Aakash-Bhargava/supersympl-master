@@ -15,7 +15,7 @@ page-map {
     bottom: 0;
   }
 
-  .buttons {
+  .centerb {
     text-align: center;
   }
 
@@ -33,9 +33,16 @@ page-map {
     color: red;
   }
 
-  button {
+  /*button {
+    position: absolute !important;
+    bottom: 5px !important;
+    z-index: 999 !important;
+  }*/
+
+  #study {
     position: absolute !important;
     bottom: 5px !important;
     z-index: 999 !important;
   }
+
 }

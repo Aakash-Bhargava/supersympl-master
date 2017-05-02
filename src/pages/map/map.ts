@@ -94,14 +94,14 @@ export class MapPage implements OnInit{
       for(var i=0; i<4; i++) {
         let num = pins[i]['images'].length;
         let desc = '<h5 style="text-align:center;">' + pins[i]['class'] + '</h5>';
-        desc += '<p>' + pins[i]['time'] + '</p>';
+        desc += '<p class="centerb">' + pins[i]['time'] + '</p>';
         desc += '<p><em>(' + num +') People studying:</em></p>';
-        desc += '<p>';
+        desc += '<p class="centerb">';
         for(var j=0; j<num; j++) {
           desc += pins[i]['images'][j];
         }
         desc += '</p>';
-        desc += '<p class="buttons"><button ion-button style="color:white;background-color:red;">Ask to Join</button></p>';
+        desc += '<p class="centerb"><button ion-button style="color:white;background-color:red;">Ask to Join</button></p>';
 
         let new_lat = e.latlng.lat + pins[i]['offset'][0];
         let new_lng = e.latlng.lng + pins[i]['offset'][1];
