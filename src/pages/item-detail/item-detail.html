@@ -40,18 +40,66 @@
   			<ion-list-header>
   				Professor
 	  		</ion-list-header>
-	  		<ion-item>{{section.professor.name}}</ion-item>
-	  		<ion-item>Professor Email</ion-item>
-	  		<ion-item>Other Communication</ion-item>
-	  		<ion-item>Office Hours</ion-item>
-	  		<ion-item>More...</ion-item>
+        <!-- <ion-item>
+          <h2 color="primary">Name:</h2>
+          <p>{{section.professor.name}}</p>
+        </ion-item>
+        <ion-item>
+          <h2 color="primary">Email</h2>
+          <p>{{section.professor.email}}</p>
+        </ion-item> -->
+	  		<ion-item>
+          Name:
+          <ion-note item-right>
+            {{section.professor.name}}
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          Email:
+          <ion-note item-right>
+            {{section.professor.email}}
+          </ion-note>
+        </ion-item>
+        <ion-item>
+          Office Hours:
+          <ion-note item-right>
+            Mon, Tue 2-5pm
+          </ion-note>
+        </ion-item>
+	  		<!-- <ion-item>Office Hours</ion-item> -->
+	  		<!-- <ion-item>More...</ion-item> -->
 		</ion-list>
 	    <ion-list *ngSwitchCase="'classmates'">
         <ion-list-header>
   				Classmates
 	  		</ion-list-header>
         <ion-item>
-          display a list of classmates here
+          <ion-avatar item-left>
+            <img src="https://pbs.twimg.com/profile_images/877902748/Profile_Photo.jpg">
+          </ion-avatar>
+          <h2> Sarah Leeman</h2>
+          <p> Computer Science </p>
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-left>
+            <img src="https://i.vimeocdn.com/portrait/7772033_300x300">
+          </ion-avatar>
+          <h2> Gustavo Fulton </h2>
+          <p> Computer Science </p>
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-left>
+            <img src="http://kacper.life/wellpledge/images/user1.jpg">
+          </ion-avatar>
+          <h2> Lori Fischer </h2>
+          <p> Marketing </p>
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-left>
+            <img src="http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg">
+          </ion-avatar>
+          <h2> Brody Clarke </h2>
+          <p> Business </p>
         </ion-item>
         <!-- <ion-item *ngFor="let item of currentItems">
           <button ion-item (click)="openItem(item)">

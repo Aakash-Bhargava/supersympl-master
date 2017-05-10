@@ -63,6 +63,7 @@ export class ListMasterPage {
               icon
               professor{
                 name
+                email
               }
             }
           }
@@ -88,6 +89,7 @@ export class ListMasterPage {
                 icon
                 professor{
                   name
+                  email
                 }
               }
             }
