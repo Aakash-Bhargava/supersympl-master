@@ -61,6 +61,12 @@ export class ListMasterPage {
               courseName
               type
               icon
+              users {
+                firstName
+                lastName
+                major
+                profilePic
+              }
               professor{
                 name
                 email
@@ -87,6 +93,12 @@ export class ListMasterPage {
                 courseName
                 type
                 icon
+                users {
+                  firstName
+                  lastName
+                  major
+                  profilePic
+                }
                 professor{
                   name
                   email

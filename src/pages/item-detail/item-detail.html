@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ section.name }}</ion-title>
+    <ion-title>{{ section.courseName }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -73,33 +73,12 @@
         <ion-list-header>
   				Classmates
 	  		</ion-list-header>
-        <ion-item>
+        <ion-item *ngFor="let user of users" text-capitalize>
           <ion-avatar item-left>
-            <img src="https://pbs.twimg.com/profile_images/877902748/Profile_Photo.jpg">
+            <img src="{{user.profilePic}}">
           </ion-avatar>
-          <h2> Sarah Leeman</h2>
-          <p> Computer Science </p>
-        </ion-item>
-        <ion-item>
-          <ion-avatar item-left>
-            <img src="https://i.vimeocdn.com/portrait/7772033_300x300">
-          </ion-avatar>
-          <h2> Gustavo Fulton </h2>
-          <p> Computer Science </p>
-        </ion-item>
-        <ion-item>
-          <ion-avatar item-left>
-            <img src="http://kacper.life/wellpledge/images/user1.jpg">
-          </ion-avatar>
-          <h2> Lori Fischer </h2>
-          <p> Marketing </p>
-        </ion-item>
-        <ion-item>
-          <ion-avatar item-left>
-            <img src="http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg">
-          </ion-avatar>
-          <h2> Brody Clarke </h2>
-          <p> Business </p>
+          <h2 text-capitalize> {{user.firstName}} {{user.lastName}}</h2>
+          <p text-capitalize>  {{user.major}} </p>
         </ion-item>
         <!-- <ion-item *ngFor="let item of currentItems">
           <button ion-item (click)="openItem(item)">

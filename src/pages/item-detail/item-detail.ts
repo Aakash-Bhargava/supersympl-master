@@ -17,6 +17,7 @@ import gql from 'graphql-tag';
 export class ItemDetailPage {
   classInfo: string = "professor";
   section: any;
+  users = <any>[];
   //name: string;
   //email: string;
 
@@ -26,6 +27,8 @@ export class ItemDetailPage {
                      private apollo: Angular2Apollo) {
 
     this.section = navParams.get('section') || items.defaultItem;
+    this.users = this.section.users;
+    console.log(this.users);
   }
 
 
