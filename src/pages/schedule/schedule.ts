@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
 
 /*
   Generated class for the Schedule page.
@@ -13,7 +14,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 })
 export class SchedulePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
@@ -37,7 +38,15 @@ export class SchedulePage {
     timeStarts: '12:00',
     timeEnds: '13:00'
   }
-
+  onPeriodChange(event){
+    console.log(event);
+    let alert = this.alertCtrl.create({
+      title: 'CSE 232 Homework',
+      subTitle: 'Due 11:59pm',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 
   moreInfo() {
   let alert = this.alertCtrl.create({

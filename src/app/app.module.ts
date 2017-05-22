@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -32,6 +32,8 @@ import { SetLocationPage } from '../pages/set-location/set-location';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { provideClient } from './client';
 import { ApolloModule } from 'angular2-apollo';
+
+import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
 
 
 // The translate loader needs to know where to load i18n files
@@ -106,7 +108,7 @@ export function providers() {
 }
 
 @NgModule({
-  declarations: declarations(),
+  declarations: [declarations(), IonCalendar],
   imports: [
     ApolloModule.withClient(provideClient),
     IonicModule.forRoot(MyApp),
@@ -118,6 +120,7 @@ export function providers() {
   ],
   bootstrap: [IonicApp],
   entryComponents: entryComponents(),
-  providers: providers()
+  providers: providers(),
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

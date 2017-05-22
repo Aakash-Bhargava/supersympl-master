@@ -15,7 +15,7 @@
   	</ion-navbar>
 </ion-header>
 <ion-content padding>
-	<ion-item-divider color="light">Upcoming Due Dates</ion-item-divider>
+	<!-- <ion-item-divider color="light">Upcoming Due Dates</ion-item-divider>
 	<ion-item>
   		<ion-label>CSE Project 1</ion-label>
   		<ion-datetime displayFormat="MMM, DD" [(ngModel)]="event3.month"></ion-datetime>
@@ -40,9 +40,9 @@
 	<ion-item>
 	  <ion-label>End Time</ion-label>
 	  <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeEnds"></ion-datetime>
-	</ion-item>
-
-	<ion-item>
+	</ion-item> -->
+  <ion-calendar (change)="onPeriodChange($event)"></ion-calendar>
+	<!-- <ion-item>
   		<ion-label>ECE 202 Group</ion-label>
 	</ion-item>
 	<ion-item>
@@ -56,6 +56,6 @@
 	<ion-item>
 	  <ion-label>End Time</ion-label>
 	  <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event2.timeEnds"></ion-datetime>
-	</ion-item>
+	</ion-item>-->
   <button ion-button clear icon-left><ion-icon name="calendar-outline"></ion-icon> Add to your calendar</button>
 </ion-content>

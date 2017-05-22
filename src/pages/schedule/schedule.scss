@@ -1,6 +1,22 @@
 page-schedule {
   button {
     width: 100%;
+    margin: auto;
+  }
+  // .ion-calendar-row {
+  //   width: 13% !important;
+  // }
+  .ion-calendar-row {
+    max-width: 100%;
+    margin: auto;
+    // margin: auto;
+  }
+  .ion-calendar-header-title {
+    max-width: 100% !important;
+  }
+  .button-default {
+    max-width: 12%;
+    margin: 1% !important;
   }
 
 }
