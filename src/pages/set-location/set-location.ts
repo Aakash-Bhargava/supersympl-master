@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, AlertController } from 'ionic-angular';
 import { MapPage } from '../map/map';
 
 import { Angular2Apollo } from 'angular2-apollo';
@@ -17,7 +17,7 @@ export class SetLocationPage {
   startTime: any;
   endTime: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, private apollo: Angular2Apollo) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, private apollo: Angular2Apollo, private alertCtrl: AlertController) {
     this.currentUserInfo().then(({data})=>{
       this.currentUser = data;
       this.currentUser = this.currentUser.user;
@@ -64,9 +64,18 @@ export class SetLocationPage {
   }
 
   setPin() {
-    let c = {name: this.className, startTime: this.startTime, endTime: this.endTime};
-    //this.navCtrl.push(MapPage, {class: c});
-    this.viewCtrl.dismiss(c);
+    if (this.startTime >= this.endTime) {
+      let alert = this.alertCtrl.create({
+        title: 'Hey! You can\'t do this! ',
+        subTitle: 'End time needs to be after start time.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    } else {
+      let c = {name: this.className, startTime: this.startTime, endTime: this.endTime};
+      //this.navCtrl.push(MapPage, {class: c});
+      this.viewCtrl.dismiss(c);
+    }
   }
 
   displayFriends() {

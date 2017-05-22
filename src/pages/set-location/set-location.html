@@ -40,7 +40,7 @@
     </ion-item>
     <ion-item>
       <ion-label>To:</ion-label>
-      <ion-datetime displayFormat="h:mm a" [(ngModel)]="endTime"></ion-datetime>
+      <ion-datetime displayFormat="h:mm a" [min]="startTime" [(ngModel)]="endTime"></ion-datetime>
     </ion-item>
     <!--<ion-list-header>Visibility</ion-list-header>-->
     <ion-item-divider color="light">Visibility</ion-item-divider>

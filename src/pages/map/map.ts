@@ -67,11 +67,16 @@ export class MapPage implements OnInit {
           iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678093-pin-128.png',
           iconSize: [38, 38] // size of the icon
         });
-        for(var i=0; i < this.alllocations.length; i++) {
+        for (let location of this.alllocations) {
           console.log(this.alllocations);
-          let desc = '<h5 style="text-align:center;">' + this.alllocations[i]['sectionName'] + '</h5>';
-          desc += '<p class="centerb">' + this.alllocations[i]['startTime'] + ' - ' + this.alllocations[i]['endTime'] +'</p>';
-          let latlng = Leaflet.latLng(this.alllocations[i]['latitude'], this.alllocations[i]['longitude']);
+          let desc = '<h5 style="text-align:center;">' + location.sectionName + '</h5>';
+          desc += '<p class="centerb">' + location.startTime + ' - ' + location.endTime +'</p>';
+          // desc += '<button style="background-color: #cc2121;"> Join </button>';
+          desc += '<p class="centerb">';
+          desc += '<img class="centerb" src='+ location.user.profilePic+' style="width:30%;height:30%;border-radius: 50%;">';
+          desc += '</p>';
+
+          let latlng = Leaflet.latLng(location.latitude, location.longitude);
           Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
               .bindPopup(desc);//.openPopup();
         }
@@ -104,6 +109,7 @@ export class MapPage implements OnInit {
         });
         let desc = '<h5 style="text-align:center;">' + c['name'] + '</h5>';
         desc += '<p class="centerb">' + c['startTime'] + ' - ' + c['endTime'] +'</p>';
+        desc += '<button style="text-align:center;"> Join </button>';
         let latlng = Leaflet.latLng(onLocationFound.latlng.lat, onLocationFound.latlng.lng);
         Leaflet.marker(latlng, {icon: profileIcon}).addTo(that.map)
             .bindPopup(desc);//.openPopup();
@@ -142,6 +148,10 @@ export class MapPage implements OnInit {
             latitude
             longitude
             sectionName
+            user {
+              id
+              profilePic
+            }
           }
         }
       `
