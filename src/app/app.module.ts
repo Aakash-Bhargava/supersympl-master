@@ -120,7 +120,7 @@ export function providers() {
   ],
   bootstrap: [IonicApp],
   entryComponents: entryComponents(),
-  providers: providers(),
+  providers: [providers(),IonCalendar],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

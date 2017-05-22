@@ -15,10 +15,10 @@ import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
 export class SchedulePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public alertCtrl: AlertController) {}
+              public alertCtrl: AlertController, private calendar: IonCalendar) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SchedulePage');
+    console.log(this.calendar);
   }
 
   public event = {
@@ -40,12 +40,22 @@ export class SchedulePage {
   }
   onPeriodChange(event){
     console.log(event);
-    let alert = this.alertCtrl.create({
-      title: 'CSE 232 Homework',
-      subTitle: 'Due 11:59pm',
-      buttons: ['Dismiss']
-    });
-    alert.present();
+    if (event.period.endDate == "Tue May 23 2017 00:00:00 GMT-0400 (EDT)") {
+      let alert = this.alertCtrl.create({
+        title: 'CSE 232 Homework',
+        subTitle: 'Due 11:59pm',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    } else {
+      let alert = this.alertCtrl.create({
+        title: 'CSE 415 Homework',
+        subTitle: 'Due 11:59pm',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    }
+
   }
 
   moreInfo() {
