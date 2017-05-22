@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
+import { ModalController } from 'ionic-angular';
+import { addEventModal } from '../addEventModal/addEventModal';
 
 /*
   Generated class for the Schedule page.
@@ -14,8 +16,11 @@ import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
 })
 export class SchedulePage {
 
+  calView : string = "month";
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public alertCtrl: AlertController, private calendar: IonCalendar) {}
+              public alertCtrl: AlertController, public modalCtrl: ModalController,
+              private calendar: IonCalendar) {}
 
   ionViewDidLoad() {
     console.log(this.calendar);
@@ -66,5 +71,11 @@ export class SchedulePage {
   });
   alert.present()
 }
+
+  addEvent(){
+    console.log("clicked");
+    let modal = this.modalCtrl.create(addEventModal);
+    modal.present();
+  }
 
 }
