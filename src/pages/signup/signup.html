@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <ion-list>
+  <ion-list inset>
     <ion-item>
       <ion-label floating>First Name</ion-label>
       <ion-input type="text" [(ngModel)] = "firstName"></ion-input>
@@ -39,7 +39,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Year</ion-label>
+      <ion-label>Year</ion-label>
       <ion-select [(ngModel)]="year" >
         <ion-option value="Freshman">Freshman</ion-option>
         <ion-option value="Sophomore">Sophomore</ion-option>
@@ -51,6 +51,6 @@
 
 
   </ion-list>
-  <button ion-button (click)='loginEvent()'>Submit</button>
+  <button ion-button block (click)='loginEvent()'>Submit</button>
   <!-- <button ion-button (click)='signInEvent()'>Sign In</button> -->
 </ion-content>
