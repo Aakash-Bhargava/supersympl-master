@@ -17,9 +17,6 @@ export class addEventModal {
   data: any;
 
 
-
-
-
   public event = {
     title: '',
     class: '',
@@ -48,6 +45,7 @@ export class addEventModal {
    console.log(this.event.url);
    console.log(this.event.description);
    this.createEvent();
+   this.dismiss();
  }
 
  ionViewDidEnter() {
@@ -119,7 +117,6 @@ querySections(){
       alert: this.event.alert,
       url: this.event.url,
       description: this.event.description
-
     }
   }).toPromise();
 }
