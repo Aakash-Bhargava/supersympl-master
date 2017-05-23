@@ -26,23 +26,6 @@ export class SchedulePage {
     console.log(this.calendar);
   }
 
-  public event = {
-    month: '2017-02-19',
-    timeStarts: '09:00',
-    timeEnds: '10:00'
-  }
-
-   public event2 = {
-    month: '2017-02-22',
-    timeStarts: '12:00',
-    timeEnds: '13:00'
-  }
-
-   public event3 = {
-    month: '2017-02-20',
-    timeStarts: '12:00',
-    timeEnds: '13:00'
-  }
   onPeriodChange(event){
     console.log(event);
     if (event.period.endDate == "Tue May 23 2017 00:00:00 GMT-0400 (EDT)") {

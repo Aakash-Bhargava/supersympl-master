@@ -17,45 +17,48 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content class="outer-content">
-  <ion-list>
-    <ion-item>
-      <ion-input [(ngModel)]="event.title" name="title" placeholder="Title"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Class</ion-label>
-      <ion-select [(ngModel)]="event.class">
-        <ion-option *ngFor="let section of sections" value="{{ section.courseName }}"> {{ section.courseName }}</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+  <form *ngIf="form" [formGroup]="form">
+      <ion-list>
+        <ion-item>
+          <ion-input formControlName="title" name="title" placeholder="Title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Class</ion-label>
+          <ion-select formControlName="class">
+            <ion-option *ngFor="let section of sections" value="{{ section.courseName }}"> {{ section.courseName }}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>Due</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.dueDate"></ion-datetime>
-    </ion-item>
+      <ion-list>
+        <ion-item >
+          <ion-label>Due</ion-label>
+          <ion-datetime displayFormat="DDDD MMM DD YYYY" formControlName="dueDate"></ion-datetime>
+        </ion-item>
 
-    <ion-item>
-      <ion-label>Alert</ion-label>
-      <ion-select [(ngModel)]="event.alert">
-        <ion-option value="6hours">6 hours bfore</ion-option>
-        <ion-option value="12hours">12 hours before</ion-option>
-        <ion-option value="1day">1 day before</ion-option>
-        <ion-option value="3days">3 days before</ion-option>
-        <ion-option value="1week">1 week before</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+        <ion-item>
+          <ion-label>Alert</ion-label>
+          <ion-select formControlName="alert">
+            <ion-option value="6hours">6 hours bfore</ion-option>
+            <ion-option value="12hours">12 hours before</ion-option>
+            <ion-option value="1day">1 day before</ion-option>
+            <ion-option value="3days">3 days before</ion-option>
+            <ion-option value="1week">1 week before</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
 
-  <ion-list>
-    <ion-item>
-       <ion-input  [(ngModel)]="event.url" name="url" placeholder="URL"></ion-input>
-    </ion-item>
+      <ion-list>
+        <ion-item>
+           <ion-input formControlName="url" name="url" placeholder="URL"></ion-input>
+        </ion-item>
 
-    <ion-item class="description">
-       <ion-textarea [(ngModel)]="event.description" name="description" placeholder="Enter a description"></ion-textarea>
-    </ion-item>
-  </ion-list>
+        <ion-item class="description">
+           <ion-textarea formControlName="description" name="description" placeholder="Enter a description"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </form>
 
 </ion-content>

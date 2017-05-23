@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+
 import { Angular2Apollo } from 'angular2-apollo';
+import { Subscription } from 'rxjs/Subscription'
+
 import gql from 'graphql-tag';
+import 'rxjs/add/operator/toPromise';
 
 
 
@@ -16,20 +20,26 @@ export class addEventModal {
   section: any;
   data: any;
 
-
-  public event = {
-    title: '',
-    class: '',
-    dueDate: new Date().toISOString(),
-    alert: '',
-    url: '',
-    description: ''
-  };
+  form: FormGroup;
+  isReadyToSave: boolean;
 
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
     private apollo: Angular2Apollo,
-    private formBuilder: FormBuilder ) {
+    public formBuilder: FormBuilder ) {
+
+      this.form = formBuilder.group({
+       title: ['', Validators.required],
+       class: ['', Validators.required],
+       dueDate: ['', Validators.required],
+       alert: ['', Validators.required],
+       url: ['', Validators.required],
+       description: ['', Validators.required]
+      });
+
+      this.form.valueChanges.subscribe((v) => {
+      this.isReadyToSave = this.form.valid;
+    });
   }
 
   dismiss() {
@@ -38,13 +48,14 @@ export class addEventModal {
 
  add(){
    console.log("add clicked");
-   console.log(this.event.title);
-   console.log(this.event.class);
-   console.log(this.event.dueDate);
-   console.log(this.event.alert);
-   console.log(this.event.url);
-   console.log(this.event.description);
+
    this.createEvent();
+   console.log(this.form.value.title);
+   console.log(this.form.value.class);
+   console.log(this.form.value.dueDate);
+   console.log(this.form.value.alert);
+   console.log(this.form.value.url);
+   console.log(this.form.value.description);
    this.dismiss();
  }
 
@@ -111,12 +122,12 @@ querySections(){
                 }
     `,
     variables: {
-      title: this.event.title,
-      class: this.event.class,
-      dueDate: this.event.dueDate,
-      alert: this.event.alert,
-      url: this.event.url,
-      description: this.event.description
+      title: this.form.value.title,
+      class: this.form.value.class,
+      dueDate: this.form.value.dueDate,
+      alert: this.form.value.alert,
+      url: this.form.value.url,
+      description: this.form.value.description
     }
   }).toPromise();
 }
