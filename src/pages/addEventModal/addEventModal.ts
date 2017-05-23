@@ -106,14 +106,14 @@ querySections(){
     mutation: gql`
     mutation createEvent($title: String,
                         $class: String,
-                        $dueDuate: DateTime,
+                        $dueDate: DateTime,
                         $alert: String,
                         $url: String,
                         $description: String){
 
       createEvent(title: $title,
                   class: $class,
-                  dueDate: $dueDuate,
+                  dueDate: $dueDate,
                   alert: $alert,
                   url: $url,
                   description: $description){
