@@ -28,6 +28,8 @@ import { Items } from '../mocks/providers/items';
 import { PasswordPage } from '../pages/password/password';
 import { SetLocationPage } from '../pages/set-location/set-location';
 import { addEventModal } from '../pages/addEventModal/addEventModal';
+import { CalendarModule } from "ion2-calendar";
+
 
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
@@ -113,6 +115,7 @@ export function providers() {
   declarations: [declarations(), IonCalendar],
   imports: [
     ApolloModule.withClient(provideClient),
+    CalendarModule,
     IonicModule.forRoot(MyApp),
     TranslateModule.forRoot({
       provide: TranslateLoader,

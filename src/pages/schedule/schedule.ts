@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
+
+import {CalendarController} from "ion2-calendar/dist";
+
 import { ModalController } from 'ionic-angular';
 import { addEventModal } from '../addEventModal/addEventModal';
+import { Angular2Apollo } from 'angular2-apollo';
+import { Subscription } from 'rxjs/Subscription'
+import gql from 'graphql-tag';
+import 'rxjs/add/operator/toPromise';
 
 /*
   Generated class for the Schedule page.
@@ -16,14 +23,37 @@ import { addEventModal } from '../addEventModal/addEventModal';
 })
 export class SchedulePage {
 
-  calView : string = "month";
+  calView : string = "list";
+  allEvents = <any>{};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public modalCtrl: ModalController,
-              private calendar: IonCalendar) {}
+              private calendar: IonCalendar,   private apollo: Angular2Apollo,
+              public calendarCtrl: CalendarController) {}
+
+
+  openCalendar(){
+    this.calendarCtrl.openCalendar({
+      from:new Date()
+    },
+    {
+      enableBackdropDismiss: false
+    })
+    .then( res => { console.log(res) } );
+  }
+
+  basic() {
+    this.calendarCtrl.openCalendar({
+      isRadio: true,
+      title:'Calendar',
+      closeLabel: 'Done',
+      weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
+    })
+      .then( (res:any) => { console.log(res) })
+      .catch( () => {} )
+  }
 
   ionViewDidLoad() {
-    console.log(this.calendar);
   }
 
   onPeriodChange(event){
@@ -59,6 +89,31 @@ export class SchedulePage {
     console.log("clicked");
     let modal = this.modalCtrl.create(addEventModal);
     modal.present();
+  }
+
+  getEvents(){
+    return this.apollo.query({
+      query: gql`
+      query{
+        allEvents{
+          title,
+          class,
+          dueDate,
+          url,
+          description
+        }
+      }
+    `
+    }).toPromise();
+  }
+
+  setEvents(){
+    this.getEvents().then(({data}) => {
+      if(data){
+        this.allEvents = data;
+        console.log(this.allEvents);
+      }
+    })
   }
 
 }

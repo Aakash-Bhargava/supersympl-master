@@ -7,36 +7,23 @@
 <ion-header>
   	<ion-navbar>
   		<ion-buttons start>
-      		<button ion-button icon-only (click)="moreInfo()">
-        		<ion-icon name="information-circle"></ion-icon>
+      		<button ion-button icon-only (click)="basic()">
+        		<ion-icon name="calendar"></ion-icon>
       		</button>
     	</ion-buttons>
-    	<ion-title>Schedule</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="addEvent()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+     </ion-buttons>
+    	<ion-title>Assignements</ion-title>
   	</ion-navbar>
-
-    <div>
-      <ion-segment [(ngModel)]="calView">
-        <ion-segment-button value="month">
-          <ion-icon name="calendar"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button value="list">
-          <ion-icon name="list"></ion-icon>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
 </ion-header>
 <ion-content padding>
-
-  <div [ngSwitch]="calView">
-    <div *ngSwitchCase="'month'">
-        <ion-calendar (change)="onPeriodChange($event)"></ion-calendar>
-        <button ion-button clear icon-left (click)="addEvent()"><ion-icon name="calendar-outline"></ion-icon> Add to your calendar</button>
-    </div>
-    <div *ngSwitchCase="'list'">
+    <div>
         <h1> list </h1>
     </div>
 
-  </div>
 	<!-- <ion-item-divider color="light">Upcoming Due Dates</ion-item-divider>
 	<ion-item>
   		<ion-label>CSE Project 1</ion-label>
