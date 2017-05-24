@@ -3,9 +3,26 @@ page-schedule {
     width: 100%;
     margin: auto;
   }
-  // .ion-calendar-row {
-  //   width: 13% !important;
-  // }
+
+  ion-item{
+    height: 100px;
+  }
+
+  .eventTitle{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .eventClass{
+    padding-top: 5px;
+    font-size: 16px;
+  }
+
+  .eventDueDate{
+    padding-top: 5px;
+    font-size: 16px;
+  }
+
   .ion-calendar-row {
     max-width: 100%;
     margin: auto;
@@ -18,13 +35,12 @@ page-schedule {
     max-width: 12%;
     margin: 1% !important;
   }
+  .toolbar-title-ios {
+      font-size: 1.7rem;
+      font-weight: 600;
+      text-align: center;
+      color: firebrick;
+      pointer-events: auto;
+  }
 
-}
-
-.toolbar-title-ios {
-    font-size: 1.7rem;
-    font-weight: 600;
-    text-align: center;
-    color: firebrick;
-    pointer-events: auto;
 }

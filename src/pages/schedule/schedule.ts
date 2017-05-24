@@ -24,7 +24,8 @@ import 'rxjs/add/operator/toPromise';
 export class SchedulePage {
 
   calView : string = "list";
-  allEvents = <any>{};
+  allEventsData = <any>{};
+  allEvents = <any>[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public modalCtrl: ModalController,
@@ -54,6 +55,7 @@ export class SchedulePage {
   }
 
   ionViewDidLoad() {
+    this.setEvents();
   }
 
   onPeriodChange(event){
@@ -110,8 +112,22 @@ export class SchedulePage {
   setEvents(){
     this.getEvents().then(({data}) => {
       if(data){
-        this.allEvents = data;
-        console.log(this.allEvents);
+        this.allEventsData = data;
+        this.allEvents = this.allEventsData.allEvents;
+        for(let event of this.allEvents){
+          var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
+          var day = date.getDate();
+          var monthIndex = date.getMonth() + 1;
+          var year = date.getFullYear();
+          var minutes = date.getMinutes();
+          var hours = date.getHours();
+          var seconds = date.getSeconds();
+          var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
+          // event.dueDuate = myFormattedDate;
+          // document.getElementById("dateExample").innerHTML = myFormattedDate
+          // <p id="dateExample"></p>
+          // console.log(myFormattedDate);
+        }
       }
     })
   }
