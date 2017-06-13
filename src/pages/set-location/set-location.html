@@ -36,11 +36,11 @@
     <ion-item-divider color="light">Time</ion-item-divider>
     <ion-item>
       <ion-label>From:</ion-label>
-      <ion-datetime displayFormat="h:mm a" [(ngModel)]="startTime"></ion-datetime>
+      <ion-datetime displayFormat="h:mm a" pickerFormat="h:mm a" [(ngModel)]="startTime"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>To:</ion-label>
-      <ion-datetime displayFormat="h:mm a" [min]="startTime" [(ngModel)]="endTime"></ion-datetime>
+      <ion-datetime displayFormat="h:mm a" pickerFormat="h:mm a" [min]="startTime" [(ngModel)]="endTime"></ion-datetime>
     </ion-item>
     <!--<ion-list-header>Visibility</ion-list-header>-->
     <ion-item-divider color="light">Visibility</ion-item-divider>

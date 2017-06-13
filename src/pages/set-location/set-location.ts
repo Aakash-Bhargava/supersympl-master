@@ -14,8 +14,8 @@ export class SetLocationPage {
   classes = <any>[];
 
   className: any;
-  startTime: any;
-  endTime: any;
+  startTime: String = new Date().toISOString();
+  endTime: String = new Date().toISOString();
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, private apollo: Angular2Apollo, private alertCtrl: AlertController) {
     this.currentUserInfo().then(({data})=>{
