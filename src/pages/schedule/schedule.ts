@@ -65,6 +65,7 @@ export class SchedulePage {
       title:'Calendar',
       closeLabel: 'Done',
       weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
+      cssClass: 'calendarCSS',
       daysConfig: this.allCalEv
     })
       .then( (res:any) => {
