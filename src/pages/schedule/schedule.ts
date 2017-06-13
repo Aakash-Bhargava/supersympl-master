@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
+import { ION_CALENDAR_DIRECTIVES } from '@ionic2-extra/calendar';
 
 import {CalendarController} from "ion2-calendar/dist";
 
@@ -26,56 +26,58 @@ export class SchedulePage {
   calView : string = "list";
   allEventsData = <any>{};
   allEvents = <any>[];
+  //day config
+  calEvent = <any>{
+    title: '',
+    date: '',
+    subTitle: '',
+    marked: ''
+  };
+  allCalEv = <any>[];
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public modalCtrl: ModalController,
-              private calendar: IonCalendar,   private apollo: Angular2Apollo,
-              public calendarCtrl: CalendarController) {}
+              private apollo: Angular2Apollo,
+              public calendarCtrl: CalendarController) {
 
+              }
+
+  ionViewDidLoad() {
+    this.setEvents();
+  }
 
   openCalendar(){
     this.calendarCtrl.openCalendar({
       from:new Date()
     },
     {
+      showBackdrop: false,
       enableBackdropDismiss: false
     })
-    .then( res => { console.log(res) } );
+    .then( res => {} );
   }
 
   basic() {
+    var bool = false;
     this.calendarCtrl.openCalendar({
-      isRadio: true,
+      // isRadio: true,
       title:'Calendar',
       closeLabel: 'Done',
-      weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
+      weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
+      daysConfig: this.allCalEv
     })
-      .then( (res:any) => { console.log(res) })
-      .catch( () => {} )
-  }
-
-  ionViewDidLoad() {
-    this.setEvents();
-  }
-
-  onPeriodChange(event){
-    console.log(event);
-    if (event.period.endDate == "Tue May 23 2017 00:00:00 GMT-0400 (EDT)") {
-      let alert = this.alertCtrl.create({
-        title: 'CSE 232 Homework',
-        subTitle: 'Due 11:59pm',
-        buttons: ['Dismiss']
-      });
-      alert.present();
-    } else {
-      let alert = this.alertCtrl.create({
-        title: 'CSE 415 Homework',
-        subTitle: 'Due 11:59pm',
-        buttons: ['Dismiss']
-      });
-      alert.present();
-    }
-
+      .then( (res:any) => {
+        if(!bool){
+          console.log(res);
+        }
+        else{
+          console.log("wtf");
+        }
+         })
+      .catch( () => {
+        console.log("ERROR IN SCHEDULE.TS");
+      } )
   }
 
   moreInfo() {
@@ -123,13 +125,27 @@ export class SchedulePage {
           var hours = date.getHours();
           var seconds = date.getSeconds();
           var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
-          // event.dueDuate = myFormattedDate;
-          // document.getElementById("dateExample").innerHTML = myFormattedDate
-          // <p id="dateExample"></p>
-          // console.log(myFormattedDate);
+          var ev = this.calEvent = {
+            title: event.class,
+            date: date,
+            marked: true
+          };
+          this.allCalEv.push(ev);
         }
+        console.log(this.allCalEv);
       }
     })
   }
 
+
+  loadEvent(course: any, due: any){
+    console.log("INSIDE LOAD EVENT");
+    for(let event of this.allEvents)
+    {
+      if((event.class == course) && (event.dueDate == due))
+      {
+        console.log(event);
+      }
+    }
+  }
 }

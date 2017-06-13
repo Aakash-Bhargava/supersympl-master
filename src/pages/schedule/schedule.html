@@ -25,12 +25,21 @@
             <div class="eventTitle">
               {{event.title}}
             </div>
-            <div class="eventClass">
-              {{event.class}}
-            </div>
-            <div class="eventDueDate">
-              {{event.dueDate | date: 'shortDate'}}
-            </div>
+            <span>
+              <p> Class:
+                <a class="eventClass">
+                   {{event.class}}
+                </a>
+              </p>
+            </span>
+
+            <span>
+              <p> Due Date:
+                <a class="eventDueDate">
+                  {{event.dueDate | date: 'shortDate'}}
+                </a>
+              </p>
+            </span>
           </ion-item>
     </ion-list>
 
