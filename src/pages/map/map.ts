@@ -70,10 +70,15 @@ export class MapPage implements OnInit {
         for (let location of this.alllocations) {
           console.log(this.alllocations);
           let desc = '<h5 style="text-align:center;">' + location.sectionName + '</h5>';
-          desc += '<p class="centerb">' + location.startTime + ' - ' + location.endTime +'</p>';
+          let start = new Date(location.startTime);
+          let end = new Date(location.endTime);
+
+          desc += '<p class="centerb">' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
           // desc += '<button style="background-color: #cc2121;"> Join </button>';
           desc += '<p class="centerb">';
-          desc += '<img class="centerb" src='+ location.user.profilePic+' style="width:30%;height:30%;border-radius: 50%;">';
+          for (let user of location.users) {
+            desc += '<img class="centerb" src=' + user.profilePic + ' style="width:30%;height:30%;border-radius: 50%;">';
+          }
           desc += '</p>';
 
           let latlng = Leaflet.latLng(location.latitude, location.longitude);
@@ -120,8 +125,8 @@ export class MapPage implements OnInit {
   createPin(c, lat, lng) {
     this.apollo.mutate({
       mutation: gql`
-      mutation createMapPins($latitude: Float, $longitude: Float, $startTime: String, $endTime: String, $sectionName: String, $userId: ID! ){
-        createMapPins(latitude: $latitude, longitude: $longitude, startTime: $startTime, endTime: $endTime, sectionName: $sectionName, userId: $userId  ){
+      mutation createMapPins($latitude: Float, $longitude: Float, $startTime: DateTime, $endTime: DateTime, $sectionName: String, $usersIds: [ID!] ){
+        createMapPins(latitude: $latitude, longitude: $longitude, startTime: $startTime, endTime: $endTime, sectionName: $sectionName, usersIds: $usersIds  ){
           id
         }
       }
@@ -132,7 +137,7 @@ export class MapPage implements OnInit {
         startTime: c.startTime,
         endTime: c.endTime,
         sectionName: c.name,
-        userId: this.currentUser.id
+        usersIds: [this.currentUser.id]
       }
     });
   }
@@ -148,7 +153,7 @@ export class MapPage implements OnInit {
             latitude
             longitude
             sectionName
-            user {
+            users {
               id
               profilePic
             }
@@ -200,5 +205,15 @@ export class MapPage implements OnInit {
       // Leaflet.circle(e.latlng, radius, {color: 'red'}).addTo(that.map);
     }
 
+  formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
 
   }
