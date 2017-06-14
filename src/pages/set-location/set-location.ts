@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, ViewController, AlertController } from 'ionic-angular';
 import { MapPage } from '../map/map';
 
-import { DatePicker } from '@ionic-native/date-picker';
-
 import { Angular2Apollo } from 'angular2-apollo';
 import gql from 'graphql-tag';
 
@@ -20,7 +18,7 @@ export class SetLocationPage {
   startTime: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
   endTime: String = (new Date(Date.now() - this.tzoffset + (60*60*1000))).toISOString().slice(0,-1);
 
-  constructor(public navCtrl: NavController, private datePicker: DatePicker, public viewCtrl: ViewController, private apollo: Angular2Apollo, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, private apollo: Angular2Apollo, private alertCtrl: AlertController) {
     this.currentUserInfo().then(({data})=>{
       this.currentUser = data;
       this.currentUser = this.currentUser.user;

@@ -32,7 +32,6 @@ import { CalendarModule } from "ion2-calendar";
 import { SelectedDay } from '../pages/selectedDay/selectedDay';
 
 
-import { DatePicker } from '@ionic-native/date-picker';
 
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
@@ -114,7 +113,7 @@ export function providers() {
   ],
   bootstrap: [IonicApp],
   entryComponents: entryComponents(),
-  providers: [providers(),IonCalendar, DatePicker],
+  providers: [providers(),IonCalendar],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
