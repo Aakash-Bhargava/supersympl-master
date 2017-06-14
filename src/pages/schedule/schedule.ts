@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ION_CALENDAR_DIRECTIVES } from '@ionic2-extra/calendar';
-
 import {CalendarController} from "ion2-calendar/dist";
-
 import { ModalController } from 'ionic-angular';
 import { addEventModal } from '../addEventModal/addEventModal';
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription'
 import gql from 'graphql-tag';
 import 'rxjs/add/operator/toPromise';
+
+import { SelectedDay } from '../selectedDay/selectedDay';
 
 /*
   Generated class for the Schedule page.
@@ -34,6 +34,10 @@ export class SchedulePage {
     marked: ''
   };
   allCalEv = <any>[];
+  //the day chosen on the calendar
+  dateSelected: any;
+  //the date selected's events scheduled
+  dateSelectedEvents: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -59,26 +63,37 @@ export class SchedulePage {
   }
 
   basic() {
-    var bool = false;
+
     this.calendarCtrl.openCalendar({
-      // isRadio: true,
+      isRadio: true,
       title:'Calendar',
-      closeLabel: 'Done',
+      closeLabel: 'x',
       weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
       cssClass: 'calendarCSS',
       daysConfig: this.allCalEv
     })
-      .then( (res:any) => {
-        if(!bool){
-          console.log(res);
+    .then( (res:any) => {
+
+      //convert res.time in ms to readable human date
+      var datePicked = res;
+      datePicked = datePicked.date;
+      var utcSeconds = datePicked.time;
+      this.dateSelected = new Date(utcSeconds); // The 0 there is the key, which sets the date to the epoch
+      console.log(this.dateSelected);
+
+      //after setting this.dateSelected --> query by date and retrieve assignments
+
+      this.getSelectedDayEvent().then(({data}) => {
+        if(data){
+          this.dateSelectedEvents = data;
+          this.dateSelectedEvents = this.dateSelectedEvents.allEvents;
+          console.log(this.dateSelectedEvents);
+          this.presentSelectedDayModal();
         }
-        else{
-          console.log("wtf");
-        }
-         })
-      .catch( () => {
-        console.log("ERROR IN SCHEDULE.TS");
-      } )
+      })
+
+    })
+    .catch( () => { console.log("Cancel clicked")} )
   }
 
   moreInfo() {
@@ -127,7 +142,7 @@ export class SchedulePage {
           var seconds = date.getSeconds();
           var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
           var ev = this.calEvent = {
-            title: event.class,
+            subTitle: event.class,
             date: date,
             marked: true
           };
@@ -136,6 +151,26 @@ export class SchedulePage {
         console.log(this.allCalEv);
       }
     })
+  }
+
+  getSelectedDayEvent(){
+    return this.apollo.query({
+      query: gql`
+      query getSelectedDayEvent($dueDate: DateTime) {
+        allEvents(filter: {
+          dueDate: $dueDate
+        }) {
+          id
+          title
+          class
+          dueDate
+          description
+        }
+      }
+    `, variables: {
+        dueDate: this.dateSelected
+      }
+    }).toPromise();
   }
 
 
@@ -148,5 +183,11 @@ export class SchedulePage {
         console.log(event);
       }
     }
+  }
+
+
+  presentSelectedDayModal(){
+    let selectedDayModal = this.modalCtrl.create(SelectedDay, { allEvents: this.dateSelectedEvents, date: this.dateSelected });
+    selectedDayModal.present();
   }
 }

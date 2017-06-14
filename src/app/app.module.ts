@@ -29,6 +29,8 @@ import { PasswordPage } from '../pages/password/password';
 import { SetLocationPage } from '../pages/set-location/set-location';
 import { addEventModal } from '../pages/addEventModal/addEventModal';
 import { CalendarModule } from "ion2-calendar";
+import { SelectedDay } from '../pages/selectedDay/selectedDay';
+
 
 
 
@@ -86,7 +88,8 @@ let pages = [
   ProfilePage,
   PasswordPage,
   addEventModal,
-  SetLocationPage
+  SetLocationPage,
+  SelectedDay
 ];
 
 export function declarations() {

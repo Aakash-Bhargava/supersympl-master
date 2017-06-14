@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button (click)="dismiss()">
+      dismiss
+    </button>
+    <ion-title>
+      {{date}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let e of events">
+    <h1>{{e.title}}</h1>
+    <h2>
+      {{e.class}}
+    </h2>
+    <h3>
+      {{e.description}}
+    </h3>
+  </ion-card>
+</ion-content>
