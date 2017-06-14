@@ -7,7 +7,6 @@ import { Angular2Apollo } from 'angular2-apollo';
 export {
   User,
   Api,
-  Settings,
   Items,
   Angular2Apollo
 };

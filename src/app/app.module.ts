@@ -1,7 +1,8 @@
 import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+
+import { BrowserModule } from '@angular/platform-browser';
 
 import { MyApp } from './app.component';
 
@@ -23,7 +24,6 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { ProfilePage } from '../pages/profile/profile';
 import { User } from '../providers/user';
 import { Api } from '../providers/api';
-import { Settings } from '../providers/settings';
 import { Items } from '../mocks/providers/items';
 import { PasswordPage } from '../pages/password/password';
 import { SetLocationPage } from '../pages/set-location/set-location';
@@ -32,6 +32,7 @@ import { CalendarModule } from "ion2-calendar";
 import { SelectedDay } from '../pages/selectedDay/selectedDay';
 
 
+import { DatePicker } from '@ionic-native/date-picker';
 
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
@@ -47,20 +48,6 @@ export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
 }
 
-export function provideSettings(storage: Storage) {
-  /**
-   * The Settings provider takes a set of default settings for your app.
-   *
-   * You can add new settings options at any time. Once the settings are saved,
-   * these values will not overwrite the saved values (this can be done manually if desired).
-   */
-  return new Settings(storage, {
-    option1: true,
-    option2: 'Ionitron J. Framework',
-    option3: '3',
-    option4: 'Hello'
-  });
-}
 
 
 /**
@@ -102,13 +89,11 @@ export function entryComponents() {
 
 export function providers() {
   return [
-    Storage,
 
     User,
     Api,
     Items,
 
-    { provide: Settings, useFactory: provideSettings, deps: [ Storage ] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ];
@@ -120,6 +105,7 @@ export function providers() {
     ApolloModule.withClient(provideClient),
     CalendarModule,
     IonicModule.forRoot(MyApp),
+    BrowserModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
@@ -128,7 +114,7 @@ export function providers() {
   ],
   bootstrap: [IonicApp],
   entryComponents: entryComponents(),
-  providers: [providers(),IonCalendar],
+  providers: [providers(),IonCalendar, DatePicker],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

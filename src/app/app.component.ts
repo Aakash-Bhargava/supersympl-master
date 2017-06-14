@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import {Platform, Nav, Config} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { Settings } from '../providers/providers';
 
 import { FirstRunPage } from '../pages/pages';
 import { CardsPage } from '../pages/cards/cards';
@@ -65,7 +64,7 @@ export class MyApp {
     { title: 'Password', component: PasswordPage}
   ]
 
-  constructor(translate: TranslateService, platform: Platform, settings: Settings, config: Config) {
+  constructor(translate: TranslateService, platform: Platform, config: Config) {
     // Set the default language for translation strings, and the current language.
     translate.setDefaultLang('en');
     translate.use('en')

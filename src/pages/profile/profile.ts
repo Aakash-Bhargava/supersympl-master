@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Settings } from '../../providers/settings';
 import { SettingsPage } from '../settings/settings';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { Angular2Apollo } from 'angular2-apollo';
@@ -54,7 +53,6 @@ export class ProfilePage {
   //subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
-              public settings: Settings,
               public formBuilder: FormBuilder,
               public navParams: NavParams,
               public translate: TranslateService,
@@ -77,10 +75,6 @@ export class ProfilePage {
       this.pageTitle = res;
     })
 
-    this.settings.load().then(() => {
-      this.settingsReady = true;
-      this.options = this.settings.allSettings;
-    });
   }
 
   //goToSettingsPage

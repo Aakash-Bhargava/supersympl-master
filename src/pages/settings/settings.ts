@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, AlertController, LoadingController, ViewController, ToastController, Keyboard } from 'ionic-angular';
-import { Settings } from '../../providers/settings';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { PasswordPage } from '../password/password';
 import { WelcomePage } from '../welcome/welcome';
@@ -28,7 +27,6 @@ export class SettingsPage {
 
   loading: any;
   constructor(public navCtrl: NavController,
-              public settings: Settings,
               public formBuilder: FormBuilder,
               public navParams: NavParams,
               public translate: TranslateService,

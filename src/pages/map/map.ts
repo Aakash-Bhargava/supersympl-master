@@ -112,8 +112,13 @@ export class MapPage implements OnInit {
         //iconUrl: 'https://cdn0.iconfinder.com/data/icons/industrial-icons/164/5-512.png',
           iconSize: [38, 38], // size of the icon
         });
+
+        let start = new Date(c['startTime']);
+        let end = new Date(c['endTime']);
+
+
         let desc = '<h5 style="text-align:center;">' + c['name'] + '</h5>';
-        desc += '<p class="centerb">' + c['startTime'] + ' - ' + c['endTime'] +'</p>';
+        desc += '<p class="centerb">' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
         desc += '<button style="text-align:center;"> Join </button>';
         let latlng = Leaflet.latLng(onLocationFound.latlng.lat, onLocationFound.latlng.lng);
         Leaflet.marker(latlng, {icon: profileIcon}).addTo(that.map)
