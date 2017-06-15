@@ -1,3 +1,39 @@
 page-selectedDay {
 
+
+}
+
+.daysEventsCard{
+
+  padding: 10px;
+
+  .eventTitle{
+    font-size: 24px;
+    font-weight: bolder;
+  }
+
+  .eventClass{
+    font-size: 16px;
+    padding-bottom: 5px;
+  }
+
+  .eventDescription{
+    font-size: 14px;
+    padding-bottom: 5px;
+  }
+
+  .eventUrl{
+    font-size: 14px;
+  }
+
+}
+
+
+.today{
+  border-bottom: 3px solid #03cea4;
+
+}
+
+.on-selected {
+    box-shadow: 1px 1px #bda4a4
 }

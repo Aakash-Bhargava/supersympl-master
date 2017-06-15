@@ -67,7 +67,7 @@ export class SchedulePage {
     this.calendarCtrl.openCalendar({
       isRadio: true,
       title:'Calendar',
-      closeLabel: 'x',
+      closeLabel: '',
       weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
       cssClass: 'calendarCSS',
       daysConfig: this.allCalEv
@@ -165,6 +165,7 @@ export class SchedulePage {
           class
           dueDate
           description
+          url
         }
       }
     `, variables: {

@@ -1,22 +1,26 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button (click)="dismiss()">
-      dismiss
+    <button ion-button icon-only clear (click)="dismiss()">
+      <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-title>
-      {{date}}
+      {{dateString}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let e of events">
-    <h1>{{e.title}}</h1>
-    <h2>
+  <ion-card class="daysEventsCard" *ngFor="let e of events">
+    <h1 class="eventTitle">{{e.title}}</h1>
+    <h1 class="eventClass">
       {{e.class}}
-    </h2>
-    <h3>
+    </h1>
+    <ion-note class="eventDescription">
       {{e.description}}
-    </h3>
+    </ion-note>
+    <br>
+    <ion-note class="eventUrl">
+      {{e.url}}
+    </ion-note>
   </ion-card>
 </ion-content>
