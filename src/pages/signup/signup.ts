@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, ViewController } from 'ionic-angular';
 import { MainPage } from '../../pages/pages';
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription'
@@ -27,7 +27,7 @@ export class SignupPage {
 
   private signupErrorString: string;
   constructor(public navCtrl: NavController,
-              // public user: User,
+              public viewCtrl: ViewController,
               public toastCtrl: ToastController,
               public translateService: TranslateService,
               // public formBuilder: FormBuilder,
@@ -88,5 +88,10 @@ export class SignupPage {
 
       }
     }).toPromise();
+  }
+
+  dismiss(){
+    console.log("dismiss");
+    this.viewCtrl.dismiss();
   }
 }

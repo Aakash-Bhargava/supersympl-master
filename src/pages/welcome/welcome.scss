@@ -1,49 +1,50 @@
 page-welcome {
-  .splash-bg {
-    //animation: animatedBackground 40s linear infinite;
-    background: url('../assets/img/symplLogo.png') no-repeat transparent;
-    //background-repeat: repeat-x;
-    background-size: 100% 50%;
-    height: 50%;
-    margin-top: 75px;
-    position: relative;
+  .content{
+    background-color: #626262;
   }
+  color: white;
+}
 
-  @keyframes animatedBackground {
-    from { background-position: 0 0; }
-    to { background-position: 100% 0; }
-  }
+.symplLogo{
+  margin: auto;
+  display: block;
+}
 
-  .splash-info {
-    margin-top: -64px;
-    position: relative;
-    text-align: center;
-    z-index: 2;
-  }
+.body{
+  padding-top: 100px;
 
-  .splash-logo {
-    // background: url('../assets/img/appicon.png') repeat transparent;
-    background-size: 100%;
-    height: 128px;
-    margin: auto;
-    width: 128px;
-  }
+}
 
-  .splash-intro {
-    font-size: 18px;
-    font-weight: bold;
-    margin: auto;
-    max-width: 80%;
-  }
+.inputFields{
 
-  button.login {
-    background-color: white;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
-    color: #333;
-    margin-top: 25px;
+    padding-top: 65px;
 
-    &.activated {
-      background-color: rgb(220, 220, 220);
+    ion-item{
+      background-color: #626262;
+      padding: 10px;
     }
-  }
+
+    ion-label{
+      color: white;
+    }
+
+    ion-input{
+      color: white;
+    }
+
+    ion-icon{
+        color: white;
+    }
+}
+
+.loginBtn{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+}
+
+.signUpBtn{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
 }

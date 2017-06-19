@@ -1,41 +1,45 @@
-<ion-header>
+<ion-header >
 
   <ion-navbar>
-    <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
+    <ion-title>
+      Sign Up
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
+
 <ion-content>
 
-  <ion-list inset>
+  <ion-list>
     <ion-item>
       <ion-label floating>First Name</ion-label>
-      <ion-input type="text" [(ngModel)] = "firstName"></ion-input>
+      <ion-input type="text" [(ngModel)]="firstName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Last Name</ion-label>
-      <ion-input type="text" [(ngModel)] = "lastName"></ion-input>
+      <ion-input type="text" [(ngModel)]="lastName"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="text" [(ngModel)] = "email"></ion-input>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input type="passwords" [(ngModel)] = "password"></ion-input>
+      <ion-input type="passwords" [(ngModel)]="password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Phone Number</ion-label>
-      <ion-input type="text" [(ngModel)] = "phone"></ion-input>
+      <ion-input type="text" [(ngModel)]="phone"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Major</ion-label>
-      <ion-input type="text" [(ngModel)] = "major"></ion-input>
+      <ion-input type="text" [(ngModel)]="major"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -51,6 +55,7 @@
 
 
   </ion-list>
-  <button ion-button block (click)='loginEvent()'>Submit</button>
-  <!-- <button ion-button (click)='signInEvent()'>Sign In</button> -->
+  <div class="signUpBtn">
+    <button ion-button block round (tap)='loginEvent()'>Submit</button>
+  </div>
 </ion-content>

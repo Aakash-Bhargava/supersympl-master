@@ -1,6 +1,27 @@
 page-signup {
 
-}
-ion-item{
-  height: 65px;
+  .content{
+    background-color: #626262;
+  }
+
+  .item{
+    background-color: #626262;
+  }
+
+  .signUpBtn{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+  }
+
+  ion-label{
+    color: white;
+  }
+
+  ion-input{
+    color: white;
+  }
+
+
+
 }

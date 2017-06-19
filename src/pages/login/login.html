@@ -1,28 +1,36 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
-  </ion-navbar>
-
+    <ion-buttons padding-top>
+      <button ion-button icon-only clear large (tap)="dismiss()">
+        <ion-icon name="arrow-back" item-start></ion-icon>
+      </button>
+    </ion-buttons>
 </ion-header>
 
 
 <ion-content>
   <form (submit)="doLogin()">
     <ion-list>
+      <img src="../assets/img/symplLogo2.png" class="symplStar">
 
-      <ion-item>
-        <ion-label floating>E-mail</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
+      <!-- <img src="../assets/img/sympl_cover.png" class="symplLabel"> -->
+      <div class="body">
 
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-icon name="mail" item-left></ion-icon>
+          <ion-label>E-mail</ion-label>
+          <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+        </ion-item>
 
-      <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
+        <ion-item>
+          <ion-icon name="lock" item-left></ion-icon>
+          <ion-label>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+        </ion-item>
+
+        <div padding>
+          <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
+        </div>
+
       </div>
 
     </ion-list>

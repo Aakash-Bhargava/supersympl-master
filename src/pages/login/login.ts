@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, ViewController } from 'ionic-angular';
 
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
@@ -35,6 +35,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
               public user: User,
+              public viewCtrl: ViewController,
               public toastCtrl: ToastController,
               public translateService: TranslateService,
               public apollo : Angular2Apollo) {
@@ -109,20 +110,9 @@ export class LoginPage {
       }).toPromise();
     }
 
-
-  // // Attempt to login in through our User service
-  // doLogin() {
-  //   this.user.login(this.account).subscribe((resp) => {
-  //     this.navCtrl.push(MainPage);
-  //   }, (err) => {
-  //     this.navCtrl.push(MainPage);
-  //     // Unable to log in
-  //     let toast = this.toastCtrl.create({
-  //       message: this.loginErrorString,
-  //       duration: 3000,
-  //       position: 'top'
-  //     });
-  //     toast.present();
-  //   });
-  // }
+    dismiss(){
+      console.log("dismiss");
+      this.viewCtrl.dismiss();
+    }
+    
 }
