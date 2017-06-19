@@ -1,5 +1,9 @@
 page-list-master {
-  .list {
-    // margin: 0;
+  .has-refresher > .scroll-content {
+    border-top: 0px;
+  }
+  ion-item {
+    color: white !important;
+    border: 0.5px solid grey;
   }
 }

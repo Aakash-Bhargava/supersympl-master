@@ -13,7 +13,6 @@ import gql from 'graphql-tag';
   templateUrl: 'search.html'
 })
 export class SearchPage {
-  allSectionsData = <any>{};
   allSections = <any>[];
   queryList = <any>[];
   userId: any;
@@ -32,6 +31,7 @@ export class SearchPage {
       this.allSections = data;
       this.userId = this.allSections.user.id;
       this.allSections = this.allSections.allSections;
+      // this.allSections.sort(this.compare);
     });
   }
 
@@ -43,7 +43,7 @@ export class SearchPage {
           user{
             id
           }
-          allSections{
+          allSections(orderBy: courseName_ASC){
             id
             courseName
             sectionNumber
@@ -106,28 +106,53 @@ export class SearchPage {
   }
 
   addToUser(course) {
-    this.apollo.mutate({
-      mutation: gql`
-      mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
-        addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
-          sectionsSection {
-            id
+    let confirm = this.alertCtrl.create({
+      title: 'Are you sure you are on this class?',
+      message: 'You can always undo it later.',
+      buttons: [
+        {
+          text: 'Nope',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Yeah!',
+          handler: () => {
+            this.apollo.mutate({
+              mutation: gql`
+              mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+                addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+                  sectionsSection {
+                    id
+                  }
+                }
+              }
+              `,variables:{
+                usersUserId: this.userId,
+                sectionsSectionId: course.id
+              }
+            }).toPromise();
+            let toast = this.toast.create({
+              message: 'Class Added!',
+              position: 'top',
+              duration: 3000
+            });
+            toast.present();
+            this.viewCtrl.dismiss();
           }
         }
-      }
-      `,variables:{
-        usersUserId: this.userId,
-        sectionsSectionId: course.id
-      }
-    }).toPromise();
-
-    let toast = this.toast.create({
-      message: 'Class Added!',
-      position: 'top',
-      duration: 3000
+      ]
     });
-    toast.present();
+    confirm.present();
 
-    this.viewCtrl.dismiss();
+  }
+
+  compare(a,b) {
+    if (a.courseName < b.courseName)
+      return -1;
+    if (a.courseName > b.courseName)
+      return 1;
+    return 0;
   }
 }
