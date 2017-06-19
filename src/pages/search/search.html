@@ -13,14 +13,16 @@
 
     <!-- <h2>{{course.name}}</h2> -->
     <ion-item *ngFor="let course of queryList">
-      <ion-label>{{course.name}}</ion-label>
-        <ion-select (click)=listSections(course) (ionChange)="addToUser()" cancelText="Nah" okText="Add!">
+      <h2>{{course.courseName}}</h2>
+      <p> Section: {{course.sectionNumber}} </p>
+      <button ion-button clear item-end (click)="addToUser(course)">Add</button>
+        <!-- <ion-select (click)=listSections(course) (ionChange)="addToUser()" cancelText="Nah" okText="Add!"> -->
 
           <!-- <div > -->
-            <ion-option *ngFor="let section of sectionList" [value]="section.sectionNumber" (ionSelect) = "addSection(section)">{{section.sectionNumber}}</ion-option>
+            <!-- <ion-option *ngFor="let section of sectionList" [value]="section.sectionNumber" (ionSelect) = "addSection(section)">{{section.sectionNumber}}</ion-option> -->
           <!-- </div> -->
 
-        </ion-select>
+        <!-- </ion-select> -->
       </ion-item>
 
   </ion-list>

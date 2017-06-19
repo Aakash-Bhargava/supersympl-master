@@ -13,12 +13,9 @@ import gql from 'graphql-tag';
   templateUrl: 'search.html'
 })
 export class SearchPage {
-  allCourseData = <any>{};
-  allCourses = <any>[];
+  allSectionsData = <any>{};
+  allSections = <any>[];
   queryList = <any>[];
-  // course: any;
-  sectionList=<any>[];
-  section: any;
   userId: any;
   // section: any;
   constructor(public navCtrl: NavController,
@@ -32,10 +29,9 @@ export class SearchPage {
 
   ngOnInit() {
     this.currentUserInfo().then(({data}) => {
-      this.allCourseData = data;
-      this.allCourses = this.allCourseData.allCourses;
-      this.userId = this.allCourseData.user.id;
-      console.log(this.allCourses);
+      this.allSections = data;
+      this.userId = this.allSections.user.id;
+      this.allSections = this.allSections.allSections;
     });
   }
 
@@ -47,16 +43,16 @@ export class SearchPage {
           user{
             id
           }
-          allCourses{
+          allSections{
             id
-            name
+            courseName
+            sectionNumber
             type
-          	sections{
+            professor {
+              name
+            }
+            users{
               id
-              sectionNumber
-              professor{
-                name
-              }
             }
           }
         }
@@ -66,7 +62,8 @@ export class SearchPage {
 
 
   initializeItems(): void {
-    this.queryList = this.allCourses;
+    this.queryList = this.allSections;
+    console.log(this.queryList);
   }
 
   /**
@@ -81,13 +78,18 @@ export class SearchPage {
 
     // if the value is an empty string don't filter the items
     if (!q) {
+      this.queryList = [];
       return;
     }
 
     this.queryList = this.queryList.filter((v) => {
-      if(v.name && q) {
-        if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-          this.sectionList = v.sections;
+      if(v.courseName && q) {
+        if (v.courseName.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          for (let user of v.users) {
+            if (user.id == this.userId) {
+              return false;
+            }
+          }
           return true;
         }
         return false;
@@ -96,35 +98,15 @@ export class SearchPage {
 
     console.log(q, this.queryList.length);
   }
-  //  getItems(ev) {
-  //   this.initializeItems()
-  //   let val = ev.target.value;
-  //   if(!val || !val.trim()) {
-  //     this.allCourses = [];
-  //     return;
-  //   }
-  //   this.allCourses = this..name.query({
-  //     name: val
-  //   });
-  // }
-  //
-  // /**
-  //  * Navigate to the detail page for this item.
-  //  */
+
   listSections(course) {
-    this.sectionList = course.sections;
+    // this.sectionList = course.sections;
 
     console.log(course.sections);
   }
 
-  addSection(section){
-    this.section = section;
-    // console.log(section);
-  }
-  addToUser() {
-    // console.log(this.section);
+  addToUser(course) {
     this.apollo.mutate({
-
       mutation: gql`
       mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
         addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
@@ -135,7 +117,7 @@ export class SearchPage {
       }
       `,variables:{
         usersUserId: this.userId,
-        sectionsSectionId: this.section.id
+        sectionsSectionId: course.id
       }
     }).toPromise();
 
