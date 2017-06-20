@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for classes to add to your schedule! "></ion-searchbar>
-  <ion-list>
+  <ion-list *ngIf="queryList.length != 0">
 
     <!-- <h2>{{course.name}}</h2> -->
     <ion-item *ngFor="let course of queryList">
@@ -26,4 +26,8 @@
       </ion-item>
 
   </ion-list>
+
+  <div class="empty" *ngIf="queryList.length == 0">
+    <h2> Search for Classes </h2>
+  </div>
 </ion-content>

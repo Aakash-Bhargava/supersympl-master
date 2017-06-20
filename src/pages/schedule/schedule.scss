@@ -17,10 +17,12 @@ page-schedule {
   .eventClass{
     padding-bottom: 5px;
     font-size: 16px;
+    color: grey;
   }
 
   .eventDueDate{
     font-size: 16px;
+    color: grey;
   }
 
   .ion-calendar-row {
@@ -34,13 +36,6 @@ page-schedule {
   .button-default {
     max-width: 12%;
     margin: 1% !important;
-  }
-  .toolbar-title-ios {
-      font-size: 1.7rem;
-      font-weight: 600;
-      text-align: center;
-      color: firebrick;
-      pointer-events: auto;
   }
 }
 
@@ -83,14 +78,10 @@ page-schedule {
 
   .days {
     width: 14.28% !important;
+  }
 
-  }
-  .days button {
-    font-size: 0.7em !important;
-    color: white !important;
-  }
-  .days small {
-    font-size: 0.9em !important;
+  .days button p {
+    font-size: 0.9em;
   }
 
 }
