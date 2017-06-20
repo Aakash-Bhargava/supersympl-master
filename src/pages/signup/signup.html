@@ -14,35 +14,42 @@
 
   <ion-list>
     <ion-item>
+      <ion-icon name="person" item-left></ion-icon>
       <ion-label floating>First Name</ion-label>
       <ion-input type="text" [(ngModel)]="firstName"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-icon name="people" item-left></ion-icon>
       <ion-label floating>Last Name</ion-label>
       <ion-input type="text" [(ngModel)]="lastName"></ion-input>
     </ion-item>
 
     <ion-item>
+      <ion-icon name="mail" item-left></ion-icon>
       <ion-label floating>Email</ion-label>
       <ion-input type="text" [(ngModel)]="email"></ion-input>
     </ion-item>
 
     <ion-item>
+      <ion-icon name="lock" item-left></ion-icon>
       <ion-label floating>Password</ion-label>
       <ion-input type="passwords" [(ngModel)]="password"></ion-input>
     </ion-item>
 
     <ion-item>
+      <ion-icon name="call" item-left></ion-icon>
       <ion-label floating>Phone Number</ion-label>
       <ion-input type="text" [(ngModel)]="phone"></ion-input>
     </ion-item>
 
     <ion-item>
+      <ion-icon name="school" item-left></ion-icon>
       <ion-label floating>Major</ion-label>
       <ion-input type="text" [(ngModel)]="major"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item style="height:75px;">
+      <ion-icon name="body" item-left></ion-icon>
       <ion-label>Year</ion-label>
       <ion-select [(ngModel)]="year" >
         <ion-option value="Freshman">Freshman</ion-option>
@@ -56,6 +63,6 @@
 
   </ion-list>
   <div class="signUpBtn">
-    <button ion-button block round (tap)='loginEvent()'>Submit</button>
+    <button ion-button block round (tap)='loginEvent()'>Sign Up</button>
   </div>
 </ion-content>
