@@ -1,29 +1,35 @@
 page-profile {
-  .profile-header {
-    color: white;
-    text-align: center;
-    padding: 3px;
-	}
-  .profile-header:first-of-type {
-    font-size: 1.5em;
+  .avatar-background {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    height: 200px;
+    width: 100%;
+    transform: scale(1.5);
+    filter: blur(5px);
   }
 
-  .avatar-row {
-    align-items: center;
-    background-color: rgba(#cc2121, .93);
-    display: flex;
-    justify-content: center;
-
-	}
+  .profile-header {
+    text-align: center;
+    color: white;
+    font-size: 1.7em;
+    padding: 1%;
+  }
+  .major {
+    font-size: 1em;
+    padding-bottom: 5%;
+  }
 
   .avatar {
     border-radius: 50%;
     height: 150px;
     width: 150px;
     border: 2px solid lightgrey;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 3%;
 	}
 
-  .profile-buttons {
-    background: none;
-	}
+
+
 }

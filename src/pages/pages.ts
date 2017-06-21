@@ -14,5 +14,5 @@ export const MainPage = TabsPage;
 // The initial root pages for our tabs (remove if not using tabs)
 export const Tab1Root = ListMasterPage;
 export const Tab2Root = MapPage;
-export const Tab3Root = ProfilePage;
-export const Tab4Root = SchedulePage;
+export const Tab3Root = SchedulePage;
+export const Tab4Root = ProfilePage;
