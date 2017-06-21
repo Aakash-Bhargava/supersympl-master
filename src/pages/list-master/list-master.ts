@@ -71,6 +71,12 @@ export class ListMasterPage {
                 name
                 email
               }
+              events {
+                description
+                dueDate
+                dueTime
+                title
+              }
             }
           }
         }
@@ -102,6 +108,12 @@ export class ListMasterPage {
                 professor{
                   name
                   email
+                }
+                events {
+                  description
+                  dueDate
+                  dueTime
+                  title
                 }
               }
             }

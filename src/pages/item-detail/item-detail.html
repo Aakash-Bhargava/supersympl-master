@@ -3,51 +3,24 @@
   <ion-navbar>
     <ion-title>{{ section.courseName }}</ion-title>
   </ion-navbar>
+  <ion-segment [(ngModel)]="classInfo">
+    <ion-segment-button value="professor">
+      Professor
+    </ion-segment-button>
+    <ion-segment-button value="classmates">
+      Classmates
+    </ion-segment-button>
+  </ion-segment>
 
 </ion-header>
 
-
 <ion-content>
-  <ion-grid>
-		<ion-row style="height: 200px;" >
-      <!--Different header images for different class types  -->
-      <div *ngIf="section.type == 'CSE'">
-        <img src="assets/img/CSE_classes.jpg">
-      </div>
-      <div *ngIf="section.type == 'ECE'">
-        <img src="assets/img/ECE_classes.jpg">
-      </div>
-      <div *ngIf="section.type == 'PHY'">
-        <img src="assets/img/PHY_classes.png">
-      </div>
-      <div *ngIf="section.type == 'MTH'">
-        <img src="assets/img/MTH_classes.jpg">
-      </div>
-    </ion-row>
-		<div padding style="background-color: white;">
-  			<ion-segment [(ngModel)]="classInfo">
-		    <ion-segment-button value="professor">
-		      Professor
-		    </ion-segment-button>
-		    <ion-segment-button value="classmates">
-		      Classmates
-		    </ion-segment-button>
-		  </ion-segment>
-		</div>
 
 		<div [ngSwitch]="classInfo">
-			<ion-list *ngSwitchCase="'professor'" style="background: white;">
+			<ion-list *ngSwitchCase="'professor'">
   			<ion-list-header>
   				Professor
 	  		</ion-list-header>
-        <!-- <ion-item>
-          <h2 color="primary">Name:</h2>
-          <p>{{section.professor.name}}</p>
-        </ion-item>
-        <ion-item>
-          <h2 color="primary">Email</h2>
-          <p>{{section.professor.email}}</p>
-        </ion-item> -->
 	  		<ion-item>
           Name:
           <ion-note item-right>
@@ -66,26 +39,28 @@
             Mon, Tue 2-5pm
           </ion-note>
         </ion-item>
-	  		<!-- <ion-item>Office Hours</ion-item> -->
-	  		<!-- <ion-item>More...</ion-item> -->
+      <ion-list-header>
+        Upcoming due dates:
+      </ion-list-header>
+      <ion-item *ngFor="let event of events">
+        <h2>{{event.title}}</h2>
+        <p>
+          {{event.dueDate | date: 'EEE, MMM dd - hh:mm a'}}
+        </p>
+        <p text-wrap>{{event.description}}</p>
+      </ion-item>
 		</ion-list>
 	    <ion-list *ngSwitchCase="'classmates'">
         <ion-list-header>
   				Classmates
 	  		</ion-list-header>
-        <ion-item *ngFor="let user of users" text-capitalize>
+        <button ion-item *ngFor="let user of users" text-capitalize>
           <ion-avatar item-left>
             <img src="{{user.profilePic}}">
           </ion-avatar>
           <h2 text-capitalize> {{user.firstName}} {{user.lastName}}</h2>
           <p text-capitalize>  {{user.major}} </p>
-        </ion-item>
-        <!-- <ion-item *ngFor="let item of currentItems">
-          <button ion-item (click)="openItem(item)">
-            <h2>{{item.name}}</h2>
-            <p>{{item.about}}</p>
-          </button> -->
+        </button>
       </ion-list>
 	</div>
-	</ion-grid>
 </ion-content>

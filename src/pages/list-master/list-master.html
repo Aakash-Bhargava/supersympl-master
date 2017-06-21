@@ -30,17 +30,13 @@
 
   <ion-list>
     <ion-item-sliding  *ngFor="let section of sections">
-      <ion-item (click)="openItem(section)">
-        <!-- <button ion-item > -->
-          <ion-avatar item-left>
-            <i primary class="{{section.icon}} fa-2x"aria-hidden="true"></i>
-            <!-- <span class={{section.icon}}></span> -->
+      <button ion-item (click)="openItem(section)">
+          <ion-avatar item-left text-center>
+            <i primary class="{{section.icon}} fa-2x" aria-hidden="true"></i>
           </ion-avatar>
           <h2>{{section.courseName}}</h2>
           <p>Section: {{section.sectionNumber}}</p>
-          <!-- <p>{{course.about}}</p> -->
-        <!-- </button> -->
-      </ion-item>
+      </button>
       <ion-item-options>
         <button ion-button color="danger" (click)="removeSection(section);">
           Delete
