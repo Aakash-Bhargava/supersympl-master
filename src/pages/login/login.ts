@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, ViewController } from 'ionic-angular';
 
-import { TranslateService } from 'ng2-translate/ng2-translate';
-
 import { MainPage } from '../../pages/pages';
-import { User } from '../../providers/user';
 
 import { Angular2Apollo } from 'angular2-apollo';
 
@@ -34,15 +31,9 @@ export class LoginPage {
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-              public user: User,
               public viewCtrl: ViewController,
               public toastCtrl: ToastController,
-              public translateService: TranslateService,
               public apollo : Angular2Apollo) {
-
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
   }
 
     CurrentUserForProfile = gql`
@@ -114,5 +105,5 @@ export class LoginPage {
       console.log("dismiss");
       this.viewCtrl.dismiss();
     }
-    
+
 }

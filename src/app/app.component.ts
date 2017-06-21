@@ -3,14 +3,11 @@ import {Platform, Nav, Config} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 
-import { FirstRunPage } from '../pages/pages';
-import { CardsPage } from '../pages/cards/cards';
 import { ContentPage } from '../pages/content/content';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
-import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { ListMasterPage } from '../pages/list-master/list-master';
 import { MenuPage } from '../pages/menu/menu';
@@ -18,7 +15,6 @@ import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { ProfilePage } from '../pages/profile/profile';
-import { TranslateService } from 'ng2-translate/ng2-translate';
 import { PasswordPage } from '../pages/password/password';
 import { SetLocationPage } from '../pages/set-location/set-location';
 
@@ -42,15 +38,13 @@ import { SetLocationPage } from '../pages/set-location/set-location';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage: any;//  = WelcomePage; for default login
+  rootPage: any;
 
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
-    { title: 'Tutorial', component: TutorialPage },
     { title: 'Welcome', component: WelcomePage },
     { title: 'Tabs', component: TabsPage },
-    { title: 'Cards', component: CardsPage },
     { title: 'Content', component: ContentPage },
     { title: 'Login', component: LoginPage },
     { title: 'Signup', component: SignupPage },
@@ -64,14 +58,7 @@ export class MyApp {
     { title: 'Password', component: PasswordPage}
   ]
 
-  constructor(translate: TranslateService, platform: Platform, config: Config) {
-    // Set the default language for translation strings, and the current language.
-    translate.setDefaultLang('en');
-    translate.use('en')
-
-    translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
-      config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
-    });
+  constructor(platform: Platform, config: Config) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

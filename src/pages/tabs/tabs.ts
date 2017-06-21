@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
 import { Angular2Apollo } from 'angular2-apollo';
 
 
@@ -24,6 +23,5 @@ export class TabsPage {
   tab4Title = "Profile";
 
   constructor(public navCtrl: NavController,
-              public translateService: TranslateService,
               private apollo: Angular2Apollo) {}
 }

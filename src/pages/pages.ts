@@ -1,11 +1,8 @@
 import { TabsPage } from './tabs/tabs';
-import { TutorialPage } from './tutorial/tutorial';
 import { ListMasterPage } from './list-master/list-master';
 import { ProfilePage } from './profile/profile';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { MapPage } from '../pages/map/map';
-// The page the user lands on after opening the app and without a session
-export const FirstRunPage = TutorialPage;
 
 // The main page the user will see as they use the app over a long period of time.
 // Change this if not using tabs
