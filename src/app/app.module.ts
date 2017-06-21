@@ -31,6 +31,8 @@ import { addEventModal } from '../pages/addEventModal/addEventModal';
 import { CalendarModule } from "ion2-calendar";
 import { SelectedDay } from '../pages/selectedDay/selectedDay';
 
+import { Camera } from '@ionic-native/camera';
+
 
 
 
@@ -92,6 +94,7 @@ export function providers() {
     User,
     Api,
     Items,
+    Camera,
 
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ pageTitle }}</ion-title>
+    <ion-title>Profile</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="goToSettingsPage()">
         <ion-icon color="primary" name="cog"></ion-icon>
@@ -11,29 +11,30 @@
 
 <ion-content>
   <div class="header">
-    <img class="avatar-background" src="assets/img/marty-avatar.png" />
-    <ion-avatar>
-      <img class="avatar" src="assets/img/marty-avatar.png">
-      <div class="profile-header">
-        {{firstName}} {{lastName}}
-      </div>
-      <div class="profile-header major">
-        {{major}}
-      </div>
+    <img class="avatar-background" [src]="imageUri" />
+    <ion-avatar (click)="changePic()">
+      <img class="avatar" [src]="imageUri">
     </ion-avatar>
+    <div class="profile-header">
+      {{userInfo.firstName}} {{userInfo.lastName}}
+    </div>
+    <div class="profile-header major">
+      {{userInfo.major}}
+    </div>
+
   </div>
 		<ion-list>
   		<ion-item>
         <h2 color="primary">Email: </h2>
-        <p>{{email}}</p>
+        <p>{{userInfo.email}}</p>
       </ion-item>
   		<ion-item>
         <h2 color="primary">Phone Number: </h2>
-        <p>{{phone}}</p>
+        <p>{{userInfo.phone}}</p>
       </ion-item>
       <ion-item>
         <h2 color="primary">Year: </h2>
-        <p>{{year}}</p>
+        <p>{{userInfo.year}}</p>
       </ion-item>
       <ion-item>
         <h2 color="primary">Current classes: </h2>
