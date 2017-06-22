@@ -8,21 +8,13 @@ import { Component } from '@angular/core';
 export class SelectedDay {
 
   events: any;
-  date: any;
-  dateString: any;
+  dateSelected: any;
 
    constructor(params: NavParams, public viewCtrl: ViewController) {
 
      this.events = params.get('allEvents');
 
-     this.date = params.get('date');
-     var date = this.date.getDate();
-     var month = this.date.getMonth(); //Be careful! January is 0 not 1
-     var year = this.date.getFullYear();
-
-     this.dateString = date + "/" +(month + 1) + "/" + year;
-     console.log('all Events', params.get('allEvents'));
-     console.log('date', this.dateString);
+     this.dateSelected = params.get('date');
    }
 
    dismiss(){

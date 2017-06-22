@@ -4,23 +4,19 @@
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-title>
-      {{dateString}}
+      {{dateSelected | date: 'EEEE, MMMM d y'}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card class="daysEventsCard" *ngFor="let e of events">
-    <h1 class="eventTitle">{{e.title}}</h1>
-    <h1 class="eventClass">
-      {{e.class}}
-    </h1>
-    <ion-note class="eventDescription">
+  <ion-card *ngFor="let e of events" padding>
+    <h1>{{e.title}} - {{e.section.courseName}}</h1>
+    <p>
       {{e.description}}
-    </ion-note>
-    <br>
-    <ion-note class="eventUrl">
+    </p>
+    <p>
       {{e.url}}
-    </ion-note>
+    </p>
   </ion-card>
 </ion-content>
