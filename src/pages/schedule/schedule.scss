@@ -73,7 +73,6 @@ page-schedule {
     button.days-btn.on-selected{
       background-color: #f53d3d !important;;
     }
-
   }
 
   .days {
@@ -82,6 +81,10 @@ page-schedule {
 
   .days button p {
     font-size: 0.9em;
+  }
+
+  .days button small {
+    font-size: 2.2em !important;
   }
 
 }

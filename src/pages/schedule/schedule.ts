@@ -146,7 +146,7 @@ export class SchedulePage {
           var seconds = date.getSeconds();
           var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
           var ev = this.calEvent = {
-            // subTitle: event.class,
+            subTitle: '·',
             date: date,
             marked: true
           };

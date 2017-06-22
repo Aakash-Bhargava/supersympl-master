@@ -33,10 +33,10 @@ export class ItemDetailPage {
 
     for (let event of this.section.events) {
       if (event.dueDate < now) {
-        this.events.push(event);
+        this.pastEvents.push(event);
       } else {
         if (this.pastEvents.length < 3) {
-          this.pastEvents.push(event);
+          this.events.push(event);
         }
       }
     }
