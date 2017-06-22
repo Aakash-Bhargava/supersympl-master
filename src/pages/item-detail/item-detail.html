@@ -49,6 +49,16 @@
         </p>
         <p text-wrap>{{event.description}}</p>
       </ion-item>
+      <ion-list-header>
+        Past due dates:
+      </ion-list-header>
+      <ion-item *ngFor="let event of pastEvents">
+        <h2>{{event.title}}</h2>
+        <p>
+          {{event.dueDate | date: 'EEE, MMM dd'}}
+        </p>
+        <p text-wrap>{{event.description}}</p>
+      </ion-item>
 		</ion-list>
 	    <ion-list *ngSwitchCase="'classmates'">
         <ion-list-header>

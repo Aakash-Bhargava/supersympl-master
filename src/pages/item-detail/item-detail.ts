@@ -19,13 +19,27 @@ export class ItemDetailPage {
   users = <any>[];
   events = <any>[];
 
+  pastEvents = <any>[];
+
   constructor(public navCtrl: NavController,
                      navParams: NavParams,
                      private apollo: Angular2Apollo) {
 
     this.section = navParams.get('section');
     this.users = this.section.users;
-    this.events = this.section.events;
+    let now = new Date().toISOString();
+
+
+
+    for (let event of this.section.events) {
+      if (event.dueDate < now) {
+        this.events.push(event);
+      } else {
+        if (this.pastEvents.length < 3) {
+          this.pastEvents.push(event);
+        }
+      }
+    }
   }
 
 
