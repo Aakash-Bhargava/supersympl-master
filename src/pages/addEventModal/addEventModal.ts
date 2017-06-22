@@ -20,8 +20,12 @@ export class addEventModal {
   section: any;
   data: any;
 
+  today = new Date();
   form: FormGroup;
   isReadyToSave: boolean;
+
+  dueDate: any;
+  dueTime: any;
 
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
@@ -30,9 +34,9 @@ export class addEventModal {
 
       this.form = formBuilder.group({
        title: ['', Validators.required],
-       class: ['', Validators.required],
-       dueDate: ['', Validators.required],
-       alert: ['', Validators.required],
+       section: ['', Validators.required],
+       dueDate: [this.today.toISOString(), Validators.required],
+       dueTime: [this.today.toISOString(), Validators.required],
        url: ['', Validators.required],
        description: ['', Validators.required]
       });
@@ -49,17 +53,22 @@ export class addEventModal {
  add(){
    console.log("add clicked");
 
+
+
+  //  console.log("DATE: " + this.dueDate);
+  //  console.log("HOURS: " + this.dueTime.getHours());
    this.createEvent();
    console.log(this.form.value.title);
-   console.log(this.form.value.class);
+   console.log(this.form.value.section);
    console.log(this.form.value.dueDate);
-   console.log(this.form.value.alert);
+   console.log(this.form.value.dueTime);
    console.log(this.form.value.url);
    console.log(this.form.value.description);
    this.dismiss();
  }
 
  ionViewDidEnter() {
+   this.today.setHours(this.today.getHours() - 4);
    this.getUserSections();
  }
 
@@ -102,19 +111,25 @@ querySections(){
 }
 
   createEvent(){
+
+  //Get dueDate Date object and set time to midnight for dataBase filters
+  var tempDueDate = new Date(this.form.value.dueDate);
+  tempDueDate.setHours(0,0,0,0);
+  console.log(tempDueDate);
+
   return this.apollo.mutate({
     mutation: gql`
     mutation createEvent($title: String,
-                        $class: String,
+                        $sectionId: ID,
                         $dueDate: DateTime,
-                        $alert: String,
+                        $dueTime: DateTime,
                         $url: String,
                         $description: String){
 
       createEvent(title: $title,
-                  class: $class,
+                  sectionId: $sectionId,
                   dueDate: $dueDate,
-                  alert: $alert,
+                  dueTime: $dueTime,
                   url: $url,
                   description: $description){
                     id
@@ -123,9 +138,9 @@ querySections(){
     `,
     variables: {
       title: this.form.value.title,
-      class: this.form.value.class,
-      dueDate: this.form.value.dueDate,
-      alert: this.form.value.alert,
+      sectionId: this.form.value.section,
+      dueDate: tempDueDate,
+      dueTime: this.form.value.dueTime,
       url: this.form.value.url,
       description: this.form.value.description
     }
