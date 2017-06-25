@@ -20,6 +20,7 @@ export class ListMasterPage {
   sections = <any>[];
   section: any;
   data: any;
+  now = new Date().toISOString();
   constructor(public navCtrl: NavController, //public items: Items,
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
