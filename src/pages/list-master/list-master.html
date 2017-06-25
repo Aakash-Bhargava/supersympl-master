@@ -38,11 +38,11 @@
           <p>Section: {{section.sectionNumber}}</p>
           <p *ngIf="section.events.length > 0">Upcoming due dates:</p>
           <p *ngIf="section.events.length == 0">No due dates</p>
-          <ul *ngIf="section.events.length > 0">
-            <div *ngFor="let event of section.events">
-              <li *ngIf="event.dueDate > now"><span>{{event.title}} {{event.dueDate | date: 'EEE, MMM dd'}}</span></li>
-            </div>
-          </ul>
+          <!-- <ul *ngIf="section.events.length > 0"> -->
+          <div *ngFor="let event of section.events">
+            <p *ngIf="event.dueDate > now"><span> · {{event.title}} {{event.dueDate | date: 'EEE, MMM dd'}}</span></p>
+          </div>
+          <!-- </ul> -->
       </button>
       <ion-item-options>
         <button ion-button color="danger" (click)="removeSection(section);">
