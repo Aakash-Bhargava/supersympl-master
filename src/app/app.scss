@@ -16,12 +16,16 @@
 // automatically applied to the <body> element in the app.
 
 .toolbar-background{
-  background-color: #323232;
-
+  background-color: #D5D5D5;
+  border: 0px !important;
 }
 
 .toolbar-title{
   color: white;
+}
+
+.tabbar {
+  border-top: 0px !important;
 }
 
 .text-input{
