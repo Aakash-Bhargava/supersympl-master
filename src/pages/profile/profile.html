@@ -15,10 +15,10 @@
     <ion-avatar (click)="changePic()">
       <img class="avatar" [src]="imageUri">
     </ion-avatar>
-    <div class="profile-header">
+    <div class="profile-header" text-capitalize>
       {{userInfo.firstName}} {{userInfo.lastName}}
     </div>
-    <div class="profile-header major">
+    <div class="profile-header major" text-capitalize>
       {{userInfo.major}}
     </div>
 

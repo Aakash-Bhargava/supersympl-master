@@ -64,7 +64,7 @@
         <ion-list-header>
   				Classmates
 	  		</ion-list-header>
-        <button ion-item *ngFor="let user of users" text-capitalize>
+        <button ion-item *ngFor="let user of users" (click)="gotoUser(user)" text-capitalize>
           <ion-avatar item-left>
             <img src="{{user.profilePic}}">
           </ion-avatar>

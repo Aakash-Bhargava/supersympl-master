@@ -54,8 +54,14 @@ export class ListMasterPage {
         query{
           user{
             id
+            email
             firstName
             lastName
+            phone
+            email
+            major
+            year
+            profilePic
             sections{
               id
               sectionNumber
@@ -63,10 +69,18 @@ export class ListMasterPage {
               type
               icon
               users {
+                id
+                email
                 firstName
                 lastName
+                phone
+                email
                 major
+                year
                 profilePic
+                sections {
+                  courseName
+                }
               }
               professor{
                 name
@@ -92,8 +106,14 @@ export class ListMasterPage {
           query{
             user{
               id
+              email
               firstName
               lastName
+              phone
+              email
+              major
+              year
+              profilePic
               sections{
                 id
                 sectionNumber
@@ -101,10 +121,18 @@ export class ListMasterPage {
                 type
                 icon
                 users {
+                  id
+                  email
                   firstName
                   lastName
+                  phone
+                  email
                   major
+                  year
                   profilePic
+                  sections {
+                    courseName
+                  }
                 }
                 professor{
                   name

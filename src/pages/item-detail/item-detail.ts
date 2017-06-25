@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription';
 
+import { ProfilePage } from '../profile/profile';
+
 import gql from 'graphql-tag';
 
 @Component({
@@ -40,6 +42,11 @@ export class ItemDetailPage {
         }
       }
     }
+  }
+
+  gotoUser(user) {
+    console.log("ha");
+    this.navCtrl.push(ProfilePage, {user: user});
   }
 
 

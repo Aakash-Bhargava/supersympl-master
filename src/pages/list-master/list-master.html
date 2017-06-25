@@ -37,8 +37,11 @@
           <h2>{{section.courseName}}</h2>
           <p>Section: {{section.sectionNumber}}</p>
           <p *ngIf="section.events.length > 0">Upcoming due dates:</p>
-          <ul *ngFor="let event of section.events">
-            <li *ngIf="event.dueDate > now"><span>{{event.title}}, {{event.dueDate | date: 'EEE, MMM dd'}}</span></li>
+          <p *ngIf="section.events.length == 0">No due dates</p>
+          <ul *ngIf="section.events.length > 0">
+            <div *ngFor="let event of section.events">
+              <li *ngIf="event.dueDate > now"><span>{{event.title}} {{event.dueDate | date: 'EEE, MMM dd'}}</span></li>
+            </div>
           </ul>
       </button>
       <ion-item-options>

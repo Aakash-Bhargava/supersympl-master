@@ -25,7 +25,9 @@ export class ProfilePage {
               public navParams: NavParams,
               private apollo: Angular2Apollo,
               private Camera: Camera,
-              private platform: Platform) {}
+              private platform: Platform) {
+
+              }
 
 
   ionViewDidLoad() {
@@ -37,18 +39,30 @@ export class ProfilePage {
   }
 
   setUser(){
-   this.checkUserInfo().then(({data}) => {
-     if (data){
-       this.userInfo = data;
-       this.userInfo = this.userInfo.user;
-       if (!this.userInfo.profilePic) {
-         this.imageUri = "https://msudenver.edu/media/sampleassets/profile-placeholder.png";
-       } else {
-         this.imageUri = this.userInfo.profilePic;
-       }
-       this.sections = this.userInfo.sections;
-     }
-   })
+    if (this.navParams.get("user")) {
+      console.log(this.navParams.get("user"));
+      this.userInfo = this.navParams.get("user");
+      if (!this.userInfo.profilePic) {
+        this.imageUri = "https://msudenver.edu/media/sampleassets/profile-placeholder.png";
+      } else {
+        this.imageUri = this.userInfo.profilePic;
+      }
+      this.sections = this.userInfo.sections;
+    } else {
+      this.checkUserInfo().then(({data}) => {
+        if (data){
+          this.userInfo = data;
+          this.userInfo = this.userInfo.user;
+          if (!this.userInfo.profilePic) {
+            this.imageUri = "https://msudenver.edu/media/sampleassets/profile-placeholder.png";
+          } else {
+            this.imageUri = this.userInfo.profilePic;
+          }
+          this.sections = this.userInfo.sections;
+        }
+      })
+
+    }
  }
 
  //returns a promise containing the user's info
