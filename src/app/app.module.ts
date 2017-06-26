@@ -63,7 +63,23 @@ export function entryComponents() {
 }
 
 @NgModule({
-  declarations: [declarations(), IonCalendar],
+  declarations: [  MyApp,
+    LoginPage,
+    MapPage,
+    SignupPage,
+    TabsPage,
+    WelcomePage,
+    ListMasterPage,
+    ItemDetailPage,
+    MenuPage,
+    SettingsPage,
+    SearchPage,
+    SchedulePage,
+    ProfilePage,
+    PasswordPage,
+    addEventModal,
+    SetLocationPage,
+    SelectedDay],
   imports: [
     ApolloModule.withClient(provideClient),
     CalendarModule,

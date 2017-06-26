@@ -35,11 +35,11 @@ export class ItemDetailPage {
 
     for (let event of this.section.events) {
       if (event.dueDate < now) {
-        this.pastEvents.push(event);
-      } else {
         if (this.pastEvents.length < 3) {
-          this.events.push(event);
+          this.pastEvents.push(event);
         }
+      } else {
+        this.events.push(event);
       }
     }
   }
