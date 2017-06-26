@@ -3,7 +3,6 @@ import {Platform, Nav, Config} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 
-import { ContentPage } from '../pages/content/content';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
@@ -45,7 +44,6 @@ export class MyApp {
   pages: any[] = [
     { title: 'Welcome', component: WelcomePage },
     { title: 'Tabs', component: TabsPage },
-    { title: 'Content', component: ContentPage },
     { title: 'Login', component: LoginPage },
     { title: 'Signup', component: SignupPage },
     { title: 'Map', component: MapPage },

@@ -1,19 +1,18 @@
 page-selectedDay {
-
-  h1 {
-    text-align: center;
-    color: white;
+  .eventTitle{
+    font-size: 1.5em;
+    font-weight: 300;
+    padding-bottom: 5px;
   }
-
-
-}
-
-
-.today{
-  border-bottom: 3px solid #03cea4;
-
-}
-
-.on-selected {
-    box-shadow: 1px 1px #bda4a4
+  ion-item p span {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: black;
+  }
+  .popup {
+    font-weight: 390;
+  }
+  .desc {
+    text-align: justify;
+  }
 }

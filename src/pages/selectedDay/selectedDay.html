@@ -10,13 +10,20 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let e of events" padding>
-    <h1>{{e.title}} - {{e.section.courseName}}</h1>
-    <p>
-      {{e.description}}
-    </p>
-    <p>
-      {{e.url}}
-    </p>
-  </ion-card>
+  <ion-list>
+    <ion-item *ngFor="let event of events">
+      <div class="eventTitle">
+        {{event.title}}
+      </div>
+      <p>
+        <span>Class:</span> <span class="popup" >{{event.section.courseName}}</span>
+      </p>
+      <p>
+        <span>Due Date:</span> <span class="popup">{{event.dueDate | date: 'EEEE, MMMM d y'}}</span>
+      </p>
+      <p text-wrap class="desc">
+        <span>Description:</span> {{event.description}}
+      </p>
+    </ion-item>
+  </ion-list>
 </ion-content>

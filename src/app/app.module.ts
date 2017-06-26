@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MyApp } from './app.component';
 
-import { ContentPage } from '../pages/content/content';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 import { SignupPage } from '../pages/signup/signup';
@@ -37,7 +36,6 @@ import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
 
 let pages = [
   MyApp,
-  ContentPage,
   LoginPage,
   MapPage,
   SignupPage,
