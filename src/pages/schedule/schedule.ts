@@ -26,6 +26,7 @@ export class SchedulePage {
   calView : string = "list";
   allEventsData = <any>{};
   allEvents = <any>[];
+  now: any;
   //day config
   calEvent = <any>{
     title: '',
@@ -44,6 +45,7 @@ export class SchedulePage {
               public alertCtrl: AlertController, public modalCtrl: ModalController,
               private apollo: Angular2Apollo,
               public calendarCtrl: CalendarController) {
+                this.now = new Date().toISOString()
 
               }
 
@@ -70,7 +72,8 @@ export class SchedulePage {
       closeLabel: '',
       weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
       cssClass: 'calendarCSS',
-      daysConfig: this.allCalEv
+      daysConfig: this.allCalEv,
+      to: new Date().setMonth(new Date().getMonth() + 5)
     })
     .then( (res:any) => {
 
@@ -108,6 +111,38 @@ export class SchedulePage {
   addEvent(){
     console.log("clicked");
     let modal = this.modalCtrl.create(addEventModal);
+    modal.onDidDismiss(data => {
+      let info;
+      info = this.watch();
+      info.refetch().then(({data}) => {
+        if(data){
+          this.allEvents = [];
+          this.allEventsData = data;
+          for (let event of this.allEventsData.allEvents) {
+            if (event.dueDate > this.now) {
+              this.allEvents.push(event);
+            }
+          }
+          for(let event of this.allEvents){
+            var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
+            var day = date.getDate();
+            var monthIndex = date.getMonth() + 1;
+            var year = date.getFullYear();
+            var minutes = date.getMinutes();
+            var hours = date.getHours();
+            var seconds = date.getSeconds();
+            var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
+            var ev = this.calEvent = {
+              subTitle: '·',
+              date: date,
+              marked: true
+            };
+            this.allCalEv.push(ev);
+          }
+          console.log(this.allCalEv);
+        }
+      })
+    })
     modal.present();
   }
 
@@ -115,7 +150,7 @@ export class SchedulePage {
     return this.apollo.query({
       query: gql`
       query{
-        allEvents{
+        allEvents(orderBy: dueDate_ASC){
           title,
           section{
             id
@@ -131,11 +166,37 @@ export class SchedulePage {
     }).toPromise();
   }
 
+  watch(){
+    return this.apollo.watchQuery({
+      query: gql`
+      query{
+        allEvents(orderBy: dueDate_ASC){
+          title,
+          section{
+            id
+            courseName
+          }
+          dueDate,
+          dueTime
+          url,
+          description
+        }
+      }
+    `
+    });
+  }
+
   setEvents(){
     this.getEvents().then(({data}) => {
       if(data){
+        this.allEvents = [];
         this.allEventsData = data;
-        this.allEvents = this.allEventsData.allEvents;
+        for (let event of this.allEventsData.allEvents) {
+          if (event.dueDate > this.now) {
+            this.allEvents.push(event);
+          }
+        }
+        console.log(this.allEvents);
         for(let event of this.allEvents){
           var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
           var day = date.getDate();
@@ -152,7 +213,7 @@ export class SchedulePage {
           };
           this.allCalEv.push(ev);
         }
-        console.log(this.allCalEv);
+        console.log("Events" + this.allCalEv);
       }
     })
   }

@@ -40,7 +40,7 @@
           <p *ngIf="section.events.length == 0">No due dates</p>
           <!-- <ul *ngIf="section.events.length > 0"> -->
           <div *ngFor="let event of section.events">
-            <p *ngIf="event.dueDate > now"><span> · {{event.title}} {{event.dueDate | date: 'EEE, MMM dd'}}</span></p>
+            <p *ngIf="event.dueDate > now"><span> · {{event.title}},  {{event.dueDate | date: 'EEE MMM dd'}}</span></p>
           </div>
           <!-- </ul> -->
       </button>

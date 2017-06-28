@@ -49,10 +49,39 @@ export class MapPage implements OnInit {
     var that = this;
     let map = Leaflet.map('map');
     this.map = map;
-    Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
+    var geojson = [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.031952, 38.913184]
+    },
+    properties: {
+      'marker-color': '#3ca0d3',
+      'marker-size': 'large',
+      'marker-symbol': 'rocket'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.413682, 37.775408]
+    },
+    properties: {
+      'marker-color': '#63b6e5',
+      'marker-size': 'large',
+      'marker-symbol': 'rocket'
+    }
+  }
+];
+
+    Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
       //attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+
       maxZoom: 18
     }).addTo(this.map);
+    Leaflet.marker([37.775408, -122.413682]).addTo(this.map);
 
     //web location
     this.map.locate({ setView: true});

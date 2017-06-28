@@ -44,7 +44,7 @@
       </ion-list-header>
       <ion-item *ngFor="let event of events">
         <h2>{{event.title}}</h2>
-        <p>
+        <p class="dueDate">
           {{event.dueDate | date: 'EEE, MMM dd'}} - {{event.dueTime | date: 'hh:mm a'}}
         </p>
         <p text-wrap>{{event.description}}</p>
