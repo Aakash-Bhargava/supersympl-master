@@ -1,8 +1,5 @@
 page-welcome {
-  // .content{
-  //   background-color: #626262;
-  // }
-  color: white;
+
 }
 
 .symplLogo{
@@ -17,34 +14,22 @@ page-welcome {
 
 .inputFields{
 
-    padding-top: 65px;
+    padding-top: 15%;
 
     ion-item{
-      // background-color: #626262;
-      padding: 10px;
+      padding: 2%;
+      color: grey;
     }
 
-    ion-label{
-      color: white;
-    }
-
-    ion-input{
-      color: white;
-    }
-
-    ion-icon{
-        color: white;
+    ion-label {
+      color: grey;
     }
 }
 
 .loginBtn{
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 5px;
+  padding: 2%;
 }
 
 .signUpBtn{
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
+  padding: 2%;
 }
