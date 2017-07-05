@@ -93,8 +93,8 @@ export class MapPage implements OnInit {
 
         var radius = e.accuracy / 4;
         var profileIcon = Leaflet.icon({
-          iconUrl: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png',
-          iconSize: [50, 50] // size of the icon
+          iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
+          iconSize: [60, 50] // size of the icon
         });
         for (let location of this.alllocations) {
           console.log(this.alllocations);
@@ -137,9 +137,9 @@ export class MapPage implements OnInit {
       this.map.on('locationfound', function (onLocationFound) {
         that.createPin(c,onLocationFound.latlng.lat,onLocationFound.latlng.lng );
         var profileIcon = Leaflet.icon({
-          iconUrl: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png',
+          iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
         //iconUrl: 'https://cdn0.iconfinder.com/data/icons/industrial-icons/164/5-512.png',
-          iconSize: [50, 50], // size of the icon
+          iconSize: [60, 50], // size of the icon
         });
 
         let start = new Date(c['startTime']);

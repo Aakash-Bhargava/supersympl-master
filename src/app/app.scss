@@ -16,7 +16,7 @@
 // automatically applied to the <body> element in the app.
 
 .toolbar-background{
-  background-color: #D5D5D5;
+  background-color: #3787A8;
   border: 0px !important;
 }
 
@@ -30,13 +30,4 @@
 
 .text-input{
   color: black;
-}
-
-@font-face{
-  font-family: Lato;
-  src: url('../assets/fonts/OpenSans.woff2') format('woff2');
-}
-
-*{
-font-family: Lato;
 }
