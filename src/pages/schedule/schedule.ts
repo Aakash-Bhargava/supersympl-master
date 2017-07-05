@@ -40,6 +40,8 @@ export class SchedulePage {
   //the date selected's events scheduled
   dateSelectedEvents: any;
 
+  currentUser: any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public modalCtrl: ModalController,
@@ -51,6 +53,19 @@ export class SchedulePage {
 
   ionViewDidLoad() {
     this.setEvents();
+    this.apollo.query({
+      query: gql`
+        query {
+          user {
+            id
+          }
+        }
+      `
+    }).toPromise().then(({data})=> {
+      this.currentUser = data;
+      console.log(this.currentUser);
+      this.currentUser = this.currentUser.user;
+    });
   }
 
   openCalendar(){
@@ -108,42 +123,54 @@ export class SchedulePage {
   alert.present()
 }
 
-  addEvent(){
+  addEvent() {
     console.log("clicked");
     let modal = this.modalCtrl.create(addEventModal);
     modal.onDidDismiss(data => {
-      let info;
-      info = this.watch();
-      info.refetch().then(({data}) => {
-        if(data){
-          this.allEvents = [];
-          this.allEventsData = data;
-          for (let event of this.allEventsData.allEvents) {
-            if (event.dueDate > this.now) {
-              this.allEvents.push(event);
-            }
-          }
-          for(let event of this.allEvents){
-            var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
-            var day = date.getDate();
-            var monthIndex = date.getMonth() + 1;
-            var year = date.getFullYear();
-            var minutes = date.getMinutes();
-            var hours = date.getHours();
-            var seconds = date.getSeconds();
-            var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
-            var ev = this.calEvent = {
-              subTitle: '·',
-              date: date,
-              marked: true
-            };
-            this.allCalEv.push(ev);
-          }
-          console.log(this.allCalEv);
-        }
-      })
+      this.refreshPage();
     })
     modal.present();
+  }
+
+  refreshPage() {
+    let info;
+    info = this.watch();
+    info.refetch().then(({data}) => {
+      if(data){
+        let voted = false;
+        this.allEvents = [];
+        this.allEventsData = data;
+        for (let event of this.allEventsData.allEvents) {
+          voted = false;
+          if (event.dueDate >= this.now) {
+            for (let downvote of event.downvotes ) {
+              if (downvote.id == this.currentUser.id) {
+                voted = true;
+                break;
+              }
+            }
+            this.allEvents.push({event: event, voted: voted});
+          }
+        }
+        for(let event of this.allEvents){
+          var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
+          var day = date.getDate();
+          var monthIndex = date.getMonth() + 1;
+          var year = date.getFullYear();
+          var minutes = date.getMinutes();
+          var hours = date.getHours();
+          var seconds = date.getSeconds();
+          var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
+          var ev = this.calEvent = {
+            subTitle: '·',
+            date: date,
+            marked: true
+          };
+          this.allCalEv.push(ev);
+        }
+        console.log(this.allCalEv);
+      }
+    })
   }
 
   getEvents(){
@@ -151,14 +178,18 @@ export class SchedulePage {
       query: gql`
       query{
         allEvents(orderBy: dueDate_ASC){
-          title,
+          id
+          title
           section{
             id
             courseName
           }
-          dueDate,
+          downvotes {
+            id
+          }
+          dueDate
           dueTime
-          url,
+          url
           description
         }
       }
@@ -171,14 +202,18 @@ export class SchedulePage {
       query: gql`
       query{
         allEvents(orderBy: dueDate_ASC){
-          title,
+          id
+          title
           section{
             id
             courseName
           }
-          dueDate,
+          downvotes {
+            id
+          }
+          dueDate
           dueTime
-          url,
+          url
           description
         }
       }
@@ -189,14 +224,23 @@ export class SchedulePage {
   setEvents(){
     this.getEvents().then(({data}) => {
       if(data){
+        let voted = false;
         this.allEvents = [];
         this.allEventsData = data;
         for (let event of this.allEventsData.allEvents) {
-          if (event.dueDate > this.now) {
-            this.allEvents.push(event);
+          voted = false;
+          if (event.dueDate >= this.now) {
+            for (let downvote of event.downvotes ) {
+              if (downvote.id == this.currentUser.id) {
+                voted = true;
+                break;
+              }
+            }
+            this.allEvents.push({event: event, voted: voted});
           }
         }
         console.log(this.allEvents);
+        // this.allEvents.sort(this.compare);
         for(let event of this.allEvents){
           var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
           var day = date.getDate();
@@ -259,5 +303,35 @@ export class SchedulePage {
   presentSelectedDayModal(){
     let selectedDayModal = this.modalCtrl.create(SelectedDay, { allEvents: this.dateSelectedEvents, date: this.dateSelected });
     selectedDayModal.present();
+  }
+
+  compare(a,b) {
+      if (a.section.courseName < b.section.courseName)
+        return -1;
+      if (a.section.courseName > b.section.courseName)
+        return 1;
+      return 0;
+  }
+
+  downvote(event) {
+    this.apollo.mutate({
+      mutation: gql`
+      mutation addToDownvoteOnEvent($downvotesUserId: ID!, $eventsEventId: ID!) {
+        addToDownvoteOnEvent(downvotesUserId: $downvotesUserId, eventsEventId: $eventsEventId){
+          eventsEvent{
+            id
+          }
+        }
+      }
+      `,
+      variables: {
+        downvotesUserId: this.currentUser.id,
+        eventsEventId: event.id
+      }
+
+    }).toPromise().then(({data})=> {
+      this.refreshPage();
+    });
+
   }
 }

@@ -1,9 +1,3 @@
-<!--
-  Generated template for the Schedule page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   	<ion-navbar>
   		<ion-buttons start>
@@ -19,27 +13,29 @@
     	<ion-title>Assignments</ion-title>
   	</ion-navbar>
 </ion-header>
-<ion-content >
-    <ion-list>
-          <ion-item *ngFor="let event of allEvents">
-            <div class="eventTitle">
-              {{event.title}}
-            </div>
-            <span>
-              <p> Class:
-                <a class="eventClass">
-                   {{event.section.courseName}}
-                </a>
-              </p>
-            </span>
-
-            <span>
-              <p> Due Date:
-                <a class="eventDueDate">
-                  {{event.dueDate | date: 'shortDate'}}
-                </a>
-              </p>
-            </span>
-          </ion-item>
-    </ion-list>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let event of allEvents">
+      <div class="eventTitle">
+        {{event.event.title}}
+      </div>
+      <span>
+        <p> Class:
+          <a class="eventClass">
+             {{event.event.section.courseName}}
+          </a>
+        </p>
+      </span>
+      <span>
+        <p> Due Date:
+          <a class="eventDueDate">
+            {{event.event.dueDate | date: 'shortDate'}}
+          </a>
+        </p>
+      </span>
+      <span item-end color="primary" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
+      <!-- <ion-icon *ngIf="event.voted" color="primary" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon> -->
+      <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>
