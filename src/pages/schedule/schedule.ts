@@ -153,7 +153,7 @@ export class SchedulePage {
           }
         }
         for(let event of this.allEvents){
-          var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
+          var date = new Date(event.event.dueDate); // had to remove the colon (:) after the T in order to make it work
           var day = date.getDate();
           var monthIndex = date.getMonth() + 1;
           var year = date.getFullYear();
@@ -242,7 +242,7 @@ export class SchedulePage {
         console.log(this.allEvents);
         // this.allEvents.sort(this.compare);
         for(let event of this.allEvents){
-          var date = new Date(event.dueDate); // had to remove the colon (:) after the T in order to make it work
+          var date = new Date(event.event.dueDate); // had to remove the colon (:) after the T in order to make it work
           var day = date.getDate();
           var monthIndex = date.getMonth() + 1;
           var year = date.getFullYear();

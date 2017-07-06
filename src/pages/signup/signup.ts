@@ -3,7 +3,6 @@ import { NavController, ToastController, ViewController } from 'ionic-angular';
 import { MainPage } from '../../pages/pages';
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription'
-import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import gql from 'graphql-tag';
 
@@ -29,13 +28,8 @@ export class SignupPage {
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
               public toastCtrl: ToastController,
-              public translateService: TranslateService,
               // public formBuilder: FormBuilder,
               private apollo: Angular2Apollo) {
-
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.signupErrorString = value;
-    })
   }
 
   //calls the createAndSignIn function
