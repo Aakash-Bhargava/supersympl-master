@@ -45,22 +45,43 @@ export class SignupPage {
       toast.present();
       console.log("ha");
     } else {
-      this.createAndSignIn().then(({data}) => {
+      this.createUser().then(({data}) => {
         if (data){
-          this.userInfo.data = data
-          console.log(this.userInfo.data.signinUser.token);
-          window.localStorage.setItem('graphcoolToken', this.userInfo.data.signinUser.token);
-          // this.navCtrl.push(MainPage);
-          // location.reload();
-          this.navCtrl.setRoot(MainPage);
+          this.SignIn().then(({data}) => {
+            this.userInfo.data = data
+            console.log(this.userInfo.data.signinUser.token);
+            window.localStorage.setItem('graphcoolToken', this.userInfo.data.signinUser.token);
+            this.navCtrl.setRoot(MainPage);
+          }, (errors) => {
+              console.log(errors);
+              if (errors == "GraphQL error: No user found with that information") {
+                let toast = this.toastCtrl.create({
+                  message: 'User already exists with that information. Try again.1',
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              }
+            });
+
         }
-      });
+      }, (errors) => {
+          console.log(errors);
+          if (errors == "Error: GraphQL error: User already exists with that information") {
+            let toast = this.toastCtrl.create({
+              message: 'User already exists with that information. Try again.',
+              duration: 3000,
+              position: 'top'
+            });
+            toast.present();
+          }
+        });
     }
 
   }
 
   //returns a promise that both creates the user and returns the user's auth token
-  createAndSignIn(){
+  createUser(){
       return this.apollo.mutate({
         mutation: gql`
         mutation createUser($email: String!,
@@ -79,9 +100,6 @@ export class SignupPage {
                      year: $year){
             id
           }
-          signinUser(email: {email: $email, password: $password}){
-            token
-          }
         }
         `,
         variables: {
@@ -93,6 +111,23 @@ export class SignupPage {
           phone: this.phone,
           year: this.year,
 
+        }
+      }).toPromise();
+  }
+  SignIn(){
+      return this.apollo.mutate({
+        mutation: gql`
+        mutation signinUser($email: String!,
+                            $password: String!){
+
+          signinUser(email: {email: $email, password: $password}){
+            token
+          }
+        }
+        `,
+        variables: {
+          email: this.email,
+          password: this.password,
         }
       }).toPromise();
   }
