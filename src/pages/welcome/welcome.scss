@@ -1,35 +1,65 @@
 page-welcome {
+  .symplLogo{
+    margin: auto;
+    display: block;
+  }
 
-}
+  .body{
+    padding-top: 100px;
 
-.symplLogo{
-  margin: auto;
-  display: block;
-}
+  }
 
-.body{
-  padding-top: 100px;
+  .inputFields{
 
-}
+      padding-top: 15%;
 
-.inputFields{
+      ion-item{
+        padding: 2%;
+        color: grey;
+      }
 
-    padding-top: 15%;
+      ion-label {
+        color: grey;
+      }
+  }
 
-    ion-item{
-      padding: 2%;
-      color: grey;
-    }
+  .loginBtn{
+    padding: 2%;
+  }
 
-    ion-label {
-      color: grey;
-    }
-}
+  .signUpBtn{
+    padding: 2%;
+  }
 
-.loginBtn{
-  padding: 2%;
-}
+  // HR with text in the middle effect
+  .strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .strike>span {
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    color: #FF1654;
+  }
+  .strike>span:before,
+  .strike>span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: rgba(255, 255, 255, .6);;
+  }
+  .strike>span:before {
+    right: 100%;
+    margin-right: 15px;
+  }
+  .strike>span:after {
+    left: 100%;
+    margin-left: 15px;
+  }
 
-.signUpBtn{
-  padding: 2%;
 }

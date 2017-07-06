@@ -36,52 +36,63 @@ export class SignupPage {
   //sets the auth token
   //pushes the Tabs Page
   loginEvent(event) {
-    this.createAndSignIn().then(({data}) => {
-      if (data){
-        this.userInfo.data = data
-        console.log(this.userInfo.data.signinUser.token);
-        window.localStorage.setItem('graphcoolToken', this.userInfo.data.signinUser.token);
-      }
-    });
-    this.navCtrl.push(MainPage)
+    if (!this.firstName || !this.lastName || !this.email || !this.password || !this.major || !this.phone || !this.year) {
+      let toast = this.toastCtrl.create({
+        message: 'There is some information missing. Try again.',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+      console.log("ha");
+    } else {
+      this.createAndSignIn().then(({data}) => {
+        if (data){
+          this.userInfo.data = data
+          console.log(this.userInfo.data.signinUser.token);
+          window.localStorage.setItem('graphcoolToken', this.userInfo.data.signinUser.token);
+          this.navCtrl.push(MainPage);
+        }
+      });
+    }
+
   }
 
   //returns a promise that both creates the user and returns the user's auth token
   createAndSignIn(){
-    return this.apollo.mutate({
-      mutation: gql`
-      mutation createUser($email: String!,
-                          $password: String!,
-                          $firstName: String!,
-                          $lastName: String!,
-                          $major: String!,
-                          $phone: String,
-                          $year: String!){
+      return this.apollo.mutate({
+        mutation: gql`
+        mutation createUser($email: String!,
+                            $password: String!,
+                            $firstName: String!,
+                            $lastName: String!,
+                            $major: String!,
+                            $phone: String,
+                            $year: String!){
 
-        createUser(authProvider: { email: {email: $email, password: $password}},
-                   firstName: $firstName,
-                   lastName: $lastName,
-                   major: $major,
-                   phone: $phone,
-                   year: $year){
-          id
+          createUser(authProvider: { email: {email: $email, password: $password}},
+                     firstName: $firstName,
+                     lastName: $lastName,
+                     major: $major,
+                     phone: $phone,
+                     year: $year){
+            id
+          }
+          signinUser(email: {email: $email, password: $password}){
+            token
+          }
         }
-        signinUser(email: {email: $email, password: $password}){
-          token
-        }
-      }
-      `,
-      variables: {
-        email: this.email,
-        password: this.password,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        major: this.major,
-        phone: this.phone,
-        year: this.year,
+        `,
+        variables: {
+          email: this.email,
+          password: this.password,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          major: this.major,
+          phone: this.phone,
+          year: this.year,
 
-      }
-    }).toPromise();
+        }
+      }).toPromise();
   }
 
   dismiss(){
