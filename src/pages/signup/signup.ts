@@ -50,7 +50,9 @@ export class SignupPage {
           this.userInfo.data = data
           console.log(this.userInfo.data.signinUser.token);
           window.localStorage.setItem('graphcoolToken', this.userInfo.data.signinUser.token);
-          this.navCtrl.push(MainPage);
+          // this.navCtrl.push(MainPage);
+          // location.reload();
+          this.navCtrl.setRoot(MainPage);
         }
       });
     }

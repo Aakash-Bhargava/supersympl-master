@@ -4,6 +4,8 @@ import { NavController, NavParams, AlertController, LoadingController, ViewContr
 import { PasswordPage } from '../password/password';
 import { WelcomePage } from '../welcome/welcome';
 
+import {App} from 'ionic-angular';
+
 import { Angular2Apollo } from 'angular2-apollo';
 import gql from 'graphql-tag';
 
@@ -33,7 +35,8 @@ export class SettingsPage {
               private apollo: Angular2Apollo,
               public viewCtrl: ViewController,
               public toastCtrl: ToastController,
-              public keyboard: Keyboard )
+              public keyboard: Keyboard,
+              public app: App)
   {
     this.currentUserInfo().then(({data}) => {
       this.currentUser = data;
@@ -109,9 +112,10 @@ export class SettingsPage {
         content: 'Logging Out...'
       });
       this.loading.present();
-      location.reload();
-      this.navCtrl.push(WelcomePage);
-      //  this.app.getRootNav().setRoot(WelcomePage);
+      // this.navCtrl.setRoot(WelcomePage);
+      // location.reload();
+      // this.navCtrl.push(WelcomePage);
+       this.app.getRootNav().setRoot(WelcomePage);
   }
 
   closeKeyboard() {
