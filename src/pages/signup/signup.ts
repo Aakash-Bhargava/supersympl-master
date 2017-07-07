@@ -90,14 +90,16 @@ export class SignupPage {
                             $lastName: String!,
                             $major: String!,
                             $phone: String,
-                            $year: String!){
+                            $year: String!,
+                            $profilePic: String){
 
           createUser(authProvider: { email: {email: $email, password: $password}},
                      firstName: $firstName,
                      lastName: $lastName,
                      major: $major,
                      phone: $phone,
-                     year: $year){
+                     year: $year,
+                     profilePic: $profilePic){
             id
           }
         }
@@ -110,7 +112,7 @@ export class SignupPage {
           major: this.major,
           phone: this.phone,
           year: this.year,
-
+          profilePic: "https://msudenver.edu/media/sampleassets/profile-placeholder.png"
         }
       }).toPromise();
   }

@@ -140,16 +140,19 @@ export class SchedulePage {
         let voted = false;
         this.allEvents = [];
         this.allEventsData = data;
-        for (let event of this.allEventsData.allEvents) {
-          voted = false;
-          if (event.dueDate >= this.now) {
-            for (let downvote of event.downvotes ) {
-              if (downvote.id == this.currentUser.id) {
-                voted = true;
-                break;
+        this.allEventsData = this.allEventsData.user;
+        for (let section of this.allEventsData.sections) {
+          for (let event of section.events) {
+            voted = false;
+            if (event.dueDate >= this.now) {
+              for (let downvote of event.downvotes) {
+                if (downvote.id == this.currentUser.id) {
+                  voted = true;
+                  break;
+                }
               }
+              this.allEvents.push({event: event, voted: voted});
             }
-            this.allEvents.push({event: event, voted: voted});
           }
         }
         for(let event of this.allEvents){
@@ -177,20 +180,37 @@ export class SchedulePage {
     return this.apollo.query({
       query: gql`
       query{
-        allEvents(orderBy: dueDate_ASC){
+        user{
           id
-          title
-          section{
+          email
+          firstName
+          lastName
+          phone
+          email
+          major
+          year
+          profilePic
+          sections{
             id
+            sectionNumber
             courseName
+            type
+            events {
+              id
+              title
+              section{
+                id
+                courseName
+              }
+              downvotes {
+                id
+              }
+              dueDate
+              dueTime
+              url
+              description
+            }
           }
-          downvotes {
-            id
-          }
-          dueDate
-          dueTime
-          url
-          description
         }
       }
     `
@@ -201,20 +221,37 @@ export class SchedulePage {
     return this.apollo.watchQuery({
       query: gql`
       query{
-        allEvents(orderBy: dueDate_ASC){
+        user{
           id
-          title
-          section{
+          email
+          firstName
+          lastName
+          phone
+          email
+          major
+          year
+          profilePic
+          sections{
             id
+            sectionNumber
             courseName
+            type
+            events {
+              id
+              title
+              section{
+                id
+                courseName
+              }
+              downvotes {
+                id
+              }
+              dueDate
+              dueTime
+              url
+              description
+            }
           }
-          downvotes {
-            id
-          }
-          dueDate
-          dueTime
-          url
-          description
         }
       }
     `
@@ -227,16 +264,19 @@ export class SchedulePage {
         let voted = false;
         this.allEvents = [];
         this.allEventsData = data;
-        for (let event of this.allEventsData.allEvents) {
-          voted = false;
-          if (event.dueDate >= this.now) {
-            for (let downvote of event.downvotes ) {
-              if (downvote.id == this.currentUser.id) {
-                voted = true;
-                break;
+        this.allEventsData = this.allEventsData.user;
+        for (let section of this.allEventsData.sections) {
+          for (let event of section.events) {
+            voted = false;
+            if (event.dueDate >= this.now) {
+              for (let downvote of event.downvotes) {
+                if (downvote.id == this.currentUser.id) {
+                  voted = true;
+                  break;
+                }
               }
+              this.allEvents.push({event: event, voted: voted});
             }
-            this.allEvents.push({event: event, voted: voted});
           }
         }
         console.log(this.allEvents);
@@ -257,7 +297,6 @@ export class SchedulePage {
           };
           this.allCalEv.push(ev);
         }
-        console.log("Events" + this.allCalEv);
       }
     })
   }
