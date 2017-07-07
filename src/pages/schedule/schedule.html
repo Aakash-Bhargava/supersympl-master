@@ -33,7 +33,7 @@
           </a>
         </p>
       </span>
-      <span item-end color="primary" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
+      <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
       <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon>
     </ion-item>
   </ion-list>

@@ -49,39 +49,12 @@ export class MapPage implements OnInit {
     var that = this;
     let map = Leaflet.map('map');
     this.map = map;
-    var geojson = [
-  {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-77.031952, 38.913184]
-    },
-    properties: {
-      'marker-color': '#3ca0d3',
-      'marker-size': 'large',
-      'marker-symbol': 'rocket'
-    }
-  },
-  {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-122.413682, 37.775408]
-    },
-    properties: {
-      'marker-color': '#63b6e5',
-      'marker-size': 'large',
-      'marker-symbol': 'rocket'
-    }
-  }
-];
 
     Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
       //attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 
       maxZoom: 18
     }).addTo(this.map);
-    Leaflet.marker([37.775408, -122.413682]).addTo(this.map);
 
     //web location
     this.map.locate({ setView: true});
@@ -101,7 +74,7 @@ export class MapPage implements OnInit {
           let desc = '<h5 style="text-align:center;">' + location.sectionName + '</h5>';
           let start = new Date(location.startTime);
           let end = new Date(location.endTime);
-
+          desc += '<p class="centerb">' + start.toLocaleDateString() + '</p>';
           desc += '<p class="centerb">' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
           // desc += '<button style="background-color: #cc2121;"> Join </button>';
           desc += '<p class="centerb">';
