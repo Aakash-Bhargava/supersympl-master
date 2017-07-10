@@ -13,8 +13,14 @@ export class SelectedDay {
    constructor(params: NavParams, public viewCtrl: ViewController) {
 
      this.events = params.get('allEvents');
+     console.log(this.events);
 
-     this.dateSelected = params.get('date');
+     if (params.get('date')) {
+        this.dateSelected = params.get('date');
+     } else {
+       this.dateSelected = this.events[0].dueDate;
+     }
+
    }
 
    dismiss(){

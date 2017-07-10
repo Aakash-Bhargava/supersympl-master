@@ -373,4 +373,11 @@ export class SchedulePage {
     });
 
   }
+
+  gotoEvent(event) {
+    let events = [];
+    events.push(event.event);
+    let selectedDayModal = this.modalCtrl.create(SelectedDay, { allEvents: events});
+    selectedDayModal.present();
+  }
 }
