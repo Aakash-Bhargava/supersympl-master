@@ -3,8 +3,8 @@
     <button ion-button icon-only clear (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-title>
-      {{dateSelected | date: 'EEEE, MMMM d y'}}
+    <ion-title text-wrap>
+      {{dateSelected | date: 'EEEE, MMMM d'}}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -19,7 +19,7 @@
         <span>Class:</span> <span class="popup" >{{event.section.courseName}}</span>
       </p>
       <p>
-        <span>Due Date:</span> <span class="popup">{{event.dueDate | date: 'EEEE, MMMM d y'}}</span>
+        <span>Due Date:</span> <span class="popup" text-wrap>{{event.dueDate | date: 'h:mm a EEEE, MMMM d'}}</span>
       </p>
       <p text-wrap class="desc">
         <span>Description:</span> {{event.description}}
