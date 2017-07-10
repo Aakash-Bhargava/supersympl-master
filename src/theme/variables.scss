@@ -25,7 +25,9 @@ $font-path: '../assets/fonts';
 
 $colors: (
   // primary:    rgba(#cc2121, .93),
+  // primary:    #de2c35,
   primary:    #de2c35,
+
   secondary:  #345995,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -33,13 +35,14 @@ $colors: (
 );
 
 $background-color: #eaeaea;
-$tabs-background: #3d95ce;
+// $tabs-background: #3d95ce;
+$tabs-background: #BEAAB6;
 $tabs-tab-color-inactive: white;
 $tabs-md-tab-color-inactive: white;
 // $list-border-color: #7c7e80;
 $list-text-color: black;
 
-$font-family-base: monospace;
+// $font-family-base: monospace;
 
 
 
