@@ -30,10 +30,24 @@
 
   <ion-list>
     <ion-card *ngFor="let section of sectionsData" (tap)="openItem(section.section)" [ngClass]="section.meetsToday ? 'todayLecture' : null">
+      <div style="position: relative">
+        <ion-fab right top *ngIf="section.meetsToday">
+          <button ion-fab class="fab-map">
+            <span style="font-size: 0.5em">
+            Meets Today!
+          </span>
+          </button>
+        </ion-fab>
+      </div>
       <ion-card-header>
-        {{section.section.courseName}}
+        <!-- <ion-avatar item-end> -->
+          <i primary item-end class="{{section.section.icon}} fa-2x" aria-hidden="true"></i>
+          {{section.section.courseName}}
+        <!-- </ion-avatar> -->
+
       </ion-card-header>
       <ion-card-content>
+
         <span class="lectures">
             <p *ngIf="section.section.monday">Mon: {{section.section.monday}}</p>
             <p *ngIf="section.section.tuesday">Tues: {{section.section.tuesday}}</p>
@@ -44,7 +58,7 @@
         <h3 *ngIf="section.section.events.length == 0">No due dates</h3>
         <h3 *ngIf="section.section.events.length > 0">Upcoming due dates:</h3>
         <div *ngFor="let event of section.section.events">
-          <p *ngIf="event.dueDate > now"><span> ■ {{event.title}},  {{event.dueDate | date: 'EEE MMM dd'}}</span></p>
+          <p *ngIf="event.dueDate > now"><span> · {{event.title}},  {{event.dueDate | date: 'EEE MMM dd'}}</span></p>
         </div>
       </ion-card-content>
     </ion-card>
@@ -60,9 +74,7 @@
 <!--
 <ion-item-sliding  *ngFor="let section of sections">
   <button ion-item (click)="openItem(section)">
-      <ion-avatar item-left text-center>
-        <i primary class="{{section.icon}} fa-2x" aria-hidden="true"></i>
-      </ion-avatar>
+
       <h2>{{section.courseName}}</h2>
       <p>Section: {{section.sectionNumber}}</p>
       <p *ngIf="section.events.length > 0">Upcoming due dates:</p>
