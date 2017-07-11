@@ -92,6 +92,7 @@ export class SchedulePage {
       weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
       cssClass: 'calendarCSS',
       daysConfig: this.allCalEv,
+      monthTitle: 'MMMM yyyy',
       to: new Date().setMonth(new Date().getMonth() + 5)
     })
     .then( (res:any) => {
