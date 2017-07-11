@@ -29,29 +29,53 @@
   </ion-refresher>
 
   <ion-list>
-    <ion-item-sliding  *ngFor="let section of sections">
-      <button ion-item (click)="openItem(section)">
-          <ion-avatar item-left text-center>
-            <i primary class="{{section.icon}} fa-2x" aria-hidden="true"></i>
-          </ion-avatar>
-          <h2>{{section.courseName}}</h2>
-          <p>Section: {{section.sectionNumber}}</p>
-          <p *ngIf="section.events.length > 0">Upcoming due dates:</p>
-          <p *ngIf="section.events.length == 0">No due dates</p>
-          <!-- <ul *ngIf="section.events.length > 0"> -->
-          <div *ngFor="let event of section.events">
-            <p *ngIf="event.dueDate > now"><span> · {{event.title}},  {{event.dueDate | date: 'EEE MMM dd'}}</span></p>
-          </div>
-          <!-- </ul> -->
-      </button>
-      <ion-item-options>
-        <button ion-button color="danger" (click)="removeSection(section);">
-          Delete
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-card *ngFor="let section of sectionsData" (tap)="openItem(section.section)" [ngClass]="section.meetsToday ? 'todayLecture' : null">
+      <ion-card-header>
+        {{section.section.courseName}}
+      </ion-card-header>
+      <ion-card-content>
+        <span class="lectures">
+            <p *ngIf="section.section.monday">Mon: {{section.section.monday}}</p>
+            <p *ngIf="section.section.tuesday">Tues: {{section.section.tuesday}}</p>
+            <p *ngIf="section.section.wednesday">Wed: {{section.section.wednesday}}</p>
+            <p *ngIf="section.section.thursday">Thurs: {{section.section.thursday}}</p>
+            <p *ngIf="section.section.friday">Fri: {{section.section.friday}}</p>
+        </span>
+        <h3 *ngIf="section.section.events.length == 0">No due dates</h3>
+        <h3 *ngIf="section.section.events.length > 0">Upcoming due dates:</h3>
+        <div *ngFor="let event of section.section.events">
+          <p *ngIf="event.dueDate > now"><span> ■ {{event.title}},  {{event.dueDate | date: 'EEE MMM dd'}}</span></p>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
-  <div class="empty" text-center *ngIf="sections.length == 0">
+
+  <div class="empty" text-center *ngIf="sectionsData.length == 0">
     <h2> No Classes </h2>
   </div>
 </ion-content>
+
+
+
+<!--
+<ion-item-sliding  *ngFor="let section of sections">
+  <button ion-item (click)="openItem(section)">
+      <ion-avatar item-left text-center>
+        <i primary class="{{section.icon}} fa-2x" aria-hidden="true"></i>
+      </ion-avatar>
+      <h2>{{section.courseName}}</h2>
+      <p>Section: {{section.sectionNumber}}</p>
+      <p *ngIf="section.events.length > 0">Upcoming due dates:</p>
+      <p *ngIf="section.events.length == 0">No due dates</p>
+
+      <div *ngFor="let event of section.events">
+        <p *ngIf="event.dueDate > now"><span> · {{event.title}},  {{event.dueDate | date: 'EEE MMM dd'}}</span></p>
+      </div>
+
+  </button>
+  <ion-item-options>
+    <button ion-button color="danger" (click)="removeSection(section);">
+      Delete
+    </button>
+  </ion-item-options>
+</ion-item-sliding> -->

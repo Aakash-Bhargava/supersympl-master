@@ -16,8 +16,11 @@ import gql from 'graphql-tag';
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
+  today: any;
+  meetsToday = false;
   currentUser = <any>{};
   sections = <any>[];
+  sectionsData = <any>[];
   section: any;
   data: any;
   now = new Date().toISOString();
@@ -28,16 +31,62 @@ export class ListMasterPage {
   }
 
   ionViewDidEnter() {
+    this.today = new Date().toDateString();
+    this.today = this.today.split(' ')[0];
+    console.log(this.today);
+
     this.refreshData();
   }
 
   refreshData() {
     this.data = this.watch();
     this.data.refetch().then(({data}) => {
+      this.sectionsData = [];
       this.currentUser = data;
       this.currentUser = this.currentUser.user;
       this.sections = this.currentUser.sections;
-      this.section = this.sections.sectionNumber;
+      for(let section of this.sections){
+        switch(this.today) {
+          case "Mon": {
+            if(section.monday){
+              this.meetsToday = true;
+            }
+            break;
+           }
+           case "Tue": {
+             if(section.tuesday){
+               this.meetsToday = true;
+             }
+             break;
+           }
+           case "Wed": {
+             if(section.wednesday){
+               this.meetsToday = true;
+             }
+              break;
+           }
+           case "Thu": {
+             if(section.thursday){
+               this.meetsToday = true;
+             }
+              break;
+           }
+           case "Fri": {
+             if(section.friday){
+               this.meetsToday = true;
+             }
+              break;
+           }
+           default: {
+              console.log("Invalid choice");
+              break;
+           }
+        }
+        this.sectionsData.push({section: section, meetsToday: this.meetsToday})
+        console.log(this.sectionsData);
+        this.meetsToday = false;
+      }
+      // this.section = this.sections.sectionNumber;
     });
   }
 
@@ -68,6 +117,11 @@ export class ListMasterPage {
               courseName
               type
               icon
+              monday
+              tuesday
+              wednesday
+              thursday
+              friday
               users {
                 id
                 email
@@ -120,6 +174,11 @@ export class ListMasterPage {
                 courseName
                 type
                 icon
+                monday
+                tuesday
+                wednesday
+                thursday
+                friday
                 users {
                   id
                   email
