@@ -40,6 +40,14 @@ page-schedule {
   .length {
     color: #FF1654;
   }
+  .filter {
+    font-size: 0.9em;
+    height: 5%;
+  }
+  ion-list-header {
+    // background-color: #BEAAB6 !important;
+    text-align: center;
+  }
 }
 
 //for the calendar

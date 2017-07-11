@@ -26,6 +26,7 @@ export class addEventModal {
 
   dueDate: any;
   dueTime: any;
+  now: any = new Date();
 
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
@@ -43,6 +44,7 @@ export class addEventModal {
 
       this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
+      this.now = this.now.toISOString();
     });
   }
 
@@ -52,18 +54,7 @@ export class addEventModal {
 
  add(){
    console.log("add clicked");
-
-
-
-  //  console.log("DATE: " + this.dueDate);
-  //  console.log("HOURS: " + this.dueTime.getHours());
    this.createEvent();
-   console.log(this.form.value.title);
-   console.log(this.form.value.section);
-   console.log(this.form.value.dueDate);
-   console.log(this.form.value.dueTime);
-   console.log(this.form.value.url);
-   console.log(this.form.value.description);
    this.dismiss();
  }
 

@@ -42,6 +42,10 @@ export class SchedulePage {
 
   currentUser: any;
 
+  filterBy: any = "dueDate";
+
+  first: boolean = true;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public modalCtrl: ModalController,
@@ -132,7 +136,7 @@ export class SchedulePage {
     modal.present();
   }
 
-  refreshPage() {
+  refreshPage(sortBy?) {
     let info;
     info = this.watch();
     info.refetch().then(({data}) => {
@@ -141,6 +145,7 @@ export class SchedulePage {
         this.allEvents = [];
         this.allEventsData = data;
         this.allEventsData = this.allEventsData.user;
+
         for (let section of this.allEventsData.sections) {
           for (let event of section.events) {
             voted = false;
@@ -151,11 +156,21 @@ export class SchedulePage {
                   break;
                 }
               }
-              this.allEvents.push({event: event, voted: voted});
+              this.allEvents.push({event: event, voted: voted, first: true});
             }
           }
         }
+
+        this.allEvents.sort(this.sortDueDate);
+
+        let last = new Date();
+
         for(let event of this.allEvents){
+          if (event.event.dueDate == last) {
+            event.first = false;
+          }
+          last = event.event.dueDate;
+
           var date = new Date(event.event.dueDate); // had to remove the colon (:) after the T in order to make it work
           var day = date.getDate();
           var monthIndex = date.getMonth() + 1;
@@ -265,6 +280,8 @@ export class SchedulePage {
         this.allEvents = [];
         this.allEventsData = data;
         this.allEventsData = this.allEventsData.user;
+
+
         for (let section of this.allEventsData.sections) {
           for (let event of section.events) {
             voted = false;
@@ -275,13 +292,23 @@ export class SchedulePage {
                   break;
                 }
               }
-              this.allEvents.push({event: event, voted: voted});
+              this.allEvents.push({event: event, voted: voted, first: true});
             }
           }
         }
+
+        this.allEvents.sort(this.sortDueDate);
         console.log(this.allEvents);
-        // this.allEvents.sort(this.compare);
-        for(let event of this.allEvents){
+
+        let last = new Date();
+
+        for(let event of this.allEvents) {
+          if (event.event.dueDate == last) {
+            event.first = false;
+          }
+          console.log(event);
+          last = event.event.dueDate;
+
           var date = new Date(event.event.dueDate); // had to remove the colon (:) after the T in order to make it work
           var day = date.getDate();
           var monthIndex = date.getMonth() + 1;
@@ -344,12 +371,19 @@ export class SchedulePage {
     selectedDayModal.present();
   }
 
-  compare(a,b) {
-      if (a.section.courseName < b.section.courseName)
-        return -1;
-      if (a.section.courseName > b.section.courseName)
-        return 1;
-      return 0;
+  sortDueDate(a,b) {
+    if (a.event.dueDate < b.event.dueDate)
+      return -1;
+    if (a.event.dueDate > b.event.dueDate)
+      return 1;
+    return 0;
+  }
+  sortDueDateData(a,b) {
+    if (a.dueDate < b.dueDate)
+      return -1;
+    if (a.dueDate > b.dueDate)
+      return 1;
+    return 0;
   }
 
   downvote(event) {

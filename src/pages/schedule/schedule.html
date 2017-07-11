@@ -14,27 +14,38 @@
   	</ion-navbar>
 </ion-header>
 <ion-content>
+  <!-- <ion-item class="filter">
+    <ion-label>Sort</ion-label>
+    <ion-select interface="popover" class="select" [(ngModel)]="filterBy" (ionChange)="filter()">
+      <ion-option value="class">Class</ion-option>
+      <ion-option value="dueDate">Due Date</ion-option>
+    </ion-select>
+  </ion-item> -->
   <ion-list>
-    <ion-item *ngFor="let event of allEvents" (tap)="gotoEvent(event)">
-      <div class="eventTitle">
-        {{event.event.title}}
-      </div>
-      <span>
-        <p> Class:
-          <a class="eventClass">
-             {{event.event.section.courseName}}
-          </a>
-        </p>
-      </span>
-      <span>
-        <p> Due Date:
-          <a class="eventDueDate">
-            {{event.event.dueDate | date: 'shortDate'}}
-          </a>
-        </p>
-      </span>
-      <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
-      <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon>
-    </ion-item>
+    <div *ngFor="let event of allEvents">
+      <ion-list-header *ngIf="event.first">{{event.event.dueDate | date: 'EEEE, MMM dd'}}</ion-list-header>
+      <ion-item  (tap)="gotoEvent(event)">
+        <div class="eventTitle">
+          {{event.event.section.courseName}}
+
+        </div>
+        <span>
+          <p> Assignment:
+            <a class="eventClass">
+               {{event.event.title}}
+            </a>
+          </p>
+        </span>
+        <span>
+          <p> Due Time:
+            <a class="eventDueDate">
+              {{event.event.dueTime | date: 'h:mm a'}}
+            </a>
+          </p>
+        </span>
+        <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
+        <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon>
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>
