@@ -55,7 +55,7 @@
       <ion-item *ngFor="let event of pastEvents">
         <h2>{{event.title}}</h2>
         <p>
-          {{event.dueDate | date: 'EEE, MMM dd'}} - {{event.dueTime | date: 'hh:mm a'}}
+          {{event.dueDate | date: 'EEEE, MMM dd'}}
         </p>
         <p text-wrap>{{event.description}}</p>
       </ion-item>

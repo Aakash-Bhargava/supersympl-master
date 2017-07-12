@@ -18,22 +18,7 @@ import { PasswordPage } from '../pages/password/password';
 import { SetLocationPage } from '../pages/set-location/set-location';
 
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-
-  </ion-menu>
+  template: `
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
