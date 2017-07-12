@@ -17,6 +17,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class ProfilePage {
 
+  classMateView = false;
   userInfo = <any>{};
   sections: any[];
   imageUri: any;
@@ -40,6 +41,7 @@ export class ProfilePage {
 
   setUser(){
     if (this.navParams.get("user")) {
+      this.classMateView = true;
       console.log(this.navParams.get("user"));
       this.userInfo = this.navParams.get("user");
       if (!this.userInfo.profilePic) {

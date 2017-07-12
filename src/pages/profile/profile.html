@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Profile</ion-title>
-    <ion-buttons end>
+    <ion-buttons *ngIf="!classMateView" end>
       <button ion-button icon-only (click)="goToSettingsPage()">
         <ion-icon color="primary" name="cog"></ion-icon>
       </button>
@@ -12,7 +12,10 @@
 <ion-content>
   <div class="header">
     <img class="avatar-background" [src]="imageUri" />
-    <ion-avatar (click)="changePic()">
+    <ion-avatar *ngIf="!classMateView" (click)="changePic()">
+      <img class="avatar" [src]="imageUri">
+    </ion-avatar>
+    <ion-avatar *ngIf="classMateView">
       <img class="avatar" [src]="imageUri">
     </ion-avatar>
     <div class="profile-header" text-capitalize>
@@ -28,7 +31,7 @@
         <h2 color="primary">Email: </h2>
         <p>{{userInfo.email}}</p>
       </ion-item>
-  		<ion-item>
+  		<ion-item *ngIf="!classMateView">
         <h2 color="primary">Phone Number: </h2>
         <p>{{userInfo.phone}}</p>
       </ion-item>
