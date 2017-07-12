@@ -10,6 +10,15 @@
 
 <ion-content>
 
+  <div class="profileHeader">
+    <ion-avatar *ngIf="!classMateView" (click)="changePic()">
+      <img class="avatar" [src]="imageUri">
+      <ion-fab right class="pop-in" [ngClass]="{'pop-out': fabGone}" style="top: 14rem; right: 10rem">
+        <button ion-fab mini color="dark"><ion-icon name="camera"></ion-icon></button>
+      </ion-fab>
+    </ion-avatar>
+  </div>
+
   <ion-list>
     <ion-item>
       <ion-icon class="licon" name="person" item-left></ion-icon>

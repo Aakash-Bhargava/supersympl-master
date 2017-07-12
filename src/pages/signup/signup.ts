@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavController, ToastController, ViewController } from 'ionic-angular';
+import { NavController, ToastController, ViewController, Platform } from 'ionic-angular';
 import { MainPage } from '../../pages/pages';
 import { Angular2Apollo } from 'angular2-apollo';
-import { Subscription } from 'rxjs/Subscription'
+import { Subscription } from 'rxjs/Subscription';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import gql from 'graphql-tag';
 
@@ -22,6 +24,8 @@ export class SignupPage {
   phone: "";
   year: "";
 
+  imageUri = "https://msudenver.edu/media/sampleassets/profile-placeholder.png";
+
   userInfo = <any>{};
 
   private signupErrorString: string;
@@ -29,7 +33,9 @@ export class SignupPage {
               public viewCtrl: ViewController,
               public toastCtrl: ToastController,
               // public formBuilder: FormBuilder,
-              private apollo: Angular2Apollo) {
+              private apollo: Angular2Apollo,
+              private Camera: Camera,
+              private platform: Platform) {
   }
 
   //calls the createAndSignIn function
@@ -112,7 +118,7 @@ export class SignupPage {
           major: this.major,
           phone: this.phone,
           year: this.year,
-          profilePic: "https://msudenver.edu/media/sampleassets/profile-placeholder.png"
+          profilePic: this.imageUri
         }
       }).toPromise();
   }
@@ -132,6 +138,31 @@ export class SignupPage {
           password: this.password,
         }
       }).toPromise();
+  }
+
+  changePic() {
+    let options: CameraOptions = {
+      quality: 50,
+      destinationType: 0,
+      targetWidth: 500,
+      targetHeight: 500,
+      encodingType: 0,
+      sourceType: 0,
+      correctOrientation: true,
+      allowEdit: true
+
+    };
+    if (this.platform.is('android')) {
+      this.Camera.getPicture(options).then((ImageData) => {
+        let base64Image = "data:image/jpeg;base64," + ImageData;
+        this.imageUri = base64Image;
+      });
+    } else if (this.platform.is('ios')) {
+      this.Camera.getPicture(options).then((ImageData) => {
+        let base64Image = "data:image/jpeg;base64," + ImageData;
+        this.imageUri = base64Image;
+      })
+    }
   }
 
   dismiss(){
