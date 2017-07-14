@@ -24,27 +24,30 @@
   <ion-list>
     <div *ngFor="let event of allEvents">
       <ion-list-header *ngIf="event.first">{{event.event.dueDate | date: 'EEEE, MMM dd'}}</ion-list-header>
-      <ion-item  (tap)="gotoEvent(event)">
-        <div class="eventTitle">
+      <ion-item>
+        <div class="eventTitle" (tap)="gotoEvent(event)">
           {{event.event.section.courseName}}
 
         </div>
-        <span>
+        <span (tap)="gotoEvent(event)">
           <p> Assignment:
             <a class="eventClass">
                {{event.event.title}}
             </a>
           </p>
         </span>
-        <span>
+        <span (tap)="gotoEvent(event)">
           <p> Due Time:
             <a class="eventDueDate">
               {{event.event.dueTime | date: 'h:mm a'}}
             </a>
           </p>
         </span>
-        <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
-        <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon>
+        <!-- <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
+        <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon> -->
+        <ion-note item-end (tap)="options($event)">
+          <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+        </ion-note>
       </ion-item>
     </div>
   </ion-list>

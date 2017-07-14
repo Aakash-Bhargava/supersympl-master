@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, PopoverController, IonicPage } from 'ionic-angular';
 import { ION_CALENDAR_DIRECTIVES } from '@ionic2-extra/calendar';
 import {CalendarController} from "ion2-calendar/dist";
 import { ModalController } from 'ionic-angular';
 import { addEventModal } from '../addEventModal/addEventModal';
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription'
+
+// import { ScheduleOptionsPage } from 'schedule-options/schedule-options';
+
 import gql from 'graphql-tag';
 import 'rxjs/add/operator/toPromise';
 
@@ -49,7 +52,7 @@ export class SchedulePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public modalCtrl: ModalController,
-              private apollo: Angular2Apollo,
+              private apollo: Angular2Apollo,public popoverCtrl: PopoverController,
               public calendarCtrl: CalendarController) {
                 this.now = new Date().toISOString()
 
@@ -414,5 +417,10 @@ export class SchedulePage {
     events.push(event.event);
     let selectedDayModal = this.modalCtrl.create(SelectedDay, { allEvents: events});
     selectedDayModal.present();
+  }
+
+  options(ev) {
+    let popover = this.popoverCtrl.create('ScheduleOptionsPage');
+    popover.present({ev: ev});
   }
 }
