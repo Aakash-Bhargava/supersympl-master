@@ -1,105 +1,106 @@
 {
-    "name": "ionic-hello-world",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
-    "private": true,
-    "scripts": {
-        "clean": "ionic-app-scripts clean",
-        "build": "ionic-app-scripts build",
-        "ionic:build": "ionic-app-scripts build",
-        "ionic:serve": "ionic-app-scripts serve"
-    },
-    "dependencies": {
-        "@angular/common": "4.2.2",
-        "@angular/compiler": "4.2.2",
-        "@angular/compiler-cli": "^4.2.2",
-        "@angular/core": "^4.2.2",
-        "@angular/forms": "4.2.2",
-        "@angular/http": "4.2.2",
-        "@angular/platform-browser": "4.2.2",
-        "@angular/platform-browser-dynamic": "4.2.2",
-        "@angular/platform-server": "4.2.2",
-        "@ionic-native/camera": "^3.12.1",
-        "@ionic-native/core": "^3.12.1",
-        "@ionic-native/image-picker": "^3.12.1",
-        "@ionic/storage": "2.0.1",
-        "@ionic2-extra/calendar": "^0.1.1",
-        "angular2-apollo": "^0.9.0",
-        "apollo-client": "^1.4.2",
-        "com.synconset.imagepicker": "https://github.com/Telerik-Verified-Plugins/ImagePicker.git",
-        "cordova-android": "^6.2.3",
-        "cordova-browser": "^4.1.0",
-        "cordova-ios": "^4.4.0",
-        "cordova-plugin-camera": "^2.4.1",
-        "cordova-plugin-compat": "^1.1.0",
-        "cordova-plugin-console": "^1.0.7",
-        "cordova-plugin-datepicker": "^0.9.3",
-        "cordova-plugin-device": "^1.1.6",
-        "cordova-plugin-splashscreen": "^4.0.3",
-        "cordova-plugin-statusbar": "^2.2.3",
-        "cordova-plugin-telerik-imagepicker": "git+https://github.com/Telerik-Verified-Plugins/ImagePicker.git",
-        "cordova-plugin-whitelist": "^1.3.2",
-        "graphql-tag": "^2.2.2",
-        "ion2-calendar": "^1.0.7",
-        "ionic-angular": "3.3.0",
-        "ionic-native": "^2.9.0",
-        "ionic-plugin-keyboard": "^2.2.1",
-        "ionicons": "3.0.0",
-        "leaflet": "^1.0.3",
-        "moment": "^2.18.1",
-        "ng2-translate": "^5.0.0",
-        "react-apollo": "^1.0.0-rc.3",
-        "rxjs": "5.4.0",
-        "subscriptions-transport-ws": "^0.7.3",
-        "sw-toolbox": "3.6.0",
-        "tslint": "^5.4.3",
-        "zone.js": "0.8.12"
-    },
-    "devDependencies": {
-        "@ionic/app-scripts": "1.3.7",
-        "@ionic/cli-plugin-cordova": "1.4.1",
-        "@ionic/cli-plugin-ionic-angular": "1.3.2",
-        "typescript": "2.3.4"
-    },
-    "cordovaPlugins": [
-        "cordova-plugin-whitelist",
-        "cordova-plugin-console",
-        "cordova-plugin-statusbar",
-        "cordova-plugin-device",
-        "cordova-plugin-splashscreen",
-        "ionic-plugin-keyboard",
-        "cordova-plugin-inappbrowser"
-    ],
-    "cordovaPlatforms": [
-        "ios",
-        {
-            "platform": "ios",
-            "version": "",
-            "locator": "ios"
-        }
-    ],
-    "description": "supersympl: An Ionic project",
-    "cordova": {
-        "plugins": {
-            "cordova-plugin-console": {},
-            "cordova-plugin-device": {},
-            "cordova-plugin-splashscreen": {},
-            "cordova-plugin-statusbar": {},
-            "cordova-plugin-whitelist": {},
-            "ionic-plugin-keyboard": {},
-            "cordova-plugin-datepicker": {},
-            "com.synconset.imagepicker": {
-                "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Change PRofile Picture"
-            },
-            "cordova-plugin-camera": {
-                "CAMERA_USAGE_DESCRIPTION": " ",
-                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
-            }
-        },
-        "platforms": [
-            "android",
-            "browser",
-            "ios"
-        ]
+  "name": "ionic-hello-world",
+  "author": "Ionic Framework",
+  "homepage": "http://ionicframework.com/",
+  "private": true,
+  "scripts": {
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  },
+  "dependencies": {
+    "@angular/common": "4.2.6",
+    "@angular/compiler": "4.2.6",
+    "@angular/compiler-cli": "^4.2.2",
+    "@angular/core": "^4.2.2",
+    "@angular/forms": "4.2.6",
+    "@angular/http": "4.2.6",
+    "@angular/platform-browser": "4.2.6",
+    "@angular/platform-browser-dynamic": "4.2.6",
+    "@angular/platform-server": "4.2.6",
+    "@ionic-native/camera": "^4.0.0",
+    "@ionic-native/core": "^4.0.0",
+    "@ionic-native/image-picker": "^4.0.0",
+    "@ionic/storage": "2.0.1",
+    "@ionic2-extra/calendar": "^0.1.1",
+    "angular2-apollo": "^0.9.0",
+    "apollo-client": "^1.9.0-0",
+    "com.synconset.imagepicker": "https://github.com/Telerik-Verified-Plugins/ImagePicker.git",
+    "cordova-android": "^6.2.3",
+    "cordova-browser": "^4.1.0",
+    "cordova-ios": "^4.4.0",
+    "cordova-plugin-camera": "^2.4.1",
+    "cordova-plugin-compat": "^1.1.0",
+    "cordova-plugin-console": "^1.0.7",
+    "cordova-plugin-datepicker": "^0.9.3",
+    "cordova-plugin-device": "^1.1.6",
+    "cordova-plugin-splashscreen": "^4.0.3",
+    "cordova-plugin-statusbar": "^2.2.3",
+    "cordova-plugin-telerik-imagepicker": "git+https://github.com/Telerik-Verified-Plugins/ImagePicker.git",
+    "cordova-plugin-whitelist": "^1.3.2",
+    "graphql-tag": "^2.2.2",
+    "ion2-calendar": "^1.0.7",
+    "ionic-angular": "3.5.3",
+    "ionic-native": "^2.9.0",
+    "ionic-plugin-keyboard": "^2.2.1",
+    "ionic2-pincode-input": "0.0.8",
+    "ionicons": "3.0.0",
+    "leaflet": "^1.0.3",
+    "moment": "^2.18.1",
+    "ng2-translate": "^5.0.0",
+    "react-apollo": "^1.0.0-rc.3",
+    "rxjs": "5.4.2",
+    "subscriptions-transport-ws": "^0.8.1",
+    "sw-toolbox": "3.6.0",
+    "tslint": "^5.4.3",
+    "zone.js": "0.8.13"
+  },
+  "devDependencies": {
+    "@ionic/app-scripts": "2.0.2",
+    "@ionic/cli-plugin-cordova": "1.4.1",
+    "@ionic/cli-plugin-ionic-angular": "1.3.2",
+    "typescript": "2.4.1"
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-whitelist",
+    "cordova-plugin-console",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-device",
+    "cordova-plugin-splashscreen",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-inappbrowser"
+  ],
+  "cordovaPlatforms": [
+    "ios",
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
     }
+  ],
+  "description": "supersympl: An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-console": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-whitelist": {},
+      "ionic-plugin-keyboard": {},
+      "cordova-plugin-datepicker": {},
+      "com.synconset.imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Change PRofile Picture"
+      },
+      "cordova-plugin-camera": {
+        "CAMERA_USAGE_DESCRIPTION": " ",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+      }
+    },
+    "platforms": [
+      "android",
+      "browser",
+      "ios"
+    ]
+  }
 }

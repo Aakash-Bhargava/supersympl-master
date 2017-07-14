@@ -16,6 +16,13 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { ProfilePage } from '../pages/profile/profile';
 import { PasswordPage } from '../pages/password/password';
 import { SetLocationPage } from '../pages/set-location/set-location';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   template: `

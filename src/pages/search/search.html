@@ -15,7 +15,8 @@
     <ion-item *ngFor="let course of queryList">
       <h2>{{course.courseName}}</h2>
       <p> Section: {{course.sectionNumber}} </p>
-      <button ion-button clear item-end (click)="addToUser(course)">Add</button>
+      <!-- <button ion-button clear item-end (click)="addToUser(course)">Add</button> -->
+        <button ion-button clear item-end (click)="openPinCode(course)">Add</button>
         <!-- <ion-select (click)=listSections(course) (ionChange)="addToUser()" cancelText="Nah" okText="Add!"> -->
 
           <!-- <div > -->

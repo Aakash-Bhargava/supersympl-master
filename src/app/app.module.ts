@@ -23,7 +23,8 @@ import { SetLocationPage } from '../pages/set-location/set-location';
 import { addEventModal } from '../pages/addEventModal/addEventModal';
 import { CalendarModule } from "ion2-calendar";
 import { SelectedDay } from '../pages/selectedDay/selectedDay';
-
+import { PincodeInputModule } from  'ionic2-pincode-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Camera } from '@ionic-native/camera';
 
 
@@ -83,6 +84,8 @@ export function entryComponents() {
   imports: [
     ApolloModule.withClient(provideClient),
     CalendarModule,
+    PincodeInputModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
     BrowserModule,
   ],

@@ -6,6 +6,7 @@ import { ItemDetailPage } from '../item-detail/item-detail';
 // import { Item } from '../../models/item';
 import { Angular2Apollo } from 'angular2-apollo';
 import gql from 'graphql-tag';
+import { PincodeController } from  'ionic2-pincode-input/dist/pincode'
 
 
 @Component({
@@ -16,10 +17,13 @@ export class SearchPage {
   allSections = <any>[];
   queryList = <any>[];
   userId: any;
+  code:string;
+  accessCode: any;
   // section: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               // public items: Items
+              public pincodeCtrl: PincodeController,
               public alertCtrl: AlertController,
               private apollo: Angular2Apollo,
               public viewCtrl: ViewController,
@@ -155,4 +159,74 @@ export class SearchPage {
       return 1;
     return 0;
   }
+
+
+
+
+  openPinCode(course):any{
+    console.log(course);
+    this.apollo.query({
+      query: gql`
+      query allSections($courseId: ID!){
+        allSections( filter: {id: $courseId})
+        {
+          id
+          courseName
+          accessCode
+        }
+      }
+      `,variables:{
+        courseId: course.id
+      }
+    }).toPromise().then(({data}) => {
+      if (data){
+        this.accessCode = data;
+        this.accessCode = this.accessCode.allSections[0].accessCode;
+      }
+    })
+
+    let pinCode =  this.pincodeCtrl.create({
+      title:'Pincode'
+    });
+
+    pinCode.present();
+
+    pinCode.onDidDismiss( (code,status) => {
+
+      if(status === 'done'){
+
+        if(code == this.accessCode){
+          this.apollo.mutate({
+            mutation: gql`
+            mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+              addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+                sectionsSection {
+                  id
+                }
+              }
+            }
+            `,variables:{
+              usersUserId: this.userId,
+              sectionsSectionId: course.id
+            }
+          }).toPromise();
+          let toast = this.toast.create({
+            message: 'Class Added!',
+            position: 'top',
+            duration: 3000
+          });
+          toast.present();
+          this.viewCtrl.dismiss();
+        }
+
+      }else if (status === 'forgot'){
+
+        // forgot password
+      }
+
+    })
+
+  }
+
+
 }

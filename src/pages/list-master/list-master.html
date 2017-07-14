@@ -41,14 +41,16 @@
       </div>
       <ion-card-header>
         <!-- <ion-avatar item-end> -->
-          <i primary item-end class="{{section.section.icon}} fa-2x" aria-hidden="true"></i>
-          {{section.section.courseName}}
+        {{section.section.courseName}}
+          <!-- <i primary item-end class="{{section.section.icon}} fa-2x" aria-hidden="true"></i> -->
+
         <!-- </ion-avatar> -->
 
       </ion-card-header>
       <ion-card-content>
 
         <span class="lectures">
+            Lectures:
             <p *ngIf="section.section.monday">Mon: {{section.section.monday}}</p>
             <p *ngIf="section.section.tuesday">Tues: {{section.section.tuesday}}</p>
             <p *ngIf="section.section.wednesday">Wed: {{section.section.wednesday}}</p>
