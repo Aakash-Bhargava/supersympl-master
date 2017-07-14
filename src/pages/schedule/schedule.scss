@@ -4,31 +4,21 @@ page-schedule {
     margin: auto;
   }
 
-  ion-item{
-    height: 80px;
-  }
-
   .eventTitle{
-    font-size: 20px;
-    font-weight: bolder;
-    padding-bottom: 5px;
+    font-size: 1.3em;
   }
 
   .eventClass{
-    padding-bottom: 5px;
-    font-size: 16px;
     color: grey;
   }
 
   .eventDueDate{
-    font-size: 16px;
     color: grey;
   }
 
   .ion-calendar-row {
     max-width: 100%;
     margin: auto;
-    // margin: auto;
   }
   .ion-calendar-header-title {
     max-width: 100% !important;
@@ -61,7 +51,7 @@ page-schedule {
 
   ion-header{
     .toolbar-background-md,.toolbar-background-ios{
-      background-color: #f53d3d;
+      background-color: #045a41;
     }
     .toolbar-title-md,.toolbar-title-ios{
       color: #fff;
@@ -70,7 +60,7 @@ page-schedule {
       color: #fff;
     }
     .week-title{
-      background-color: rgba(245, 61, 61, 0.64);
+      background-color: #1A6952;
       color: #fff;
     }
   }
@@ -84,10 +74,10 @@ page-schedule {
     }
 
     .days-btn,.month-title{
-      color: #f53d3d;
+      color: #045a41;
     }
     button.days-btn.on-selected{
-      background-color: #f53d3d !important;;
+      background-color: #045a41 !important;;
     }
   }
 
@@ -103,11 +93,16 @@ page-schedule {
     font-size: 2.2em !important;
   }
 
-  // .today p {
+  .marked p, .marked small {
+    color: #FFBA08 !important;
+  }
+
+  .today p {
+    color: #FFBA08 !important;
   //   // font-size: 1.1em !important;
   //   padding: 20%;
   //   border-bottom: 2px solid lightgreen !important;
   //   border-radius: 100%;
-  // }
+  }
 
 }

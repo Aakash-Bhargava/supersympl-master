@@ -92,7 +92,7 @@ export class SchedulePage {
       isRadio: true,
       title:'Calendar',
       closeLabel: '',
-      weekdaysTitle: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
+      weekdaysTitle: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       cssClass: 'calendarCSS',
       daysConfig: this.allCalEv,
       monthTitle: 'MMMM yyyy',
