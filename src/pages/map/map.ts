@@ -37,7 +37,7 @@ export class MapPage implements OnInit {
       if (data){
         this.currentUser = data;
         this.currentUser = this.currentUser.user;
-        // console.log(this.currentUser);
+        console.log(this.currentUser);
       }
     })
   }
@@ -50,11 +50,13 @@ export class MapPage implements OnInit {
     let map = Leaflet.map('map');
     this.map = map;
 
-    Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
-      //attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-
+    Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
+      minZoom: 7.5,
+      zoom: 16,
       maxZoom: 18
     }).addTo(this.map);
+
+    // var myLayer = Leaflet.featureLayer().setGeoJSON(geojson).addTo(map);
 
     //web location
     this.map.locate({ setView: true});
@@ -69,27 +71,45 @@ export class MapPage implements OnInit {
           iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
           iconSize: [60, 50] // size of the icon
         });
-        for (let location of this.alllocations) {
-          console.log(this.alllocations);
-          let desc = '<h5 style="text-align:center;">' + location.sectionName + '</h5>';
-          let start = new Date(location.startTime);
-          let end = new Date(location.endTime);
-          desc += '<p class="centerb">' + start.toLocaleDateString() + '</p>';
-          desc += '<p class="centerb">' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
-          // desc += '<button style="background-color: #cc2121;"> Join </button>';
-          desc += '<p class="centerb">';
-          for (let user of location.users) {
-            desc += '<img class="centerb" src=' + user.profilePic + ' style="width:30%;height:30%;border-radius: 50%;">';
-          }
-          desc += '</p>';
+        let amgroup = false;
+        that.currentUserInfo().then(({data}) => {
+          if (data){
+            this.currentUser = data;
+            this.currentUser = this.currentUser.user;
+            for (let location of this.alllocations) {
+              console.log(this.alllocations);
+              let desc = '<div class="popheader"><h5">' + location.sectionName + '</h5></div>';
+              let start = new Date(location.startTime);
+              let end = new Date(location.endTime);
+              desc += '<div class="popcontent"<p class="centerb">' + start.toUTCString().substr(0,17);
+              desc += '</br>' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
+              // desc += '<button style="background-color: #cc2121;"> Join </button>';
+              desc += '<p>';
+              for (let user of location.users) {
+                if (user.id == this.currentUser.id) {
+                  amgroup = true;
+                }
+                desc += '<img src=' + user.profilePic + ' style="width:30%;height:30%;border-radius: 50%;">';
+              }
 
-          let latlng = Leaflet.latLng(location.latitude, location.longitude);
-          Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
-              .bindPopup(desc);//.openPopup();
-        }
-      })
+              desc += '</p>';
 
-    });
+              if (!amgroup) {
+                desc += '<button class="join" (tap)="joinClass()"> Join </button></div>';
+              }
+
+              let latlng = Leaflet.latLng(location.latitude, location.longitude);
+              Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
+                  .bindPopup(desc);//.openPopup();
+                }
+              }
+        })
+      });
+    })
+  }
+
+  joinClass() {
+    console.log("join");
   }
 
 

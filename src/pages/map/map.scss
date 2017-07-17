@@ -45,4 +45,28 @@ page-map {
     z-index: 999 !important;
   }
 
+  .leaflet-popup-content-wrapper {
+    background-color: #045a41;
+    opacity: 0.8;
+    font-family: serif;
+  }
+
+  .popheader {
+    font-size: 1.5em;
+    text-align: center;
+    color: white;
+  }
+  .popcontent {
+    color: white;
+    text-align: center;
+  }
+
+  .join {
+    color: white;
+    background: none;
+    border: 1px solid white;
+    border-radius: 10%;
+    font-size: 1.3em;
+  }
+
 }

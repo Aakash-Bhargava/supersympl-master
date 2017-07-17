@@ -26,6 +26,7 @@ import { SelectedDay } from '../pages/selectedDay/selectedDay';
 import { PincodeInputModule } from  'ionic2-pincode-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Camera } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 
@@ -91,7 +92,7 @@ export function entryComponents() {
   ],
   bootstrap: [IonicApp],
   entryComponents: entryComponents(),
-  providers: [Camera,IonCalendar, { provide: ErrorHandler, useClass: IonicErrorHandler }],
+  providers: [Camera,IonCalendar, { provide: ErrorHandler, useClass: IonicErrorHandler }, Geolocation],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
