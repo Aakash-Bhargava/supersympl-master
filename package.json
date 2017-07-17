@@ -21,6 +21,7 @@
         "@angular/platform-server": "4.2.2",
         "@ionic-native/camera": "^3.12.1",
         "@ionic-native/core": "^3.12.1",
+        "@ionic-native/geolocation": "^4.0.1",
         "@ionic-native/image-picker": "^3.12.1",
         "@ionic/storage": "2.0.1",
         "@ionic2-extra/calendar": "^0.1.1",
