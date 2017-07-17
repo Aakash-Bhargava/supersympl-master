@@ -42,24 +42,28 @@ export class MapPage implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.drawMap();
   }
-  drawMap(): void {
+  drawMap(filterBy?) {
     var that = this;
-    let map = Leaflet.map('map');
-    this.map = map;
+    let map: any;
+    if (!filterBy) {
+      map = Leaflet.map('map');
+      this.map = map;
 
-    Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
-      minZoom: 7.5,
-      zoom: 16,
-      maxZoom: 18
-    }).addTo(this.map);
+      Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
+        minZoom: 7.5,
+        zoom: 16,
+        maxZoom: 18
+      }).addTo(this.map);
 
-    // var myLayer = Leaflet.featureLayer().setGeoJSON(geojson).addTo(map);
+      //web location
+      this.map.locate({ setView: true});
+    }
 
-    //web location
-    this.map.locate({ setView: true});
+
+
     this.map.on('locationfound', function addMockPins(e) {
       let pins: any;
       that.getAllPins().then(({data})=> {
@@ -71,6 +75,7 @@ export class MapPage implements OnInit {
           iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
           iconSize: [60, 50] // size of the icon
         });
+
         let amgroup = false;
         that.currentUserInfo().then(({data}) => {
           if (data){
@@ -83,7 +88,6 @@ export class MapPage implements OnInit {
               let end = new Date(location.endTime);
               desc += '<div class="popcontent"<p class="centerb">' + start.toUTCString().substr(0,17);
               desc += '</br>' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
-              // desc += '<button style="background-color: #cc2121;"> Join </button>';
               desc += '<p>';
               for (let user of location.users) {
                 if (user.id == this.currentUser.id) {
@@ -112,6 +116,10 @@ export class MapPage implements OnInit {
     console.log("join");
   }
 
+  filter(filterBy) {
+    this.drawMap(filterBy);
+  }
+
 
   setLocation() {
     let addModal = this.modalCtrl.create(SetLocationPage);
@@ -124,7 +132,6 @@ export class MapPage implements OnInit {
 
   addClassMarker(c) {
     var that = this;
-    //web location
     if(c) {
       this.map.locate({ setView: true});
       this.map.on('locationfound', function (onLocationFound) {
@@ -137,7 +144,6 @@ export class MapPage implements OnInit {
 
         let start = new Date(c['startTime']);
         let end = new Date(c['endTime']);
-
 
         let desc = '<h5 style="text-align:center;">' + c['name'] + '</h5>';
         desc += '<p class="centerb">' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
@@ -200,36 +206,6 @@ export class MapPage implements OnInit {
           }
         `
       }).toPromise();
-    }
-
-    //when we have a location draw a marker and accuracy circle
-    onLocationFound(e) {
-      // var radius = e.accuracy / 4;
-      // var profileIcon = Leaflet.icon({
-      //   iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678093-pin-128.png',
-      // //iconUrl: 'https://cdn0.iconfinder.com/data/icons/industrial-icons/164/5-512.png',
-      //   iconSize: [38, 38], // size of the icon
-      // });
-
-      // var that = this;
-      // let desc = '<h5 style="text-align:center;">' + this.alllocations['sectionName'] + '</h5>';
-      // desc += '<p class="centerb">' + this.alllocations['startTime'] + ' - ' + this.alllocations['endTime'] +'</p>';
-      // let latlng = Leaflet.latLng(this.alllocations['latitude'], this.alllocations['longitude']);
-      // Leaflet.marker(latlng, {icon: profileIcon}).addTo(that.map)
-      //     .bindPopup(desc);//.openPopup();
-      // let desc = '<h5 style="text-align:center;">' + c.name.toUpperCase() + '</h5>';
-      // //let desc = '<h5>' + c.name.toUpperCase() + '</h5>';
-      // desc += '<p>'+ c.startTime+' - '+c.endTime+'</p>';
-      // desc += '<p><em>(4) People studying:</em></p>';
-      // desc += '<p><img src="http://i1246.photobucket.com/albums/gg611/theofficechic/Design/profile-round.png" style="width:20%;height:20%;">\
-      // <img src="http://ablissfulhaven.com/dev/wp-content/uploads/2015/06/round-chokolatta-profile-pic.png" style="width:20%;height:20%;">\
-      // <img src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/6083/profile/profile-512_1.jpg" style="width:20%;height:20%;">\
-      // <img src="https://rigorous-digital.co.uk/wp-content/uploads/2014/06/profile-round.png" style="width:20%;height:20%;"></p>';
-      // desc += '<p class="buttons"><button ion-button style="color:white;background-color:red;">Ask to Join</button></p>';
-      // Leaflet.marker(e.latlng, {icon: profileIcon}).addTo(that.map)
-      //     .bindPopup(desc);//.openPopup();
-      //
-      // Leaflet.circle(e.latlng, radius, {color: 'red'}).addTo(that.map);
     }
 
   formatAMPM(date) {
