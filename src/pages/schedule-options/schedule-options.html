@@ -1,15 +1,22 @@
-
-  <ion-row class="row-dots">
-    <ion-col>
-      <button ion-button="dot" class="dot-white" [class.selected]="background == 'white'"></button>
-    </ion-col>
-    <ion-col>
-      <button ion-button="dot" class="dot-tan" [class.selected]="background == 'tan'"></button>
-    </ion-col>
-    <ion-col>
-      <button ion-button="dot" class="dot-grey" [class.selected]="background == 'grey'"></button>
-    </ion-col>
-    <ion-col>
-      <button ion-button="dot" class="dot-black" [class.selected]="background == 'black'"></button>
-    </ion-col>
-  </ion-row>
+<!-- <ion-row class="row-dots">
+  <ion-col>
+    <button ion-button="dot" class="dot-white" [class.selected]="background == 'white'"></button>
+  </ion-col>
+  <ion-col>
+    <button ion-button="dot" class="dot-tan" [class.selected]="background == 'tan'"></button>
+  </ion-col>
+  <ion-col>
+    <button ion-button="dot" class="dot-grey" [class.selected]="background == 'grey'"></button>
+  </ion-col>
+  <ion-col>
+    <button ion-button="dot" class="dot-black" [class.selected]="background == 'black'"></button>
+  </ion-col>
+</ion-row> -->
+<ion-list>
+  <ion-item (click)="close()">
+    <span>Downvote</span>
+  </ion-item>
+  <!-- <button ion-item (click)="close()">Documentation</button>
+  <button ion-item (click)="close()">Showcase</button>
+  <button ion-item (click)="close()">GitHub Repo</button> -->
+</ion-list>

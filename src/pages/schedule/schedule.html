@@ -43,11 +43,11 @@
             </a>
           </p>
         </span>
-        <!-- <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
-        <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon> -->
-        <ion-note item-end (tap)="options($event)">
+        <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span>
+        <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon>
+        <!-- <ion-note item-end (tap)="options($event)">
           <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
-        </ion-note>
+        </ion-note> -->
       </ion-item>
     </div>
   </ion-list>

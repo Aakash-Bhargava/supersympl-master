@@ -87,6 +87,13 @@ page-schedule-options {
   .text-times-new-roman {
     font-family: "Times New Roman";
   }
+  ion-list {
+    margin-bottom: 0 !important;
+  }
+
+  ion-item span {
+    color: red;
+  }
 }
 
 .popover-page {
