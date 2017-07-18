@@ -83,7 +83,13 @@ export class MapPage implements OnInit {
             this.currentUser = this.currentUser.user;
 
             //User position
-            Leaflet.marker(e.latlng).addTo(map)
+            // Leaflet.marker(e.latlng).addTo(map)
+            var circle = Leaflet.circle(e.latlng, {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: radius
+            }).addTo(map);
 
             //Creating pin for every location
             for (let location of this.alllocations) {
@@ -109,7 +115,7 @@ export class MapPage implements OnInit {
 
               let latlng = Leaflet.latLng(location.latitude, location.longitude);
               Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
-                  .bindPopup(desc)
+                  // .bindPopup(desc)
                   .on('click', function onClick() {
                     let addModal = that.modalCtrl.create('StudygroupPage', {location: location});
                     addModal.present();

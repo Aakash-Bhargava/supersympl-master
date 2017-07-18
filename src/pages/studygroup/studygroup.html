@@ -35,20 +35,34 @@
   </div>
 
   <div class="groupcontent">
-    <ion-grid>
-      <ion-row>
-        <ion-list>
-          <ion-list-header>
-            People
-          </ion-list-header>
-          <ion-item>
-            <ion-scroll scrollX="true">
-              <img *ngFor="let user of studygroup.users" [src]="user.profilePic" />
-            </ion-scroll>
-          </ion-item>
-        </ion-list>
-      </ion-row>
-    </ion-grid>
+    <ion-list>
+
+      <ion-list-header>
+        Hours
+      </ion-list-header>
+      <ion-item>
+        <ion-label>From: </ion-label>
+        <ion-icon ios="ios-clock-outline" md="md-clock-outline" item-start></ion-icon>
+        <ion-datetime displayFormat="h:mm a" [(ngModel)]="studygroup.startTime" disabled></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>To: </ion-label>
+        <ion-icon ios="ios-timer-outline" md="md-timer-outline" item-start></ion-icon>
+        <ion-datetime displayFormat="h:mm a" [(ngModel)]="studygroup.endTime" disabled></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+
+      <ion-list-header>
+        People ({{studygroup.users.length}})
+      </ion-list-header>
+      <ion-item>
+        <ion-scroll scrollX="true">
+          <img *ngFor="let user of studygroup.users" [src]="user.profilePic" />
+        </ion-scroll>
+      </ion-item>
+
+    </ion-list>
   </div>
 
   <button ion-button (tap)="join()" block round outline color="secondary">Join study group!</button>
