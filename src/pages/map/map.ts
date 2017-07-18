@@ -81,6 +81,11 @@ export class MapPage implements OnInit {
           if (data){
             this.currentUser = data;
             this.currentUser = this.currentUser.user;
+
+            //User position
+            Leaflet.marker(e.latlng).addTo(map)
+
+            //Creating pin for every location
             for (let location of this.alllocations) {
               console.log(this.alllocations);
               let desc = '<div class="popheader"><h5">' + location.sectionName + '</h5></div>';
@@ -104,9 +109,13 @@ export class MapPage implements OnInit {
 
               let latlng = Leaflet.latLng(location.latitude, location.longitude);
               Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
-                  .bindPopup(desc);//.openPopup();
-                }
-              }
+                  .bindPopup(desc)
+                  .on('click', function onClick() {
+                    let addModal = that.modalCtrl.create('StudygroupPage', {location: location});
+                    addModal.present();
+                  });
+            }
+          }
         })
       });
     })
@@ -186,8 +195,11 @@ export class MapPage implements OnInit {
             latitude
             longitude
             sectionName
+            createdAt
             users {
               id
+              firstName
+              lastName
               profilePic
             }
           }
