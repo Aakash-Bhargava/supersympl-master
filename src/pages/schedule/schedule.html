@@ -21,6 +21,9 @@
       <ion-option value="dueDate">Due Date</ion-option>
     </ion-select>
   </ion-item> -->
+  <div class="empty" text-center *ngIf="allEvents.length == 0">
+    <h2> No Assignments </h2>
+  </div>
   <ion-list>
     <div *ngFor="let event of allEvents">
       <ion-list-header *ngIf="event.first">{{event.event.dueDate | date: 'EEEE, MMM dd'}}</ion-list-header>

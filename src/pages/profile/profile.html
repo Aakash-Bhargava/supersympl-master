@@ -11,7 +11,12 @@
 
 <ion-content>
   <div class="header">
-    <img class="avatar-background" [src]="imageUri" />
+    <div class="header-pop">
+      <img class="avatar-background" [src]="imageUri" />
+      <ion-fab right class="pop-in" [ngClass]="{'pop-out': fabGone}">
+        <button ion-fab mini (click)="changePic()"><ion-icon name="camera"></ion-icon></button>
+      </ion-fab>
+    </div>
     <ion-avatar *ngIf="!classMateView" (click)="changePic()">
       <img class="avatar" [src]="imageUri">
     </ion-avatar>

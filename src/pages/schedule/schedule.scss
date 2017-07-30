@@ -4,6 +4,14 @@ page-schedule {
     margin: auto;
   }
 
+  .empty {
+    text-align: center;
+    padding-top: 55%;
+    h2 {
+      color: #8c8c8c;
+    }
+  }
+
   .eventTitle{
     font-size: 1.3em;
   }
