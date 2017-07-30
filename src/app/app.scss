@@ -32,3 +32,15 @@
 .text-input{
   color: black;
 }
+
+.button-inner {
+  color: map-get($colors, secondary) !important;
+}
+
+.bar-button .button-inner {
+  color: map-get($colors, primary) !important;
+}
+
+.toolbar-content button .button-inner {
+  color: map-get($colors, primary) !important;
+}

@@ -38,16 +38,16 @@
     <ion-list>
 
       <ion-list-header>
-        Hours
+        Hours ({{studygroup.startTime | date : 'EEEE, MMMM d'}})
       </ion-list-header>
       <ion-item>
         <ion-label>From: </ion-label>
-        <ion-icon ios="ios-clock-outline" md="md-clock-outline" item-start></ion-icon>
+        <ion-icon ios="ios-clock-outline" md="md-clock" item-start></ion-icon>
         <ion-datetime displayFormat="h:mm a" [(ngModel)]="studygroup.startTime" disabled></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>To: </ion-label>
-        <ion-icon ios="ios-timer-outline" md="md-timer-outline" item-start></ion-icon>
+        <ion-icon ios="ios-timer-outline" md="md-timer" item-start></ion-icon>
         <ion-datetime displayFormat="h:mm a" [(ngModel)]="studygroup.endTime" disabled></ion-datetime>
       </ion-item>
     </ion-list>

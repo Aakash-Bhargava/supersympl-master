@@ -84,6 +84,7 @@ export class MapPage implements OnInit {
 
             //User position
             // Leaflet.marker(e.latlng).addTo(map)
+
             var circle = Leaflet.circle(e.latlng, {
                 color: 'red',
                 fillColor: '#f03',
