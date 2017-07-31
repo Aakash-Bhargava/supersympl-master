@@ -52,10 +52,10 @@ export class MapPage implements OnInit {
       map = Leaflet.map('map');
       this.map = map;
 
-      Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGF0cmlja3IiLCJhIjoiY2l2aW9lcXlvMDFqdTJvbGI2eXUwc2VjYSJ9.trTzsdDXD2lMJpTfCVsVuA', {
+      Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN1ZGV2c2hvcCIsImEiOiJjajMwYnR4bWMwMDA0Mndta2kzdTZrNjJrIn0.YMCUQHUrN6vm6_HK5bgwnA', {
         minZoom: 7.5,
         zoom: 16,
-        maxZoom: 18
+        // maxZoom: 18
       }).addTo(this.map);
 
       //web location
