@@ -29,7 +29,7 @@
     <ion-item>
       <ion-label>What Are You Studying?</ion-label>
       <ion-select [(ngModel)]="className">
-        <ion-option *ngFor="let class of classes" (ionSelect)="selectClass(class.className)">{{class.courseName}}</ion-option>
+        <ion-option *ngFor="let class of classes" (ionSelect)="selectClass(class.className)">{{class.courseName}} (section {{class.sectionNumber}})</ion-option>
       </ion-select>
     </ion-item>
     <!--<ion-list-header>Time</ion-list-header>-->

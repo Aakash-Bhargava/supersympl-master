@@ -58,9 +58,9 @@
       </ion-list-header>
       <ion-item>
         <ion-scroll scrollX="true">
-          <div >
-            <img *ngFor="let user of studygroup.users" [src]="user.profilePic" />
-            <!-- <p>{{user.firstName}}</p> -->
+          <div class="groupImg" *ngFor="let user of studygroup.users" text-center>
+            <img [src]="user.profilePic" />
+            <p>{{user.firstName}}</p>
           </div>
         </ion-scroll>
       </ion-item>

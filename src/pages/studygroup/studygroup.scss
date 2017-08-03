@@ -31,14 +31,17 @@ page-studygroup {
     padding-top: 5%;
     margin-bottom: 5%;
   }
-  ion-item img {
-    border-radius: 50%;
+  .groupImg {
+    display: inline-block;
     width: 20%;
-    margin-left: 2%;
+    margin-left: 3%;
+  }
+  .groupImg img {
+    border-radius: 50%;
   }
   ion-scroll {
     // white-space: nowrap;
-    height: 11vh;
+    height: 13vh;
     width: 90vw;
 }
 

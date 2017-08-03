@@ -28,6 +28,8 @@ export class MapPage implements OnInit {
   currentUser = <any>{};
   //class: string;
 
+  mapMarkers= <any>[];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public apollo: Angular2Apollo) {
     this.getAllPins().then(({data})=> {
       this.alllocations = data;
@@ -62,8 +64,6 @@ export class MapPage implements OnInit {
       this.map.locate({ setView: true});
     }
 
-
-
     this.map.on('locationfound', function addMockPins(e) {
       let pins: any;
       that.getAllPins().then(({data})=> {
@@ -82,50 +82,27 @@ export class MapPage implements OnInit {
             this.currentUser = data;
             this.currentUser = this.currentUser.user;
 
-            //User position
-            // Leaflet.marker(e.latlng).addTo(map)
-
-            var circle = Leaflet.circle(e.latlng, {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: radius
-            }).addTo(map);
-
             //Creating pin for every location
             for (let location of this.alllocations) {
-              console.log(this.alllocations);
-              let desc = '<div class="popheader"><h5">' + location.sectionName + '</h5></div>';
-              let start = new Date(location.startTime);
-              let end = new Date(location.endTime);
-              desc += '<div class="popcontent"<p class="centerb">' + start.toUTCString().substr(0,17);
-              desc += '</br>' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
-              desc += '<p>';
-              for (let user of location.users) {
-                if (user.id == this.currentUser.id) {
-                  amgroup = true;
-                }
-                desc += '<img src=' + user.profilePic + ' style="width:30%;height:30%;border-radius: 50%;">';
-              }
-
-              desc += '</p>';
-
-              if (!amgroup) {
-                desc += '<button class="join" (tap)="joinClass()"> Join </button></div>';
-              }
 
               let latlng = Leaflet.latLng(location.latitude, location.longitude);
-              Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
+              that.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
                   // .bindPopup(desc)
                   .on('click', function onClick() {
                     let addModal = that.modalCtrl.create('StudygroupPage', {location: location});
                     addModal.present();
-                  });
+                  }));
             }
           }
         })
       });
     })
+  }
+
+  clearMarkers() {
+    for(var i = 0; i < this.mapMarkers.length; i++){
+      this.map.removeLayer(this.mapMarkers[i]);
+    }
   }
 
   joinClass() {
@@ -149,34 +126,59 @@ export class MapPage implements OnInit {
   addClassMarker(c) {
     var that = this;
     if(c) {
+      let amgroup = false;
       this.map.locate({ setView: true});
       this.map.on('locationfound', function (onLocationFound) {
-        that.createPin(c,onLocationFound.latlng.lat,onLocationFound.latlng.lng );
-        var profileIcon = Leaflet.icon({
-          iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
-        //iconUrl: 'https://cdn0.iconfinder.com/data/icons/industrial-icons/164/5-512.png',
-          iconSize: [60, 50], // size of the icon
+        that.createPin(c,onLocationFound.latlng.lat,onLocationFound.latlng.lng ).then(({data}) => {
+          console.log(data);
+          let newPin;
+          newPin = data;
+          newPin = newPin.createMapPins;
+
+          // that.clearMarkers();
+          var profileIcon = Leaflet.icon({
+            iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
+            iconSize: [60, 50], // size of the icon
+          });
+          // that.watchAllPins().subscribe(({data})=> {
+          //   console.log(data);
+          //   this.alllocations = data;
+          //   this.alllocations = this.alllocations.allMapPinses;
+          // })
+          // for (let location of this.alllocations) {
+            // console.log("loc");
+            // console.log(location);
+            let latlng = Leaflet.latLng(onLocationFound.latlng.lat, onLocationFound.latlng.lng);
+            that.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(that.map)
+                // .bindPopup(desc)
+                .on('click', function onClick() {
+                  let addModal = that.modalCtrl.create('StudygroupPage', {location: newPin});
+                  addModal.present();
+                }));
+          // }
         });
-
-        let start = new Date(c['startTime']);
-        let end = new Date(c['endTime']);
-
-        let desc = '<h5 style="text-align:center;">' + c['name'] + '</h5>';
-        desc += '<p class="centerb">' + that.formatAMPM(start) + ' - ' + that.formatAMPM(end) +'</p>';
-        desc += '<button style="text-align:center;"> Join </button>';
-        let latlng = Leaflet.latLng(onLocationFound.latlng.lat, onLocationFound.latlng.lng);
-        Leaflet.marker(latlng, {icon: profileIcon}).addTo(that.map)
-            .bindPopup(desc);//.openPopup();
       });
     }
   }
 
   createPin(c, lat, lng) {
-    this.apollo.mutate({
+    return this.apollo.mutate({
       mutation: gql`
       mutation createMapPins($latitude: Float, $longitude: Float, $startTime: DateTime, $endTime: DateTime, $sectionName: String, $usersIds: [ID!] ){
         createMapPins(latitude: $latitude, longitude: $longitude, startTime: $startTime, endTime: $endTime, sectionName: $sectionName, usersIds: $usersIds  ){
           id
+          startTime
+          endTime
+          latitude
+          longitude
+          sectionName
+          createdAt
+          users {
+            id
+            firstName
+            lastName
+            profilePic
+          }
         }
       }
       `,
@@ -188,7 +190,7 @@ export class MapPage implements OnInit {
         sectionName: c.name,
         usersIds: [this.currentUser.id]
       }
-    });
+    }).toPromise();
   }
 
   getAllPins() {
@@ -213,6 +215,29 @@ export class MapPage implements OnInit {
         }
       `
     }).toPromise();
+  }
+  watchAllPins() {
+    return this.apollo.watchQuery({
+      query: gql`
+        query{
+          allMapPinses{
+            id
+            startTime
+            endTime
+            latitude
+            longitude
+            sectionName
+            createdAt
+            users {
+              id
+              firstName
+              lastName
+              profilePic
+            }
+          }
+        }
+      `
+    });
   }
 
   currentUserInfo(){
