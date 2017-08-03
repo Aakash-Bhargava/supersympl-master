@@ -76,6 +76,19 @@ $list-text-color: black;
 
 @import 'ionic.theme.default';
 
+@font-face {
+  font-family: CenturyGothicBold;
+  src: url("../assets/fonts/CenturyGothicBold.ttf");
+}
+@font-face {
+  font-family: CenturyGothic;
+  src: url("../assets/fonts/CenturyGothic.ttf");
+}
+// $font-family-base: 'CenturyGothic' !important;
+* {
+  font-family: 'CenturyGothicBold';
+}
+
 
 // Ionicons
 // --------------------------------------------------
