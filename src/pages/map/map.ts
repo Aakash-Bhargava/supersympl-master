@@ -55,9 +55,8 @@ export class MapPage implements OnInit {
       this.map = map;
 
       Leaflet.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXN1ZGV2c2hvcCIsImEiOiJjajMwYnR4bWMwMDA0Mndta2kzdTZrNjJrIn0.YMCUQHUrN6vm6_HK5bgwnA', {
-        minZoom: 7.5,
-        zoom: 16,
-        // maxZoom: 18
+        minZoom: 10,
+        zoom: 16
       }).addTo(this.map);
 
       //web location
@@ -73,6 +72,7 @@ export class MapPage implements OnInit {
         var radius = e.accuracy / 4;
         var profileIcon = Leaflet.icon({
           iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
+          iconAnchor:   [25, 25],
           iconSize: [60, 50] // size of the icon
         });
 
@@ -105,14 +105,28 @@ export class MapPage implements OnInit {
     }
   }
 
-  joinClass() {
-    console.log("join");
-  }
-
   filter(filterBy) {
-    this.drawMap(filterBy);
+    // this.drawMap(filterBy);
+    this.clearMarkers();
+    var profileIcon = Leaflet.icon({
+      iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
+      iconAnchor:   [25, 25],
+      iconSize: [60, 50] // size of the icon
+    });
+    for (let location of this.alllocations) {
+      console.log(filterBy);
+      console.log(location.sectionName);
+      let latlng = Leaflet.latLng(location.latitude, location.longitude);
+      if (filterBy == location.sectionName || filterBy == "all") {
+        this.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(this.map)
+            // .bindPopup(desc)
+            .on('click', function onClick() {
+              let addModal = this.modalCtrl.create('StudygroupPage', {location: location});
+              addModal.present();
+            }));
+      }
+    }
   }
-
 
   setLocation() {
     let addModal = this.modalCtrl.create(SetLocationPage);
@@ -126,7 +140,6 @@ export class MapPage implements OnInit {
   addClassMarker(c) {
     var that = this;
     if(c) {
-      let amgroup = false;
       this.map.locate({ setView: true});
       this.map.on('locationfound', function (onLocationFound) {
         that.createPin(c,onLocationFound.latlng.lat,onLocationFound.latlng.lng ).then(({data}) => {
@@ -134,20 +147,11 @@ export class MapPage implements OnInit {
           let newPin;
           newPin = data;
           newPin = newPin.createMapPins;
-
-          // that.clearMarkers();
           var profileIcon = Leaflet.icon({
             iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
+            iconAnchor:   [25, 25],
             iconSize: [60, 50], // size of the icon
           });
-          // that.watchAllPins().subscribe(({data})=> {
-          //   console.log(data);
-          //   this.alllocations = data;
-          //   this.alllocations = this.alllocations.allMapPinses;
-          // })
-          // for (let location of this.alllocations) {
-            // console.log("loc");
-            // console.log(location);
             let latlng = Leaflet.latLng(onLocationFound.latlng.lat, onLocationFound.latlng.lng);
             that.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(that.map)
                 // .bindPopup(desc)
@@ -216,29 +220,6 @@ export class MapPage implements OnInit {
       `
     }).toPromise();
   }
-  watchAllPins() {
-    return this.apollo.watchQuery({
-      query: gql`
-        query{
-          allMapPinses{
-            id
-            startTime
-            endTime
-            latitude
-            longitude
-            sectionName
-            createdAt
-            users {
-              id
-              firstName
-              lastName
-              profilePic
-            }
-          }
-        }
-      `
-    });
-  }
 
   currentUserInfo(){
       return this.apollo.query({
@@ -246,21 +227,14 @@ export class MapPage implements OnInit {
           query{
             user{
               id
+              sections {
+                sectionNumber
+                courseName
+              }
             }
           }
         `
       }).toPromise();
     }
-
-  formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-  }
 
   }

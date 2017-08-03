@@ -12,10 +12,7 @@
     <ion-label>Class</ion-label>
     <ion-select class="select" [(ngModel)]="filterBy" (ionChange)="filter(filterBy)">
       <ion-option value="all" selected="true">All</ion-option>
-      <ion-option value="cse231">CSE 231</ion-option>
-      <ion-option value="CSE 425">CSE 425</ion-option>
-      <ion-option value="chem141">CHEM 141</ion-option>
-      <ion-option value="ece201">ECE 201</ion-option>
+      <ion-option *ngFor="let class of currentUser.sections" value="{{class.courseName}} (section {{class.sectionNumber}})">{{class.courseName}} (section {{class.sectionNumber}})</ion-option>
     </ion-select>
   </ion-item>
 </ion-header>
