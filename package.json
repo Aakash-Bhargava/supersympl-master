@@ -24,7 +24,6 @@
         "@ionic-native/geolocation": "^4.0.1",
         "@ionic-native/image-picker": "^3.12.1",
         "@ionic/storage": "2.0.1",
-        "@ionic2-extra/calendar": "^0.1.1",
         "angular2-apollo": "^0.9.0",
         "apollo-client": "^1.4.2",
         "com.synconset.imagepicker": "https://github.com/Telerik-Verified-Plugins/ImagePicker.git",
@@ -58,9 +57,10 @@
         "zone.js": "0.8.12"
     },
     "devDependencies": {
-        "@ionic/app-scripts": "1.3.7",
+        "@ionic/app-scripts": "2.0.2",
         "@ionic/cli-plugin-cordova": "1.4.1",
         "@ionic/cli-plugin-ionic-angular": "1.3.2",
+        "ionic": "3.6.0",
         "typescript": "2.3.4"
     },
     "cordovaPlugins": [

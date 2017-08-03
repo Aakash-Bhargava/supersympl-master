@@ -33,7 +33,6 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { provideClient } from './client';
 import { ApolloModule } from 'angular2-apollo';
 
-import { ION_CALENDAR_DIRECTIVES, IonCalendar } from '@ionic2-extra/calendar';
 
 
 let pages = [
@@ -92,7 +91,7 @@ export function entryComponents() {
   ],
   bootstrap: [IonicApp],
   entryComponents: entryComponents(),
-  providers: [Camera,IonCalendar, { provide: ErrorHandler, useClass: IonicErrorHandler }, Geolocation],
+  providers: [Camera, { provide: ErrorHandler, useClass: IonicErrorHandler }, Geolocation],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
