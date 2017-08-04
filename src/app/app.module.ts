@@ -23,6 +23,7 @@ import { SetLocationPage } from '../pages/set-location/set-location';
 import { addEventModal } from '../pages/addEventModal/addEventModal';
 import { CalendarModule } from "ion2-calendar";
 import { SelectedDay } from '../pages/selectedDay/selectedDay';
+import { StudygroupPage } from '../pages/studygroup/studygroup';
 import { PincodeInputModule } from  'ionic2-pincode-input';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Camera } from '@ionic-native/camera';
@@ -52,7 +53,8 @@ let pages = [
   PasswordPage,
   addEventModal,
   SetLocationPage,
-  SelectedDay
+  SelectedDay,
+  StudygroupPage
 ];
 
 export function declarations() {
@@ -80,6 +82,7 @@ export function entryComponents() {
     PasswordPage,
     addEventModal,
     SetLocationPage,
+    StudygroupPage,
     SelectedDay],
   imports: [
     ApolloModule.withClient(provideClient),

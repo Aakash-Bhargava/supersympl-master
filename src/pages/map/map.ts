@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { SetLocationPage } from '../set-location/set-location';
 
+import { StudygroupPage } from '../studygroup/studygroup';
+
 //Graphcool
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription'
@@ -89,7 +91,7 @@ export class MapPage implements OnInit {
               that.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
                   // .bindPopup(desc)
                   .on('click', function onClick() {
-                    let addModal = that.modalCtrl.create('StudygroupPage', {location: location});
+                    let addModal = that.modalCtrl.create(StudygroupPage, {location: location});
                     addModal.present();
                   }));
             }
