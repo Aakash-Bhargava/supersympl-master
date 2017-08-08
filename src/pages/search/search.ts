@@ -19,6 +19,7 @@ export class SearchPage {
   userId: any;
   code:string;
   accessCode: any;
+  masterCode: any;
   // section: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -173,6 +174,7 @@ export class SearchPage {
           id
           courseName
           accessCode
+          masterAccessCode
         }
       }
       `,variables:{
@@ -181,12 +183,14 @@ export class SearchPage {
     }).toPromise().then(({data}) => {
       if (data){
         this.accessCode = data;
+        this.masterCode = this.accessCode.allSections[0].masterAccessCode;
         this.accessCode = this.accessCode.allSections[0].accessCode;
       }
     })
 
     let pinCode =  this.pincodeCtrl.create({
-      title:'Pincode'
+      title:'Pincode',
+      hideForgotPassword: true,
     });
 
     pinCode.present();
@@ -194,7 +198,7 @@ export class SearchPage {
     pinCode.onDidDismiss( (code,status) => {
 
       if(status === 'done'){
-
+        //If student code
         if(code == this.accessCode){
           this.apollo.mutate({
             mutation: gql`
@@ -209,21 +213,57 @@ export class SearchPage {
               usersUserId: this.userId,
               sectionsSectionId: course.id
             }
-          }).toPromise();
-          let toast = this.toast.create({
-            message: 'Class Added!',
-            position: 'top',
-            duration: 3000
+          }).toPromise().then(({data})=> {
+            let toast = this.toast.create({
+              message: 'Class Added!',
+              position: 'top',
+              duration: 3000
+            });
+            toast.present();
+            this.viewCtrl.dismiss();
           });
-          toast.present();
-          this.viewCtrl.dismiss();
+
+
+        // If professors code
+        } else if (code == this.masterCode ) {
+          this.apollo.mutate({
+            mutation: gql`
+            mutation addToSectionOnMaster($teachingSectionId: ID!, $masterUserId: ID!){
+              addToSectionOnMaster(teachingSectionId:$teachingSectionId,masterUserId:$masterUserId){
+                teachingSection {
+                  id
+                }
+              }
+            }
+            `,variables:{
+              teachingSectionId: course.id,
+              masterUserId: this.userId
+            }
+          }).toPromise();
+          this.apollo.mutate({
+            mutation: gql`
+            mutation addToUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+              addToUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+                sectionsSection {
+                  id
+                }
+              }
+            }
+            `,variables:{
+              usersUserId: this.userId,
+              sectionsSectionId: course.id
+            }
+          }).toPromise().then(({data})=> {
+            let toast = this.toast.create({
+              message: 'Greetings Professor/TA!',
+              position: 'top',
+              duration: 3000
+            });
+            toast.present();
+            this.viewCtrl.dismiss();
+          });;
         }
-
-      }else if (status === 'forgot'){
-
-        // forgot password
       }
-
     })
 
   }
