@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { NavController, ViewController, ToastController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription'
@@ -18,6 +18,7 @@ export class addEventModal {
 
   sections = <any>[];
   section: any;
+  teaching = <any>[];
   data: any;
 
   today = new Date();
@@ -31,20 +32,20 @@ export class addEventModal {
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
     private apollo: Angular2Apollo,
-    public formBuilder: FormBuilder ) {
+    public formBuilder: FormBuilder,
+    public toast: ToastController) {
 
       this.form = formBuilder.group({
        title: ['', Validators.required],
        section: ['', Validators.required],
        dueDate: [this.today.toISOString(), Validators.required],
        dueTime: [this.today.toISOString(), Validators.required],
-       url: ['', Validators.required],
-       description: ['', Validators.required]
+       url: [''],
+       description: ['']
       });
 
       this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-      this.now = this.now.toISOString();
+        this.isReadyToSave = this.form.valid;
     });
   }
 
@@ -53,22 +54,34 @@ export class addEventModal {
  }
 
  add(){
-   console.log("add clicked");
-   this.createEvent();
-   this.dismiss();
+   if (this.isReadyToSave) {
+     this.createEvent().then(({data}) => {
+       let toast = this.toast.create({
+         message: 'Event created!',
+         position: 'top',
+         duration: 3000
+       });
+       toast.present();
+       this.dismiss();
+     });
+   } else {
+     let toast = this.toast.create({
+       message: 'Some information missing. Try again!',
+       position: 'top',
+       duration: 3000
+     });
+     toast.present();
+   }
  }
 
  ionViewDidEnter() {
    this.today.setHours(this.today.getHours() - 4);
-   this.getUserSections();
- }
-
- getUserSections() {
    this.querySections().then(({data}) => {
      if (data){
        this.data = data;
        this.sections = this.data.user.sections;
-       console.log(this.sections);
+       this.teaching = this.data.user.teaching;
+       console.log(this.teaching);
      }
    })
  }
@@ -78,6 +91,23 @@ querySections(){
     query: gql`
       query{
         user{
+          teaching{
+            id
+            sectionNumber
+            courseName
+            type
+            icon
+            users {
+              firstName
+              lastName
+              major
+              profilePic
+            }
+            professor{
+              name
+              email
+            }
+          }
           sections{
             id
             sectionNumber

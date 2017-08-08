@@ -14,12 +14,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { SelectedDay } from '../selectedDay/selectedDay';
 
-/*
-  Generated class for the Schedule page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-schedule',
   templateUrl: 'schedule.html'
@@ -65,6 +60,9 @@ export class SchedulePage {
         query {
           user {
             id
+            teaching {
+              id
+            }
           }
         }
       `
@@ -290,12 +288,12 @@ export class SchedulePage {
           for (let event of section.events) {
             voted = false;
             if (event.dueDate >= this.now) {
-              for (let downvote of event.downvotes) {
-                if (downvote.id == this.currentUser.id) {
-                  voted = true;
-                  break;
-                }
-              }
+              // for (let downvote of event.downvotes) {
+              //   if (downvote.id == this.currentUser.id) {
+              //     voted = true;
+              //     break;
+              //   }
+              // }
               this.allEvents.push({event: event, voted: voted, first: true});
             }
           }

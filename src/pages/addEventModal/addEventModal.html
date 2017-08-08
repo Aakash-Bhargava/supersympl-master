@@ -29,7 +29,7 @@
         <ion-item>
           <ion-label>Class</ion-label>
           <ion-select formControlName="section">
-            <ion-option *ngFor="let section of sections" value="{{ section.id }}"> {{ section.courseName }}</ion-option>
+            <ion-option *ngFor="let section of teaching" value="{{ section.id }}"> {{ section.courseName }}</ion-option>
           </ion-select>
         </ion-item>
 
