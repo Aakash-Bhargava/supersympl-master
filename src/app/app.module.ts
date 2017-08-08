@@ -82,7 +82,7 @@ export function entryComponents() {
     PasswordPage,
     addEventModal,
     SetLocationPage,
-    // StudygroupPage,
+    StudygroupPage,
     SelectedDay],
   imports: [
     ApolloModule.withClient(provideClient),

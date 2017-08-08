@@ -12,7 +12,7 @@
 
     <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
-        <ion-icon color="primary" name="add"></ion-icon>
+        <ion-icon color="primary" name="search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -40,11 +40,7 @@
         </ion-fab>
       </div>
       <ion-card-header>
-        <!-- <ion-avatar item-end> -->
-        {{section.section.courseName}}
-          <!-- <i primary item-end class="{{section.section.icon}} fa-2x" aria-hidden="true"></i> -->
-
-        <!-- </ion-avatar> -->
+        {{section.section.courseName}} - section {{section.section.sectionNumber}}
 
       </ion-card-header>
       <ion-card-content>
