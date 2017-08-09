@@ -6,7 +6,7 @@
       		</button>
     	</ion-buttons>
       <ion-buttons end *ngIf="currentUser">
-        <button ion-button icon-only (click)="addEvent()" *ngIf="currentUser.teaching">
+        <button ion-button icon-only (click)="addEvent()" *ngIf="currentUser.teaching.length != 0">
           <ion-icon color="primary" ios="ios-add" md="md-add"></ion-icon>
         </button>
      </ion-buttons>
@@ -17,11 +17,11 @@
   <div class="empty" text-center *ngIf="allEvents.length == 0">
     <h2> No Assignments </h2>
   </div>
-  <ion-list>
+  <ion-list *ngIf="currentUser">
     <div *ngFor="let event of allEvents">
       <ion-list-header *ngIf="event.first">{{event.event.dueDate | date: 'EEEE, MMM dd'}}</ion-list-header>
-      <button ion-item (tap)="gotoEvent(event)">
-        <div class="eventTitle" >
+      <ion-item >
+        <div class="eventTitle" (tap)="gotoEvent(event)">
           {{event.event.section.courseName}}
 
         </div>
@@ -40,11 +40,11 @@
           </p>
         </span>
         <!-- <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span> -->
-        <!-- <ion-icon *ngIf="!event.voted" color="dark" id="thumbs-down" ios="ios-thumbs-down" md="md-thumbs-down" item-end (tap)="downvote(event.event)"></ion-icon> -->
+          <ion-icon  ios="ios-color-wand" md="md-color-wand" *ngIf="currentUser.teaching.length != 0" item-end (tap)="editEvent(event.event)"></ion-icon>
         <!-- <ion-note item-end (tap)="options($event)">
           <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
         </ion-note> -->
-      </button>
+      </ion-item>
     </div>
   </ion-list>
 </ion-content>

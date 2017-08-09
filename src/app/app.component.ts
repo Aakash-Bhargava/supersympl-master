@@ -19,7 +19,7 @@ import { SetLocationPage } from '../pages/set-location/set-location';
 
 @Component({
   template: `
-  <ion-nav #content [root]="rootPage"></ion-nav>`
+  <ion-nav #content swipeBackEnabled="false" [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
   rootPage: any;

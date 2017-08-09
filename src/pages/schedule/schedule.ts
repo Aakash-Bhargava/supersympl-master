@@ -152,12 +152,12 @@ export class SchedulePage {
           for (let event of section.events) {
             voted = false;
             if (event.dueDate >= this.now) {
-              for (let downvote of event.downvotes) {
-                if (downvote.id == this.currentUser.id) {
-                  voted = true;
-                  break;
-                }
-              }
+              // for (let downvote of event.downvotes) {
+              //   if (downvote.id == this.currentUser.id) {
+              //     voted = true;
+              //     break;
+              //   }
+              // }
               this.allEvents.push({event: event, voted: voted, first: true});
             }
           }
@@ -415,10 +415,18 @@ export class SchedulePage {
     events.push(event.event);
     let selectedDayModal = this.modalCtrl.create(SelectedDay, { allEvents: events});
     selectedDayModal.present();
+
   }
 
-  options(ev) {
-    let popover = this.popoverCtrl.create('ScheduleOptionsPage');
-    popover.present({ev: ev});
+  editEvent(event) {
+    // let popover = this.popoverCtrl.create('ScheduleOptionsPage');
+    // popover.present({ev: ev});
+    console.log(event);
+    let selectedDayModal = this.modalCtrl.create('ScheduleOptionsPage', { event: event});
+    selectedDayModal.present();
+    selectedDayModal.onDidDismiss(data => {
+      this.refreshPage();
+    })
+
   }
 }
