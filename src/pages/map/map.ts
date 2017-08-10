@@ -33,16 +33,34 @@ export class MapPage implements OnInit {
   mapMarkers= <any>[];
   loading: any;
 
+  tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+  now = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
+
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams, public modalCtrl: ModalController, public apollo: Angular2Apollo) {
     this.getAllPins().then(({data})=> {
       this.alllocations = data;
       this.alllocations = this.alllocations.allMapPinses;
+      for (let location of this.alllocations) {
+        console.log(this.now);
+        console.log(location.endTime);
+        if (location.endTime <= this.now) {
+          console.log("expired");
+          this.deletePin(location.id);
+        } else if (location.users.length == 0) {
+          console.log("No user");
+          this.deletePin(location.id);
+        }
+      }
+      this.getAllPins().then(({data})=> {
+        this.alllocations = data;
+        this.alllocations = this.alllocations.allMapPinses;
+        console.log(this.alllocations);
+      })
     })
     this.currentUserInfo().then(({data}) => {
       if (data){
         this.currentUser = data;
         this.currentUser = this.currentUser.user;
-        console.log(this.currentUser);
       }
     })
   }
@@ -50,6 +68,7 @@ export class MapPage implements OnInit {
   ngOnInit() {
     this.drawMap();
   }
+
   drawMap(filterBy?) {
     var that = this;
     let map: any;
@@ -250,6 +269,23 @@ export class MapPage implements OnInit {
           }
         `
       }).toPromise();
+    }
+
+    deletePin(pinId) {
+      this.apollo.mutate({
+        mutation: gql`
+        mutation deleteMapPins($id: ID!){
+          deleteMapPins(id:$id){
+             id
+          }
+        }
+        `,variables:{
+          id: pinId
+        }
+      }).toPromise().then(({data}) => {
+        console.log("pin deleted");
+      });
+
     }
 
   }

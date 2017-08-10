@@ -73,7 +73,7 @@ export class SetLocationPage {
         buttons: ['Dismiss']
       });
       alert.present();
-    } else if (this.startTime <= this.now) {
+    } else if (this.startTime < this.now) {
       let alert = this.alertCtrl.create({
         title: 'Hey! You can\'t do this! ',
         subTitle: 'Start time needs to be later.',
