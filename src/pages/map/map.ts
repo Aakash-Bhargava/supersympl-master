@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { SetLocationPage } from '../set-location/set-location';
 
 import { StudygroupPage } from '../studygroup/studygroup';
@@ -31,8 +31,9 @@ export class MapPage implements OnInit {
   //class: string;
 
   mapMarkers= <any>[];
+  loading: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public apollo: Angular2Apollo) {
+  constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams, public modalCtrl: ModalController, public apollo: Angular2Apollo) {
     this.getAllPins().then(({data})=> {
       this.alllocations = data;
       this.alllocations = this.alllocations.allMapPinses;
@@ -142,6 +143,12 @@ export class MapPage implements OnInit {
   addClassMarker(c) {
     var that = this;
     if(c) {
+
+      this.loading = this.loadingCtrl.create({
+        content: 'Creating Pin...'
+      });
+      this.loading.present();
+
       this.map.locate({ setView: true});
       this.map.on('locationfound', function (onLocationFound) {
         that.createPin(c,onLocationFound.latlng.lat,onLocationFound.latlng.lng ).then(({data}) => {
@@ -158,9 +165,10 @@ export class MapPage implements OnInit {
             that.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(that.map)
                 // .bindPopup(desc)
                 .on('click', function onClick() {
-                  let addModal = that.modalCtrl.create('StudygroupPage', {location: newPin});
+                  let addModal = that.modalCtrl.create(StudygroupPage, {location: newPin});
                   addModal.present();
                 }));
+                that.loading.dismiss();
           // }
         });
       });
@@ -170,8 +178,8 @@ export class MapPage implements OnInit {
   createPin(c, lat, lng) {
     return this.apollo.mutate({
       mutation: gql`
-      mutation createMapPins($latitude: Float, $longitude: Float, $startTime: DateTime, $endTime: DateTime, $sectionName: String, $usersIds: [ID!] ){
-        createMapPins(latitude: $latitude, longitude: $longitude, startTime: $startTime, endTime: $endTime, sectionName: $sectionName, usersIds: $usersIds  ){
+      mutation createMapPins($latitude: Float, $longitude: Float,$location: String, $startTime: DateTime, $endTime: DateTime, $sectionName: String, $usersIds: [ID!] ){
+        createMapPins(latitude: $latitude, longitude: $longitude,location: $location, startTime: $startTime, endTime: $endTime, sectionName: $sectionName, usersIds: $usersIds  ){
           id
           startTime
           endTime
@@ -179,6 +187,7 @@ export class MapPage implements OnInit {
           longitude
           sectionName
           createdAt
+          location
           users {
             id
             firstName
@@ -191,6 +200,7 @@ export class MapPage implements OnInit {
       variables: {
         latitude: lat,
         longitude: lng,
+        location: c.location,
         startTime: c.startTime,
         endTime: c.endTime,
         sectionName: c.name,
@@ -211,6 +221,7 @@ export class MapPage implements OnInit {
             longitude
             sectionName
             createdAt
+            location
             users {
               id
               firstName

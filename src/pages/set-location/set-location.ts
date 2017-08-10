@@ -12,6 +12,7 @@ import gql from 'graphql-tag';
 export class SetLocationPage {
   currentUser = <any>{};
   classes = <any>[];
+  location: "";
 
   className: any;
   tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
@@ -72,8 +73,10 @@ export class SetLocationPage {
       });
       alert.present();
     } else {
-      let c = {name: this.className, startTime: this.startTime, endTime: this.endTime};
-      //this.navCtrl.push(MapPage, {class: c});
+      // console.log(this.location);
+      let c = {name: this.className, location: this.location, startTime: this.startTime, endTime: this.endTime};
+      // console.log(c);
+      // this.navCtrl.push(MapPage, {class: c});
       this.viewCtrl.dismiss(c);
     }
   }
