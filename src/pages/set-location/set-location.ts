@@ -16,6 +16,7 @@ export class SetLocationPage {
 
   className: any;
   tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+  now = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
   startTime: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
   endTime: String = (new Date(Date.now() - this.tzoffset + (60*60*1000))).toISOString().slice(0,-1);
 
@@ -69,6 +70,20 @@ export class SetLocationPage {
       let alert = this.alertCtrl.create({
         title: 'Hey! You can\'t do this! ',
         subTitle: 'End time needs to be after start time.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    } else if (this.startTime <= this.now) {
+      let alert = this.alertCtrl.create({
+        title: 'Hey! You can\'t do this! ',
+        subTitle: 'Start time needs to be later.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    } else if (!this.className || !this.location) {
+      let alert = this.alertCtrl.create({
+        title: 'Some information is missing.',
+        subTitle: 'Try again.',
         buttons: ['Dismiss']
       });
       alert.present();

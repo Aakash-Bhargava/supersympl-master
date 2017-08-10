@@ -108,8 +108,10 @@ export class MapPage implements OnInit {
     }
   }
 
-  filter(filterBy) {
+  filter(filterBy: String) {
     // this.drawMap(filterBy);
+    console.log("filter function");
+    let that = this;
     this.clearMarkers();
     var profileIcon = Leaflet.icon({
       iconUrl: 'http://www.clker.com/cliparts/k/Q/V/D/z/u/map-marker-small.svg',
@@ -124,7 +126,7 @@ export class MapPage implements OnInit {
         this.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(this.map)
             // .bindPopup(desc)
             .on('click', function onClick() {
-              let addModal = this.modalCtrl.create('StudygroupPage', {location: location});
+              let addModal = that.modalCtrl.create(StudygroupPage, {location: location});
               addModal.present();
             }));
       }
