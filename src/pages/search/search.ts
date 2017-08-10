@@ -196,6 +196,8 @@ export class SearchPage {
     pinCode.present();
 
     pinCode.onDidDismiss( (code,status) => {
+      console.log(code);
+      console.log(this.accessCode);
 
       if(status === 'done'){
         //If student code

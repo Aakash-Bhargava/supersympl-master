@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { MyApp } from './app.component';
 
@@ -82,13 +83,13 @@ export function entryComponents() {
     PasswordPage,
     addEventModal,
     SetLocationPage,
-    StudygroupPage,
+    // StudygroupPage,
     SelectedDay],
   imports: [
     ApolloModule.withClient(provideClient),
     CalendarModule,
     PincodeInputModule,
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
     BrowserModule,
   ],
