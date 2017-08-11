@@ -37,32 +37,30 @@ export class MapPage implements OnInit {
   now = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
 
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams, public modalCtrl: ModalController, public apollo: Angular2Apollo) {
-    this.getAllPins().then(({data})=> {
-      this.alllocations = data;
-      this.alllocations = this.alllocations.allMapPinses;
-      for (let location of this.alllocations) {
-        console.log(this.now);
-        console.log(location.endTime);
-        if (location.endTime <= this.now) {
-          console.log("expired");
-          this.deletePin(location.id);
-        } else if (location.users.length == 0) {
-          console.log("No user");
-          this.deletePin(location.id);
-        }
-      }
+
+    this.currentUserInfo().then(({data}) => {
+      this.currentUser = data;
+      this.currentUser = this.currentUser.user;
+      console.log(this.currentUser);
       this.getAllPins().then(({data})=> {
         this.alllocations = data;
         this.alllocations = this.alllocations.allMapPinses;
-        console.log(this.alllocations);
-      })
-    })
-    this.currentUserInfo().then(({data}) => {
-      if (data){
-        this.currentUser = data;
-        this.currentUser = this.currentUser.user;
-      }
-    })
+        for (let location of this.alllocations) {
+          if (location.endTime <= this.now) {
+            console.log("expired");
+            this.deletePin(location.id);
+          } else if (location.users.length == 0) {
+            console.log("No user");
+            this.deletePin(location.id);
+          }
+        }
+        this.getAllPins().then(({data})=> {
+          this.alllocations = data;
+          this.alllocations = this.alllocations.allMapPinses;
+          console.log(this.alllocations);
+        });
+      });
+    });
   }
 
   ngOnInit() {
@@ -233,8 +231,8 @@ export class MapPage implements OnInit {
   getAllPins() {
     return this.apollo.query({
       query: gql`
-        query{
-          allMapPinses{
+        query allMapPinses($userId: ID) {
+          allMapPinses (filter: {users_every: {id: $userId}}) {
             id
             startTime
             endTime
@@ -251,7 +249,9 @@ export class MapPage implements OnInit {
             }
           }
         }
-      `
+      `, variables: {
+        userId: this.currentUser.id
+      }
     }).toPromise();
   }
 
