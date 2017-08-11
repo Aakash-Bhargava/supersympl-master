@@ -44,3 +44,7 @@
 .toolbar-content button .button-inner {
   color: map-get($colors, primary) !important;
 }
+
+.alert-ios [aria-checked=true] .alert-radio-label {
+    color: #045a41;
+}
