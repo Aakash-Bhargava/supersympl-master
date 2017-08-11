@@ -109,6 +109,7 @@ export class SchedulePage {
 
       this.getSelectedDayEvent().then(({data}) => {
         if(data){
+          console.log("FUCK");
           this.dateSelectedEvents = data;
           this.dateSelectedEvents = this.dateSelectedEvents.allEvents;
           console.log(this.dateSelectedEvents);
@@ -333,8 +334,9 @@ export class SchedulePage {
   getSelectedDayEvent(){
     return this.apollo.query({
       query: gql`
-      query getSelectedDayEvent($dueDate: DateTime) {
+      query allEvents($dueDate: DateTime, $userId: ID) {
         allEvents(filter: {
+          section: {  users_some: {id : $userId}},
           dueDate: $dueDate
         }) {
           id
@@ -350,7 +352,9 @@ export class SchedulePage {
         }
       }
     `, variables: {
-        dueDate: this.dateSelected
+        dueDate: this.dateSelected,
+        userId: this.currentUser.id
+
       }
     }).toPromise();
   }
