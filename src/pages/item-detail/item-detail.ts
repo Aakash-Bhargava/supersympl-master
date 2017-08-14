@@ -79,6 +79,11 @@ export class ItemDetailPage {
                      id
                    }
                  }
+                 removeFromSectionOnMaster(teachingSectionId:$sectionsSectionId, masterUserId:$usersUserId){
+                   teachingSection {
+                     id
+                   }
+                 }
                }
                `,variables:{
                  usersUserId: this.currentUser.id,
