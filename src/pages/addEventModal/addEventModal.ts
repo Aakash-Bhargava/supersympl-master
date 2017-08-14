@@ -27,7 +27,11 @@ export class addEventModal {
 
   dueDate: any;
   dueTime: any;
-  now: any = new Date();
+  // now: any = new Date();
+  tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+  now = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
+  startTime: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
+  endTime: String = (new Date(Date.now() - this.tzoffset)).toISOString().slice(0,-1);
 
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
@@ -38,8 +42,8 @@ export class addEventModal {
       this.form = formBuilder.group({
        title: ['', Validators.required],
        section: ['', Validators.required],
-       dueDate: [this.today.toISOString(), Validators.required],
-       dueTime: [this.today.toISOString(), Validators.required],
+       dueDate: [this.startTime, Validators.required],
+       dueTime: [this.endTime, Validators.required],
        url: [''],
        description: ['']
       });
@@ -54,6 +58,8 @@ export class addEventModal {
  }
 
  add(){
+   console.log(this.form.value.dueTime);
+  //  this.form.value.dueTime.setHours((this.form.value.dueTime.getHours()+4));
    if (this.isReadyToSave) {
      this.createEvent().then(({data}) => {
        let toast = this.toast.create({

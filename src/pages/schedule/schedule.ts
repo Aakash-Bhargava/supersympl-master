@@ -68,7 +68,6 @@ export class SchedulePage {
       `
     }).toPromise().then(({data})=> {
       this.currentUser = data;
-      console.log(this.currentUser);
       this.currentUser = this.currentUser.user;
     });
   }
@@ -87,13 +86,13 @@ export class SchedulePage {
   basic() {
 
     this.calendarCtrl.openCalendar({
-      isRadio: true,
+      // isRadio: true,
       title:'Calendar',
       closeLabel: '',
-      weekdaysTitle: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      // weekdaysTitle: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       cssClass: 'calendarCSS',
       daysConfig: this.allCalEv,
-      monthTitle: 'MMMM yyyy',
+      // monthTitle: 'MMMM yyyy',
       to: new Date().setMonth(new Date().getMonth() + 5)
     })
     .then( (res:any) => {
@@ -109,7 +108,6 @@ export class SchedulePage {
 
       this.getSelectedDayEvent().then(({data}) => {
         if(data){
-          console.log("FUCK");
           this.dateSelectedEvents = data;
           this.dateSelectedEvents = this.dateSelectedEvents.allEvents;
           console.log(this.dateSelectedEvents);
@@ -175,21 +173,21 @@ export class SchedulePage {
           last = event.event.dueDate;
 
           var date = new Date(event.event.dueDate); // had to remove the colon (:) after the T in order to make it work
-          var day = date.getDate();
-          var monthIndex = date.getMonth() + 1;
-          var year = date.getFullYear();
-          var minutes = date.getMinutes();
-          var hours = date.getHours();
-          var seconds = date.getSeconds();
-          var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
+          // var day = date.getDate();
+          // var monthIndex = date.getMonth() + 1;
+          // var year = date.getFullYear();
+          // var minutes = date.getMinutes();
+          // var hours = date.getHours();
+          // var seconds = date.getSeconds();
+          // var myFormattedDate = day+"-"+monthIndex+"-"+year+" "+ hours+":"+minutes+":"+seconds;
           var ev = this.calEvent = {
             subTitle: '·',
             date: date,
             marked: true
           };
+          console.log(ev);
           this.allCalEv.push(ev);
         }
-        console.log(this.allCalEv);
       }
     })
   }
@@ -289,13 +287,10 @@ export class SchedulePage {
           for (let event of section.events) {
             voted = false;
             if (event.dueDate >= this.now) {
-              // for (let downvote of event.downvotes) {
-              //   if (downvote.id == this.currentUser.id) {
-              //     voted = true;
-              //     break;
-              //   }
-              // }
-              this.allEvents.push({event: event, voted: voted, first: true});
+              let dueTime;
+              dueTime = new Date(event.dueTime);
+              dueTime.setHours(dueTime.getHours() + 4);
+              this.allEvents.push({event: event, voted: voted, first: true, dueTime: dueTime});
             }
           }
         }

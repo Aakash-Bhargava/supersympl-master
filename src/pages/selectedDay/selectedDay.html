@@ -11,18 +11,18 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let event of events">
+    <ion-item *ngFor="let event of eventsData">
       <div class="eventTitle">
-        {{event.title}}
+        {{event.event.title}}
       </div>
       <p>
-        <span>Class:</span> <span class="popup" >{{event.section.courseName}}</span>
+        <span>Class:</span> <span class="popup" >{{event.event.section.courseName}}</span>
       </p>
       <p>
-        <span>Due Date:</span> <span class="popup" text-wrap>{{event.dueDate | date: 'h:mm a EEEE, MMMM d'}}</span>
+        <span>Due Date:</span> <span class="popup" text-wrap>{{event.dueTime | date: 'hh:mm a'}} {{event.event.dueDate | date: 'EEEE, MMMM d'}}</span>
       </p>
       <p text-wrap class="desc">
-        <span>Description:</span> {{event.description}}
+        <span>Description:</span> {{event.event.description}}
       </p>
     </ion-item>
   </ion-list>
