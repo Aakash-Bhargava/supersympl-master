@@ -26,6 +26,7 @@ export class MapPage implements OnInit {
   locationInfo = <any>{};
   filterBy:string = "all";
   alllocations: any;
+  alllocationsData = <any>[];
 
   currentUser = <any>{};
   //class: string;
@@ -42,7 +43,7 @@ export class MapPage implements OnInit {
       this.currentUser = data;
       this.currentUser = this.currentUser.user;
       console.log(this.currentUser);
-      this.getAllPins().then(({data})=> {
+      this.getAllPins().subscribe(({data})=> {
         this.alllocations = data;
         this.alllocations = this.alllocations.allMapPinses;
         for (let location of this.alllocations) {
@@ -52,13 +53,15 @@ export class MapPage implements OnInit {
           } else if (location.users.length == 0) {
             console.log("No user");
             this.deletePin(location.id);
+          } else {
+            this.alllocationsData.push(location);
           }
         }
-        this.getAllPins().then(({data})=> {
-          this.alllocations = data;
-          this.alllocations = this.alllocations.allMapPinses;
-          console.log(this.alllocations);
-        });
+        // this.getAllPins().subscribe(({data})=> {
+        //   this.alllocations = data;
+        //   this.alllocations = this.alllocations.allMapPinses;
+        //   console.log(this.alllocations);
+        // });
       });
     });
   }
@@ -85,9 +88,6 @@ export class MapPage implements OnInit {
 
     this.map.on('locationfound', function addMockPins(e) {
       let pins: any;
-      that.getAllPins().then(({data})=> {
-        this.alllocations = data;
-        this.alllocations = this.alllocations.allMapPinses;
 
         var radius = e.accuracy / 4;
         var profileIcon = Leaflet.icon({
@@ -96,26 +96,17 @@ export class MapPage implements OnInit {
           iconSize: [60, 50] // size of the icon
         });
 
-        let amgroup = false;
-        that.currentUserInfo().then(({data}) => {
-          if (data){
-            this.currentUser = data;
-            this.currentUser = this.currentUser.user;
+        //Creating pin for every location
+        for (let location of that.alllocationsData) {
 
-            //Creating pin for every location
-            for (let location of this.alllocations) {
-
-              let latlng = Leaflet.latLng(location.latitude, location.longitude);
-              that.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
-                  // .bindPopup(desc)
-                  .on('click', function onClick() {
-                    let addModal = that.modalCtrl.create(StudygroupPage, {location: location});
-                    addModal.present();
-                  }));
-            }
-          }
-        })
-      });
+          let latlng = Leaflet.latLng(location.latitude, location.longitude);
+          that.mapMarkers.push(Leaflet.marker(latlng, {icon: profileIcon}).addTo(map)
+              // .bindPopup(desc)
+              .on('click', function onClick() {
+                let addModal = that.modalCtrl.create(StudygroupPage, {location: location});
+                addModal.present();
+              }));
+        }
     })
   }
 
@@ -135,7 +126,7 @@ export class MapPage implements OnInit {
       iconAnchor:   [25, 25],
       iconSize: [60, 50] // size of the icon
     });
-    for (let location of this.alllocations) {
+    for (let location of this.alllocationsData) {
       console.log(filterBy);
       console.log(location.sectionName);
       let latlng = Leaflet.latLng(location.latitude, location.longitude);
@@ -229,7 +220,7 @@ export class MapPage implements OnInit {
   }
 
   getAllPins() {
-    return this.apollo.query({
+    return this.apollo.watchQuery({
       query: gql`
         query allMapPinses($userId: ID) {
           allMapPinses (filter: {users_every: {id: $userId}}) {
@@ -252,7 +243,7 @@ export class MapPage implements OnInit {
       `, variables: {
         userId: this.currentUser.id
       }
-    }).toPromise();
+    });
   }
 
   currentUserInfo(){
