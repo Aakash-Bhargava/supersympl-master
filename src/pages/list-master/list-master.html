@@ -44,8 +44,10 @@
 
       </ion-card-header>
       <ion-card-content>
-
-        <span class="lectures">
+        <span *ngIf="section.section.online">
+          Online Class
+        </span>
+        <span class="lectures" *ngIf="!section.section.online">
             Lectures:
             <p *ngIf="section.section.monday">Mon: {{section.section.monday}}</p>
             <p *ngIf="section.section.tuesday">Tues: {{section.section.tuesday}}</p>

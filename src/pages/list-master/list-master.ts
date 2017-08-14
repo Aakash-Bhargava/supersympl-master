@@ -116,6 +116,7 @@ export class ListMasterPage {
               sectionNumber
               courseName
               type
+              online
               icon
               monday
               tuesday
@@ -214,53 +215,15 @@ export class ListMasterPage {
     this.navCtrl.push(SearchPage);
   }
 
-  /**
-   * Delete an item from the list of items.
-   */
-   removeSection(section) {
-     let confirm = this.alertCtrl.create({
-        title: 'Are you sure?',
-        message: 'You can always add it again later.',
-        buttons: [
-          {
-            text: 'No',
-            handler: () => {
-              console.log('Disagree clicked');
-            }
-          },
-          {
-            text: 'Yes',
-            handler: () => {
-              this.apollo.mutate({
 
-               mutation: gql`
-               mutation removeFromUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
-                 removeFromUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
-                   sectionsSection {
-                     id
-                   }
-                 }
-               }
-               `,variables:{
-                 usersUserId: this.currentUser.id,
-                 sectionsSectionId: section.id
-               }
-             }).toPromise();
-
-             this.refreshData();
-            }
-          }
-        ]
-      });
-      confirm.present();
-   }
 
   /**
    * Navigate to the detail page for this item.
    */
   openItem(section) {
     this.navCtrl.push(ItemDetailPage, {
-      section: section
+      section: section,
+      user: this.currentUser
     });
   }
 

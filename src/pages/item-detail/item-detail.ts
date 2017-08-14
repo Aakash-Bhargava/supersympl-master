@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Angular2Apollo } from 'angular2-apollo';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -21,13 +21,17 @@ export class ItemDetailPage {
   users = <any>[];
   events = <any>[];
 
+  currentUser : any;
+
   pastEvents = <any>[];
 
   constructor(public navCtrl: NavController,
                      navParams: NavParams,
+                     public alertCtrl: AlertController,
                      private apollo: Angular2Apollo) {
 
     this.section = navParams.get('section');
+    this.currentUser = navParams.get('user');
     this.users = this.section.users;
     let now = new Date().toISOString();
 
@@ -45,10 +49,47 @@ export class ItemDetailPage {
   }
 
   gotoUser(user) {
-    console.log("ha");
     this.navCtrl.push(ProfilePage, {user: user});
   }
 
+  /**
+   * Delete an item from the list of items.
+   */
+   showDropAlert() {
+     let confirm = this.alertCtrl.create({
+        title: 'Are you sure?',
+        message: 'You can always add it again later.',
+        buttons: [
+          {
+            text: 'No',
+            handler: () => {
+              console.log('Disagree clicked');
 
+            }
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              this.apollo.mutate({
 
+               mutation: gql`
+               mutation removeFromUserOnSection($usersUserId: ID!, $sectionsSectionId: ID!){
+                 removeFromUserOnSection(usersUserId:$usersUserId,sectionsSectionId:$sectionsSectionId){
+                   sectionsSection {
+                     id
+                   }
+                 }
+               }
+               `,variables:{
+                 usersUserId: this.currentUser.id,
+                 sectionsSectionId: this.section.id
+               }
+             }).toPromise();
+             this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      confirm.present();
+   }
 }

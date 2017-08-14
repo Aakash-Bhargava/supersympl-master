@@ -2,6 +2,11 @@
 
   <ion-navbar>
     <ion-title>{{ section.courseName }}</ion-title>
+    <ion-buttons end>
+      <button ion-button small icon-right (tap)=showDropAlert()>
+        Drop
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-segment [(ngModel)]="classInfo">
     <ion-segment-button value="professor">
