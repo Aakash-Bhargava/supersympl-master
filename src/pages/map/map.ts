@@ -46,6 +46,7 @@ export class MapPage implements OnInit {
       this.getAllPins().subscribe(({data})=> {
         this.alllocations = data;
         this.alllocations = this.alllocations.allMapPinses;
+        console.log(this.alllocations);
         for (let location of this.alllocations) {
           if (location.endTime <= this.now) {
             console.log("expired");
@@ -222,8 +223,8 @@ export class MapPage implements OnInit {
   getAllPins() {
     return this.apollo.watchQuery({
       query: gql`
-        query allMapPinses($userId: ID) {
-          allMapPinses (filter: {users_every: {id: $userId}}) {
+        query allMapPinses {
+          allMapPinses {
             id
             startTime
             endTime
@@ -240,9 +241,7 @@ export class MapPage implements OnInit {
             }
           }
         }
-      `, variables: {
-        userId: this.currentUser.id
-      }
+      `
     });
   }
 
