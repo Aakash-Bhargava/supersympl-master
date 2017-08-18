@@ -39,6 +39,9 @@ export class MapPage implements OnInit {
 
   constructor(public navCtrl: NavController,public loadingCtrl: LoadingController, public navParams: NavParams, public modalCtrl: ModalController, public apollo: Angular2Apollo) {
 
+  }
+
+  ngOnInit() {
     this.currentUserInfo().then(({data}) => {
       this.currentUser = data;
       this.currentUser = this.currentUser.user;
@@ -58,17 +61,11 @@ export class MapPage implements OnInit {
             this.alllocationsData.push(location);
           }
         }
-        // this.getAllPins().subscribe(({data})=> {
-        //   this.alllocations = data;
-        //   this.alllocations = this.alllocations.allMapPinses;
-        //   console.log(this.alllocations);
-        // });
+        this.drawMap();
       });
-    });
-  }
 
-  ngOnInit() {
-    this.drawMap();
+    });
+
   }
 
   drawMap(filterBy?) {
