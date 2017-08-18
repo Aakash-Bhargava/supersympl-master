@@ -32,13 +32,13 @@
             </a>
           </p>
         </span>
-        <span (tap)="gotoEvent(event)">
+        <!-- <span (tap)="gotoEvent(event)">
           <p> Due Time:
             <a class="eventDueDate">
               {{event.dueTime | date: 'h:mm a'}}
             </a>
           </p>
-        </span>
+        </span> -->
         <!-- <span item-end class="length" *ngIf="event.voted">-{{event.event.downvotes.length}}</span> -->
           <ion-icon  ios="ios-color-wand" md="md-color-wand" *ngIf="currentUser.teaching.length != 0" item-end (tap)="editEvent(event.event)"></ion-icon>
         <!-- <ion-note item-end (tap)="options($event)">
