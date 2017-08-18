@@ -22,4 +22,13 @@ page-list-master {
     // box-shadow: 0px 0px 15px 1px grey;
     border: 2px solid #045a41;
   }
+  hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: outset;
+    border-width: 1px;
+}
 }
