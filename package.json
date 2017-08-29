@@ -56,7 +56,9 @@
         "subscriptions-transport-ws": "^0.7.3",
         "sw-toolbox": "3.6.0",
         "tslint": "^5.6.0",
-        "zone.js": "0.8.12"
+        "zone.js": "0.8.12",
+        "cordova-plugin-geolocation": "^2.4.3",
+        "cordova-plugin-mapbox": "~1.2.3"
     },
     "devDependencies": {
         "@ionic/app-scripts": "2.0.2",
@@ -98,6 +100,10 @@
             "cordova-plugin-camera": {
                 "CAMERA_USAGE_DESCRIPTION": " ",
                 "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+            },
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-mapbox": {
+                "ACCESS_TOKEN": "pk.eyJ1IjoibXN1ZGV2c2hvcCIsImEiOiJjajMwYnR4bWMwMDA0Mndta2kzdTZrNjJrIn0.YMCUQHUrN6vm6_HK5bgwnA"
             }
         },
         "platforms": [
